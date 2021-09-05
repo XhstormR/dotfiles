@@ -80,6 +80,7 @@
     ignorecase = false
     untrackedCache = true
     whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+    pager = delta
 [diff]
     renames = copies
 [diff "bin"]
@@ -95,3 +96,8 @@
     followTags = true
 [init]
     defaultBranch = main
+[delta]
+    navigate = true
+    line-numbers = true
+    diff-so-fancy = true
+    syntax-theme = Dracula
