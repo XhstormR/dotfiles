@@ -1,7 +1,10 @@
+# https://conda.io/projects/conda/en/latest/configuration.html
+
 channels:
   - conda-forge
   - defaults
 channel_priority: strict
+always_yes: true
 show_channel_urls: true
 default_channels:
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main

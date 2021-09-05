@@ -28,9 +28,14 @@ export VISUAL='idea'
 export HISTCONTROL='ignoreboth'
 export GPG_TTY=(tty)
 
-export LESS='-iFRMNX --mouse --use-color'
-
-export _ZL_CD='cd'
+export LESS='-iRMX --mouse --use-color'
+export LESS_TERMCAP_so=\e'[0;47;30m'
+export LESS_TERMCAP_mb=\e'[1;33m'
+export LESS_TERMCAP_md=\e'[1;31m'
+export LESS_TERMCAP_us=\e'[4;32m'
+export LESS_TERMCAP_me=\e'[0m'
+export LESS_TERMCAP_se=\e'[0m'
+export LESS_TERMCAP_ue=\e'[0m'
 
 export FZF_ALT_C_COMMAND='fd -H -E .git -t d . $dir'
 export FZF_CTRL_T_COMMAND='fd -H -E .git -t f . $dir'
@@ -41,7 +46,7 @@ export FZF_DEFAULT_OPTS='-0 -m'
 export FZF_TMUX=1
 alias f='fzf'
 
-export NNN_PLUG='p:preview-tui;o:fzopen;c:fzcd;'
+export NNN_PLUG='p:preview-tui;o:fzopen;c:fzcd;z:autojump;'
 export NNN_COLORS='#0c'
 alias nnn='nnn -adeUH -Pp'
 
@@ -54,9 +59,9 @@ alias l='ls -l'
 alias la='l -a'
 alias ll='l'
 
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
+# alias rm='rm -i'
+# alias cp='cp -i'
+# alias mv='mv -i'
 
 alias df='df -h'
 alias du='du -h'
@@ -85,8 +90,8 @@ alias gd='git diff'
 
 alias now='date +"%F %T"'
 alias week='date +"%V"'
-alias myip='curl -sk https://myip.ipip.net/'
-alias diff='git diff --no-index --color-words'
+alias myip='dig -4 +short myip.opendns.com @resolver1.opendns.com; curl -sk https://myip.ipip.net/'
+alias diff='delta'
 alias rand='openssl rand -hex 30'
 alias aria2c='aria2c -s16 -x16 -k1M'
 alias reload='exec fish'
@@ -169,8 +174,7 @@ function fish_prompt
     set -l prompt_suffix (printf '%s' $status_color $suffix $normal)
 
     set -l status_color (set_color brblue)
-    set -l statusb_color (set_color brblue --bold)
-    set -l prompt_pwd (prompt_pwd | sed "s,/,$status_color/$status_color,g" | sed "s,\(.*\)/[^m]*m,\1/$statusb_color,")
+    set -l prompt_pwd (printf '%s' $status_color (prompt_pwd) $normal)
 
     # set -l prompt_vcs (fish_vcs_prompt) # too slow
     if test -z "$prompt_vcs"
@@ -216,7 +220,7 @@ function postexec --on-event fish_postexec
 end
 
 if type tmux > /dev/null 2>&1 ; and not set -q TMUX
-    tmux attach -c (pwd) || tmux new
+    tmux -2u attach -c (pwd) || tmux -2u new
 end
 
 ## MacOS
