@@ -1,5 +1,6 @@
-fish_add_path -Pma /usr/bin # 移动至最后，降低优先级
+fish_add_path ~/.local/bin
 fish_add_path (brew --prefix coreutils)/libexec/gnubin
+fish_add_path -Pma /usr/bin # 移动至最后，降低优先级
 
 eval conda "shell.fish" "hook" $argv | source
 
@@ -46,7 +47,7 @@ export FZF_DEFAULT_OPTS='-0 -m'
 export FZF_TMUX=1
 alias f='fzf'
 
-export NNN_PLUG='p:preview-tui;o:fzopen;c:fzcd;z:autojump;'
+export NNN_PLUG='p:preview-tui;o:fzopen;c:fzcd;z:autojump;x:!chmod +x $nnn*;'
 export NNN_COLORS='#0c'
 alias nnn='nnn -adeUH -Pp'
 
@@ -55,9 +56,9 @@ alias exa='exa --group-directories-first --color=auto --time-style=long-iso -abF
 
 # alias ls='ls --group-directories-first --color=auto --time-style=long-iso -hFX'
 alias ls='exa'
-alias l='ls -l'
-alias la='l -a'
-alias ll='l'
+alias ll='ls -l'
+alias la='ll -a'
+alias l='ll'
 
 # alias rm='rm -i'
 # alias cp='cp -i'
@@ -85,6 +86,7 @@ alias dc='c ~/Documents'
 alias dl='c ~/Downloads'
 alias pj='c ~/IdeaProjects'
 
+alias g='git'
 alias gs='git status'
 alias gd='git diff'
 
