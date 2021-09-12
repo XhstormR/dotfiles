@@ -2,6 +2,7 @@
 
 let mapleader=","
 set autoindent
+set autowrite
 set cindent
 set cursorline
 set esckeys
