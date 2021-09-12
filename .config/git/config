@@ -88,7 +88,12 @@
 [help]
     autocorrect = immediate
 [merge]
+    ff = only
     log = true
+[fetch]
+    prune = true
+[rebase]
+    autosquash = true
 [rerere]
     enabled = true
 [push]
