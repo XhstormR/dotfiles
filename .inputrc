@@ -15,6 +15,7 @@ set page-completions off
 set match-hidden-files on
 set skip-completed-text on
 set enable-bracketed-paste on
+set blink-matching-paren on
 
 set visible-stats on
 set colored-stats on

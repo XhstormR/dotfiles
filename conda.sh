@@ -17,6 +17,7 @@ conda install pycurl
 conda install ripgrep
 conda install socat
 conda install tmux
+conda install trash-cli
 conda install vim
 conda install youtube-dl
 conda install zoxide
