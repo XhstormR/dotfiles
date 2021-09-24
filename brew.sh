@@ -10,6 +10,7 @@ brew install gnu-sed
 brew install hugo
 brew install less
 brew install nnn
+brew install viu
 
 brew install --cask alacritty
 brew install --cask alfred

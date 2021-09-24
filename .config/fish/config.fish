@@ -48,6 +48,7 @@ export FZF_TMUX=1
 alias f='fzf'
 
 export NNN_PLUG='p:preview-tui;o:fzopen;c:fzcd;z:autojump;x:!chmod +x $nnn*;'
+export NNN_TRASH='1'
 export NNN_COLORS='#0c'
 alias nnn='nnn -adeUH -Pp'
 
@@ -77,6 +78,7 @@ alias mkdir='mkdir -p'
 
 alias vi='vim'
 alias cat='bat'
+alias rm='trash'
 
 alias ..='c ..'
 alias ...='c ../..'
@@ -85,7 +87,7 @@ alias ....='c ../../..'
 alias dt='c ~/Desktop'
 alias dc='c ~/Documents'
 alias dl='c ~/Downloads'
-alias pj='c ~/IdeaProjects'
+alias dp='c ~/IdeaProjects'
 
 alias g='git'
 alias gs='git status'
@@ -100,23 +102,27 @@ alias rand='openssl rand -hex 30'
 alias aria2c='aria2c -s16 -x16 -k1M'
 alias reload='exec fish'
 alias map='xargs -n1'
+alias cpu='top -o cpu'
+alias mem='top -o rsize'
 alias fs='du -sbh'
 alias cb='pbcopy' # Clipboard
 alias jq='jq -C'
 alias xq='xmllint --format'
 alias e='idea -e'
 
-function o
+function o -a path
     # set -l path (cygpath -w (pwd))
+
+    # if count $argv > /dev/null
+    #     echo $argv
+    # else
+    #     echo none
+    # end
+
+    [ -n "$path" ]; or set -l path .
+    open $path
     # explorer $path
-
-    # nautilus .
-
-    if count $argv > /dev/null
-        open $argv
-    else
-        open .
-    end
+    # nautilus $path
 end
 
 function c
@@ -140,7 +146,12 @@ function take
     mkdir -p $argv && cd $argv
 end
 
-function fkill
+function fkill -a pattern
+  if test -n "$pattern"
+    pkill -9 $pattern
+    return
+  end
+
   set -l header (ps aux | head -1)
   set -l pid (ps aux | fzf -e --header "$header" | tr -s ' ' | cut -d ' ' -f 2)
   if test -n "$pid"
