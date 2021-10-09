@@ -2,6 +2,7 @@
 
 conda update --all
 
+conda install aria2
 conda install bat
 conda install bpytop
 conda install curl
