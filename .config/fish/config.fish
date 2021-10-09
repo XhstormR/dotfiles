@@ -47,6 +47,7 @@ export FZF_DEFAULT_OPTS='-0 -m'
 export FZF_TMUX=1
 alias f='fzf'
 
+export NNN_BMS='t:~/.local/share/Trash/;'
 export NNN_PLUG='p:preview-tui;o:fzopen;c:fzcd;z:autojump;x:!chmod +x $nnn*;'
 export NNN_TRASH='1'
 export NNN_COLORS='#0c'
