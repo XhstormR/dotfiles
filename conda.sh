@@ -1,26 +1,30 @@
 #!/usr/bin/env bash
 
+packages=(
+    aria2
+    bat
+    bpytop
+    curl
+    exa
+    fd-find
+    fish
+    fzf
+    gawk
+    htop
+    jq
+    pycrypto
+    pycurl
+    ripgrep
+    socat
+    tmux
+    trash-cli
+    vim
+    youtube-dl
+    zoxide
+)
+
 conda update --all
 
-conda install aria2
-conda install bat
-conda install bpytop
-conda install curl
-conda install exa
-conda install fd-find
-conda install fish
-conda install fzf
-conda install gawk
-conda install htop
-conda install jq
-conda install pycrypto
-conda install pycurl
-conda install ripgrep
-conda install socat
-conda install tmux
-conda install trash-cli
-conda install vim
-conda install youtube-dl
-conda install zoxide
+conda install ${packages[@]}
 
 conda clean --all
