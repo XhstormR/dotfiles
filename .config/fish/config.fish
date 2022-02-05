@@ -51,7 +51,7 @@ export NNN_BMS='t:~/.local/share/Trash/;'
 export NNN_PLUG='p:preview-tui;o:fzopen;c:fzcd;z:autojump;x:!chmod +x $nnn*;'
 export NNN_TRASH='1'
 export NNN_COLORS='#0c'
-alias nnn='nnn -adeUH -Pp'
+alias nnn='nnn -adexUH -Pp'
 
 export EXA_COLORS='da=2;0:gm=1;0'
 alias exa='exa --group-directories-first --color=auto --time-style=long-iso -abFg --git --icons --color-scale --sort=Name'
