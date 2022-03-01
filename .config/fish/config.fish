@@ -45,16 +45,17 @@ export FZF_ALT_C_OPTS='-0 --preview "exa -T {} | head -100"'
 export FZF_CTRL_T_OPTS='-0 --preview "bat -f -r :100 {}"'
 export FZF_DEFAULT_OPTS='-0 -m'
 export FZF_TMUX=1
+export FZF_TMUX_OPTS='-p'
 alias f='fzf'
 
 export NNN_BMS='t:~/.local/share/Trash/;'
 export NNN_PLUG='p:preview-tui;o:fzopen;c:fzcd;z:autojump;x:!chmod +x $nnn*;'
 export NNN_TRASH='1'
 export NNN_COLORS='#0c'
-alias nnn='nnn -adexUH -Pp'
+alias nnn='nnn -adexUH -Te -Pp'
 
 export EXA_COLORS='da=2;0:gm=1;0'
-alias exa='exa --group-directories-first --color=auto --time-style=long-iso -abFg --git --icons --color-scale --sort=Name'
+alias exa='exa --group-directories-first --color=auto --time-style=long-iso -abFg --git --icons --color-scale --sort=Extension'
 
 # alias ls='ls --group-directories-first --color=auto --time-style=long-iso -hFX'
 alias ls='exa'
