@@ -19,7 +19,7 @@ packages=(
     tmux
     trash-cli
     vim
-    youtube-dl
+    yt-dlp
     zoxide
 )
 

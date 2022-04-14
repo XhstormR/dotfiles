@@ -211,23 +211,17 @@ function fish_prompt
     set -l prompt_duration (math $CMD_DURATION / 1000)
     set -l prompt_right (printf '(%.2fs) %s ' $prompt_duration $prompt_time)
 
-    set -l left_width (string_width $prompt_left)
-    set -l right_width (string_width $prompt_right)
-    set -l space_width (math $COLUMNS - $left_width - $right_width + 5)
-    set -l prompt_space (printf '%'$space_width's')
+    set -l left_width (string length --visible $prompt_left)
+    set -l right_width (string length --visible $prompt_right)
+    set -l space_width (math $COLUMNS - $left_width - $right_width)
+    set -l space_width (math max 0, $space_width)
+    set -l prompt_space (string pad -w$space_width '')
 
     printf '%s%s%s\n %s ' \
     $prompt_left \
     $prompt_space \
     $prompt_right \
     $prompt_suffix
-end
-
-# https://github.com/fish-shell/fish-shell/issues/4012
-function string_width
-    set --local empty ''
-    set --local raw_string (string replace --all --regex '\e\[[^m]*m' $empty -- $argv)
-    string length -- $raw_string
 end
 
 function preexec --on-event fish_preexec

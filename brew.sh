@@ -10,6 +10,7 @@ brew install hugo
 brew install less
 brew install nnn
 brew install viu
+brew install sevenzip
 
 brew install --cask android-file-transfer
 brew install --cask alacritty
