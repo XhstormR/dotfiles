@@ -80,6 +80,7 @@ alias mkdir='mkdir -p'
 
 alias vi='vim'
 alias cat='bat'
+alias xxd='hexyl'
 alias rm='trash'
 
 alias ..='c ..'
