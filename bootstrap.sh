@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 function doIt() {
-    rsync --exclude ".git/" \
+    rsync \
+        --exclude ".git/" \
         --exclude ".idea/" \
         --exclude "/*.sh" \
         --exclude "/README.md" \

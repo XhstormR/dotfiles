@@ -32,6 +32,7 @@ brew install --cask qview
 brew install --cask rectangle
 brew install --cask stats
 brew install --cask snipaste
+brew install --cask telegram
 brew install --cask vlc
 
 brew cleanup --prune=all
