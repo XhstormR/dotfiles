@@ -208,14 +208,18 @@ function fish_prompt
 
     set -l prompt_left (printf '%s:%s %s%s' (prompt_login) $prompt_pwd $prompt_vcs $prompt_status)
 
+    set -l prompt_proxy ''
+    if set -q all_proxy
+        set prompt_proxy '🚀'
+    end
+
     set -l prompt_time (date +"%T")
     set -l prompt_duration (math $CMD_DURATION / 1000)
-    set -l prompt_right (printf '(%.2fs) %s ' $prompt_duration $prompt_time)
+    set -l prompt_right (printf '%s (%.2fs) %s ' $prompt_proxy $prompt_duration $prompt_time)
 
     set -l left_width (string length --visible $prompt_left)
     set -l right_width (string length --visible $prompt_right)
-    set -l space_width (math $COLUMNS - $left_width - $right_width)
-    set -l space_width (math max 0, $space_width)
+    set -l space_width (math max 0, $COLUMNS - $left_width - $right_width)
     set -l prompt_space (string pad -w$space_width '')
 
     printf '%s%s%s\n %s ' \
