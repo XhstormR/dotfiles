@@ -41,7 +41,7 @@ export LESS_TERMCAP_ue=\e'[0m'
 export FZF_ALT_C_COMMAND='fd -H -E .git -t d . $dir'
 export FZF_CTRL_T_COMMAND='fd -H -E .git -t f . $dir'
 export FZF_DEFAULT_COMMAND='fd -H -E .git'
-export FZF_ALT_C_OPTS='-0 --preview "exa -T {} | head -100"'
+export FZF_ALT_C_OPTS='-0 --preview "exa -T -L3 {} | head -100"'
 export FZF_CTRL_T_OPTS='-0 --preview "bat -f -r :100 {}"'
 export FZF_DEFAULT_OPTS='-0 -m'
 export FZF_TMUX=1
@@ -163,7 +163,7 @@ function fkill -a pattern
 end
 
 function proxy_on
-    set -xU all_proxy socks5://127.0.0.1:1080
+    set -xU all_proxy socks5h://127.0.0.1:1080
     set -xU http_proxy http://127.0.0.1:1080
     set -xU https_proxy http://127.0.0.1:1080
     set -xU GIT_SSH_COMMAND 'ssh -o ProxyCommand="socat - PROXY:127.0.0.1:%h:%p,proxyport=1080"'
