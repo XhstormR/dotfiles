@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function doIt() {
+function doSync() {
     rsync \
         --exclude ".git/" \
         --exclude ".idea/" \
@@ -8,6 +8,10 @@ function doIt() {
         --exclude "/README.md" \
         --exclude "/LICENSE" \
         -avh --no-perms . ~;
+}
+
+function doIt() {
+    doSync
 
     curl -o ~/.config/alacritty/dracula.yml https://raw.githubusercontent.com/dracula/alacritty/master/dracula.yml
 
@@ -24,6 +28,8 @@ cd "$(dirname "${BASH_SOURCE}")" || exit;
 
 if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
     doIt;
+elif [ "$1" == "--sync" ] || [ "$1" == "-s" ]; then
+    doSync;
 else
     read -r -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
     echo;

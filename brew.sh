@@ -24,6 +24,7 @@ brew install --cask itsycal
 brew install --cask karabiner-elements
 brew install --cask keepassxc
 brew install --cask maczip
+brew install --cask macfuse
 brew install --cask megasync
 brew install --cask miniconda
 brew install --cask mounty

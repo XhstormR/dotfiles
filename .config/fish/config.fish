@@ -176,6 +176,15 @@ function proxy_off
     set -e GIT_SSH_COMMAND
 end
 
+function proxy_toggle
+    if set -q all_proxy
+        proxy_off
+    else
+        proxy_on
+        true
+    end
+end
+
 function fish_user_key_bindings
     fzf_key_bindings
 end
