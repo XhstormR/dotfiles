@@ -4,6 +4,7 @@ function doSync() {
     rsync \
         --exclude ".git/" \
         --exclude ".idea/" \
+        --exclude "patch/" \
         --exclude "/*.sh" \
         --exclude "/README.md" \
         --exclude "/LICENSE" \
@@ -22,6 +23,10 @@ function doIt() {
 
     curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
     curl -o ~/.config/fish/functions/n.fish https://raw.githubusercontent.com/jarun/nnn/master/misc/quitcd/quitcd.fish
+    patch ~/.config/fish/functions/n.fish ./patch/n.fish.patch
+    patch ~/.config/nnn/plugins/preview-tui ./patch/preview-tui.patch
+
+    curl -o ~/Library/Fonts/"JetBrains Mono Regular Nerd Font Complete.ttf" "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/JetBrainsMono/Ligatures/Regular/complete/JetBrains%20Mono%20Regular%20Nerd%20Font%20Complete.ttf"
 }
 
 cd "$(dirname "${BASH_SOURCE}")" || exit;

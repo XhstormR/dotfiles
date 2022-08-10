@@ -1,0 +1,13 @@
+diff --git a/preview-tui b/preview-tui
+index 18791fd..5286036 100755
+--- a/preview-tui
++++ b/preview-tui
+@@ -341,7 +341,7 @@ preview_file() {
+         elif exists tree; then
+             fifo_pager tree --filelimit "$(find . -maxdepth 1 | wc -l)" -L 3 -C -F --dirsfirst --noreport
+         elif exists exa; then
+-            exa -G --group-directories-first --colour=always
++            exa -G --group-directories-first --colour=always --icons --sort=Extension -T -L3
+         else
+             fifo_pager ls -F --group-directories-first --color=always
+         fi
