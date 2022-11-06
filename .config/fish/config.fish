@@ -181,8 +181,8 @@ function proxy_toggle
         proxy_off
     else
         proxy_on
-        true
     end
+    true
 end
 
 function fish_user_key_bindings
