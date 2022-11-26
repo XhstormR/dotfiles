@@ -15,6 +15,9 @@ brew install sevenzip
 brew install --cask android-file-transfer
 brew install --cask alacritty
 brew install --cask amethyst
+brew install --cask maccy
+brew install --cask alt-tab
+brew install --cask keepingyouawake
 brew install --cask clashx
 brew install --cask cyberduck
 brew install --cask google-chrome
