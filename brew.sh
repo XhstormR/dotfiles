@@ -11,6 +11,7 @@ brew install less
 brew install nnn
 brew install viu
 brew install sevenzip
+brew install zoxide
 
 brew install --cask android-file-transfer
 brew install --cask alacritty

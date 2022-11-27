@@ -21,7 +21,6 @@ packages=(
     trash-cli
     vim
     yt-dlp
-    zoxide
 )
 
 conda update --all
