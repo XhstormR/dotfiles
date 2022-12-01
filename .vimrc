@@ -29,8 +29,8 @@ set ttyfast
 set wildmenu
 set backspace=indent,eol,start
 set colorcolumn=78
-set encoding=utf8
-set fileencoding=utf8
+set encoding=utf-8
+set fileencoding=utf-8
 set foldmethod=syntax
 set laststatus=2
 set matchtime=10
