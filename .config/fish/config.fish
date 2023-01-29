@@ -45,7 +45,7 @@ export FZF_ALT_C_OPTS='-0 --preview "exa -T -L3 {} | head -100"'
 export FZF_CTRL_T_OPTS='-0 --preview "bat -f -r :100 {}"'
 export FZF_DEFAULT_OPTS='-0 -m'
 export FZF_TMUX=1
-export FZF_TMUX_OPTS='-p'
+export FZF_TMUX_OPTS='-p 90%'
 alias f='fzf'
 
 export NNN_BMS='t:~/.local/share/Trash/;'

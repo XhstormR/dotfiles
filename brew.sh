@@ -20,7 +20,6 @@ brew install --cask maccy
 brew install --cask alt-tab
 brew install --cask keepingyouawake
 brew install --cask clashx
-brew install --cask cyberduck
 brew install --cask google-chrome
 brew install --cask iina
 brew install --cask intellij-idea
@@ -38,6 +37,5 @@ brew install --cask rectangle
 brew install --cask stats
 brew install --cask shottr
 brew install --cask telegram
-brew install --cask vlc
 
 brew cleanup --prune=all
