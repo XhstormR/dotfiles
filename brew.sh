@@ -36,6 +36,7 @@ brew install --cask qview
 brew install --cask rectangle
 brew install --cask stats
 brew install --cask shottr
+brew install --cask sloth
 brew install --cask telegram
 
 brew cleanup --prune=all
