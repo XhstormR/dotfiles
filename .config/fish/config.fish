@@ -132,6 +132,10 @@ function c
     cd $argv[1] && ll
 end
 
+function z
+    __zoxide_z $argv && ll
+end
+
 function x
     set -l name (basename $argv[1] | string split -r -m1 .)[1]
     7zz x $argv[1] -y -o$name
