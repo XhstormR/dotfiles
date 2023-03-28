@@ -13,6 +13,7 @@ brew install viu
 brew install sevenzip
 brew install zoxide
 
+brew install --cask aural
 brew install --cask android-file-transfer
 brew install --cask alacritty
 brew install --cask amethyst
