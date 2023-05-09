@@ -3,6 +3,7 @@
 brew update
 brew upgrade
 
+brew install btop
 brew install coreutils
 brew install git-delta
 brew install gnu-sed
@@ -10,6 +11,7 @@ brew install hugo
 brew install less
 brew install nnn
 brew install viu
+brew install sniffnet
 brew install sevenzip
 brew install zoxide
 
@@ -38,6 +40,7 @@ brew install --cask rectangle
 brew install --cask stats
 brew install --cask shottr
 brew install --cask sloth
+brew install --cask syncthing
 brew install --cask telegram
 
 brew cleanup --prune=all

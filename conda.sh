@@ -3,7 +3,6 @@
 packages=(
     aria2
     bat
-    bpytop
     curl
     exa
     fd-find
