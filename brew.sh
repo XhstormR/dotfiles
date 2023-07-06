@@ -42,5 +42,6 @@ brew install --cask shottr
 brew install --cask sloth
 brew install --cask syncthing
 brew install --cask telegram
+brew install --cask macwhisper
 
 brew cleanup --prune=all
