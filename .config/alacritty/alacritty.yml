@@ -1,6 +1,8 @@
 env:
     TERM: screen-256color
-    SHELL: &shell /usr/local/Caskroom/miniconda/base/bin/fish
+    SHELL: &shell /Users/user/micromamba/bin/fish
+    MAMBA_ROOT_PREFIX: /Users/user/micromamba
+    MAMBA_EXE: /usr/local/bin/micromamba
 
 shell:
     program: *shell

@@ -14,6 +14,7 @@ brew install viu
 brew install sniffnet
 brew install sevenzip
 brew install zoxide
+brew install micromamba
 
 brew install --cask aural
 brew install --cask android-file-transfer
@@ -31,7 +32,6 @@ brew install --cask karabiner-elements
 brew install --cask keepassxc
 brew install --cask maczip
 brew install --cask megasync
-brew install --cask miniconda
 brew install --cask macfuse
 brew install --cask mounty
 brew install --cask onyx

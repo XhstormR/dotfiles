@@ -22,8 +22,8 @@ packages=(
     yt-dlp
 )
 
-conda update --all
+micromamba update --all
 
-conda install ${packages[@]}
+micromamba install ${packages[@]}
 
-conda clean --all
+micromamba clean --all
