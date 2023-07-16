@@ -2,7 +2,7 @@ fish_add_path ~/.local/bin
 fish_add_path /usr/local/bin
 fish_add_path -Pma /usr/bin # 移动至最后，降低优先级
 
-eval conda "shell.fish" "hook" $argv | source
+eval micromamba shell hook --shell fish | source
 
 set -g fish_prompt_pwd_dir_length 0
 # https://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=leo

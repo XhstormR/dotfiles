@@ -26,7 +26,7 @@ function doIt() {
     patch ~/.config/fish/functions/n.fish ./patch/n.fish.patch
     patch ~/.config/nnn/plugins/preview-tui ./patch/preview-tui.patch
 
-    curl -o ~/Library/Fonts/"JetBrains Mono Regular Nerd Font Complete.ttf" "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/JetBrainsMono/Ligatures/Regular/complete/JetBrains%20Mono%20Regular%20Nerd%20Font%20Complete.ttf"
+    curl -o ~/Library/Fonts/"JetBrainsMonoNerdFont-Regular.ttf" "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFont-Regular.ttf"
 }
 
 cd "$(dirname "${BASH_SOURCE}")" || exit;

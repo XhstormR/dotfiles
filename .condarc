@@ -6,6 +6,7 @@ channels:
 channel_priority: strict
 always_yes: true
 show_channel_urls: true
+auto_activate_base: true
 default_channels:
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
