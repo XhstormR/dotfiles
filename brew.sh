@@ -31,16 +31,19 @@ brew install --cask itsycal
 brew install --cask karabiner-elements
 brew install --cask keepassxc
 brew install --cask maczip
+brew install --cask middleclick
 brew install --cask megasync
 brew install --cask macfuse
 brew install --cask mounty
 brew install --cask onyx
+brew install --cask orbstack
 brew install --cask qview
 brew install --cask rectangle
 brew install --cask stats
 brew install --cask shottr
 brew install --cask sloth
 brew install --cask syncthing
+brew install --cask sublime-text
 brew install --cask telegram
 brew install --cask macwhisper
 
