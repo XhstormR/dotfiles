@@ -5,8 +5,6 @@ brew upgrade
 
 brew install btop
 brew install coreutils
-brew install git-delta
-brew install gnu-sed
 brew install hugo
 brew install less
 brew install nnn

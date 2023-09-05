@@ -8,7 +8,9 @@ packages=(
     fd-find
     fish
     fzf
+    sed
     gawk
+    git-delta
     htop
     hexyl
     jq

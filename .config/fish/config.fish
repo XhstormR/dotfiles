@@ -25,7 +25,8 @@ set -g fish_greeting '
 
 export TERM='screen-256color'
 export LANG='C'
-export VISUAL='idea'
+export VISUAL='subl'
+export EDITOR='subl'
 export HISTCONTROL='ignoreboth'
 export GPG_TTY=(tty)
 
@@ -111,7 +112,7 @@ alias fs='du -sbh'
 alias cb='pbcopy' # Clipboard
 alias jq='jq -C'
 alias xq='xmllint --format'
-alias e='idea -e'
+alias e='subl'
 
 function o -a path
     # set -l path (cygpath -w (pwd))
