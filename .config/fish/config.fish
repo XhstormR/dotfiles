@@ -167,14 +167,14 @@ function fkill -a pattern
   end
 end
 
-function proxy_on
+function __proxy_on
     set -xU all_proxy socks5h://127.0.0.1:1080
     set -xU http_proxy http://127.0.0.1:1080
     set -xU https_proxy http://127.0.0.1:1080
     set -xU GIT_SSH_COMMAND 'ssh -o ProxyCommand="socat - PROXY:127.0.0.1:%h:%p,proxyport=1080"'
 end
 
-function proxy_off
+function __proxy_off
     set -e all_proxy
     set -e http_proxy
     set -e https_proxy
@@ -183,9 +183,9 @@ end
 
 function proxy_toggle
     if set -q all_proxy
-        proxy_off
+        __proxy_off
     else
-        proxy_on
+        __proxy_on
     end
     true
 end
@@ -196,47 +196,50 @@ end
 
 function fish_prompt
     set -l last_pipestatus $pipestatus
-    set -l normal (set_color normal)
+    set -l color_normal (set_color normal)
+    set -l color_status (set_color bryellow --bold)
 
-    set -l status_color (set_color bryellow --bold)
     set -l suffix '❯'
     if fish_is_root_user
         set suffix '#'
     end
-    set -l prompt_suffix (printf '%s' $status_color $suffix $normal)
+    set -l prompt_login  (printf '%s┏━ %s%s' $color_status (prompt_login) $color_normal)
+    set -l prompt_suffix (printf '%s┗━━%s%s' $color_status $suffix $color_normal)
 
-    set -l status_color (set_color brblue)
-    set -l prompt_pwd (printf '%s' $status_color (prompt_pwd) $normal)
+    set -l color_status (set_color brblue)
+    set -l prompt_pwd (printf '%s%s%s' $color_status (prompt_pwd) $color_normal)
 
     # set -l prompt_vcs (fish_vcs_prompt) # too slow
-    if test -z "$prompt_vcs"
-        set prompt_vcs $normal
+    if test -n "$prompt_vcs"
+        set prompt_vcs (printf '%s ' $prompt_vcs)
     end
 
-    set -l status_color  (set_color $fish_color_status)
-    set -l statusb_color (set_color $fish_color_status --bold)
-    set -l prompt_status (__fish_print_pipestatus "[" "]" "|" "$status_color" "$statusb_color" $last_pipestatus)
-    if test -z "$prompt_status"
-        set prompt_status $normal
+    set -l color_status  (set_color $fish_color_status)
+    set -l color_statusb (set_color $fish_color_status --bold)
+    set -l prompt_status (__fish_print_pipestatus "[" "]" "|" "$color_status" "$color_statusb" $last_pipestatus)
+    if test -n "$prompt_status"
+        set prompt_status (printf '%s ' $prompt_status)
     end
-
-    set -l prompt_left (printf '%s:%s %s%s' (prompt_login) $prompt_pwd $prompt_vcs $prompt_status)
 
     set -l prompt_proxy ''
     if set -q all_proxy
-        set prompt_proxy '🚀'
+        set prompt_proxy '🚀 '
     end
+
+    set -l prompt_left (printf '%s:%s %s%s%s' $prompt_login $prompt_pwd $prompt_vcs $prompt_status $prompt_proxy)
 
     set -l prompt_time (date +"%T")
     set -l prompt_duration (math $CMD_DURATION / 1000)
-    set -l prompt_right (printf '%s (%.2fs) %s ' $prompt_proxy $prompt_duration $prompt_time)
+    set -l prompt_right (printf ' (%.2fs) %s ' $prompt_duration $prompt_time)
 
-    set -l left_width (string length --visible $prompt_left)
-    set -l right_width (string length --visible $prompt_right)
-    set -l space_width (math max 0, $COLUMNS - $left_width - $right_width)
-    set -l prompt_space (string pad -w$space_width '')
+    set -l color_status (set_color yellow)
+    set -l width_left (string length --visible $prompt_left)
+    set -l width_right (string length --visible $prompt_right)
+    set -l width_space (math max 0, $COLUMNS - $width_left - $width_right)
+    set -l prompt_space (string pad -w$width_space -c━ '')
+    set -l prompt_space (printf '%s%s%s' $color_status $prompt_space $color_normal)
 
-    printf '%s%s%s\n %s ' \
+    printf '%s%s%s\n%s ' \
     $prompt_left \
     $prompt_space \
     $prompt_right \
