@@ -14,7 +14,7 @@ function doSync() {
 function doIt() {
     doSync
 
-    curl -o ~/.config/alacritty/dracula.yml https://raw.githubusercontent.com/dracula/alacritty/master/dracula.yml
+    curl -o ~/.config/alacritty/dracula.toml https://raw.githubusercontent.com/dracula/alacritty/master/dracula.toml
 
     curl -o ~/.config/fish/conf.d/zoxide.fish https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/init.fish
 

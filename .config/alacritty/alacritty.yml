@@ -17,7 +17,7 @@ window:
 font:
     size: 14
     normal:
-        family: JetBrainsMono Nerd Font
+        family: JetBrainsMono NF
 
 bell:
     animation: EaseOutSine
@@ -58,4 +58,4 @@ key_bindings:
     - { key: Z, mods: Alt, chars: "\x1bz" }
 
 import:
-    - ~/.config/alacritty/dracula.yml
+    - ~/.config/alacritty/dracula.toml

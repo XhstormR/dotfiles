@@ -23,7 +23,6 @@ set -g fish_greeting '
        \m___m__|_|    \m_m_|   \mm_|
 '
 
-export TERM='screen-256color'
 export LANG='C'
 export VISUAL='subl'
 export EDITOR='subl'
