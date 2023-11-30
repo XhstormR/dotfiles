@@ -4,7 +4,6 @@ packages=(
     aria2
     bat
     curl
-    exa
     fd-find
     fish
     fzf
