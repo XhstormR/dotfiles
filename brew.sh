@@ -3,6 +3,7 @@
 brew update
 brew upgrade
 
+brew install eza
 brew install btop
 brew install coreutils
 brew install hugo
