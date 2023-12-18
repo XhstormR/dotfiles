@@ -1,0 +1,5 @@
+selectp -t 1 # select the first pane
+splitw -v -c "#{pane_current_path}" # split it into two halves
+splitw -h -c "#{pane_current_path}" # split it into two halves
+selectp -t 1 # go back to the first pane
+splitw -h -c "#{pane_current_path}" # split it into two halves
