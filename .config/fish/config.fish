@@ -1,8 +1,8 @@
 fish_config theme choose Dracula
 
-fish_add_path ~/.local/bin
+fish_add_path /usr/bin
 fish_add_path /usr/local/bin
-fish_add_path -Pma /usr/bin # 移动至最后，降低优先级
+fish_add_path ~/.local/bin
 
 eval micromamba shell hook --shell fish | source
 
@@ -55,12 +55,11 @@ export NNN_PLUG='p:preview-tui;o:fzopen;c:fzcd;z:autojump;x:!chmod +x $nnn*;'
 export NNN_TRASH='1'
 export NNN_COLORS='#0c'
 functions --copy n __n
-alias n='__n -adexUH -Te -Pp'
+alias n='__n -adexoiUH -Te -Pp'
 
 export EZA_COLORS='da=2;0:gm=1;0'
-alias eza='eza --group-directories-first --color=auto --time-style=long-iso -abFg --git --icons --color-scale --sort=Extension'
+alias eza='eza --group-directories-first --color=auto --time-style=long-iso -abgF --git --icons --color-scale --sort=Extension --hyperlink'
 
-# alias ls='ls --group-directories-first --color=auto --time-style=long-iso -hFX'
 alias ls='eza'
 alias ll='ls -l'
 alias la='ll -a'
@@ -112,7 +111,7 @@ alias cpu='top -o cpu'
 alias mem='top -o rsize'
 alias fs='du -sbh'
 alias cb='pbcopy' # Clipboard
-alias jq='jq -C'
+alias jq='jq -r'
 alias xq='xmllint --format'
 alias e='subl'
 
@@ -262,8 +261,10 @@ end
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
 # Recursively delete .DS_Store files
-alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+alias cleanup="fd '.DS_Store' --hidden --type file -X rm -v"
+
 # Change working directory to the top-most Finder window location
 function cdf
     cd (osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')
