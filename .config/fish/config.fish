@@ -208,7 +208,8 @@ function fish_prompt
     set -l prompt_suffix (printf '%s┗━━%s%s' $color_status $suffix $color_normal)
 
     set -l color_status (set_color brblue)
-    set -l prompt_pwd (printf '%s%s%s' $color_status (prompt_pwd) $color_normal)
+    set -l prompt_pwd_hyperlink (printf '\e]8;;file://%s\e\\\%s\e]8;;\e\\' (string escape --style=url -- $PWD) (prompt_pwd))
+    set -l prompt_pwd (printf '%s%s%s' $color_status $prompt_pwd_hyperlink $color_normal)
 
     # set -l prompt_vcs (fish_vcs_prompt) # too slow
     if test -n "$prompt_vcs"
