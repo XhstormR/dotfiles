@@ -60,6 +60,8 @@ alias n='__n -adexoiUH -Te -Pp'
 export EZA_COLORS='da=2;0:gm=1;0'
 alias eza='eza --group-directories-first --color=auto --time-style=long-iso -abgF --git --icons --color-scale --sort=Extension --hyperlink'
 
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
 alias ls='eza'
 alias ll='ls -l'
 alias la='ll -a'
