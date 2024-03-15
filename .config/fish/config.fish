@@ -266,7 +266,7 @@ alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && kill
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
 # Recursively delete .DS_Store files
-alias cleanup="fd '.DS_Store' --hidden --type file -X rm -v"
+alias cleanup="fd '.DS_Store' --hidden --no-ignore --type file -X rm -v"
 
 # Change working directory to the top-most Finder window location
 function cdf
