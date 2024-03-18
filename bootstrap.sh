@@ -19,7 +19,6 @@ function doIt() {
     curl -o ~/.config/fish/conf.d/zoxide.fish https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/init.fish
 
     curl -o ~/.local/bin/fzf-tmux https://raw.githubusercontent.com/junegunn/fzf/master/bin/fzf-tmux && chmod +x ~/.local/bin/fzf-tmux
-    curl -o ~/.config/fish/functions/fzf_key_bindings.fish https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.fish
 
     curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
     curl -o ~/.config/fish/functions/n.fish https://raw.githubusercontent.com/jarun/nnn/master/misc/quitcd/quitcd.fish
