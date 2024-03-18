@@ -9,7 +9,7 @@ brew install coreutils
 brew install hugo
 brew install less
 brew install nnn
-brew install viu
+brew install chafa
 brew install sniffnet
 brew install sevenzip
 brew install zoxide
@@ -36,7 +36,7 @@ brew install --cask macfuse
 brew install --cask mounty
 brew install --cask onyx
 brew install --cask orbstack
-brew install --cask qview
+brew install --cask phoenix-slides
 brew install --cask rectangle
 brew install --cask stats
 brew install --cask shottr

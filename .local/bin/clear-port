@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Kills the process running on the provided port
+#
+# clear-port 3000
+
+if [ -n "$1" ]; then
+  port_num="$(lsof -s TCP:LISTEN -i TCP:"$1" -nt)"
+  if [ $? -eq 0 ]; then
+    kill -9 -- "$port_num"
+  fi
+else
+  echo >&2 Usage: clear-port port-number
+  exit 1
+fi
