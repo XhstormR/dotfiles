@@ -32,14 +32,9 @@ export EDITOR='subl'
 export HISTCONTROL='ignoreboth'
 export GPG_TTY=(tty)
 
-export LESS='-iRMX --mouse --use-color'
-export LESS_TERMCAP_so=\e'[0;47;30m'
-export LESS_TERMCAP_mb=\e'[1;33m'
-export LESS_TERMCAP_md=\e'[1;31m'
-export LESS_TERMCAP_us=\e'[4;32m'
-export LESS_TERMCAP_me=\e'[0m'
-export LESS_TERMCAP_se=\e'[0m'
-export LESS_TERMCAP_ue=\e'[0m'
+export PAGER='moar'
+export NNN_PAGER=$PAGER
+export MOAR='--no-linenumbers -no-clear-on-exit -quit-if-one-screen -mousemode scroll'
 
 export FZF_ALT_C_COMMAND='fd -H -E .git -t d . $dir'
 export FZF_CTRL_T_COMMAND='fd -H -E .git -t f . $dir'

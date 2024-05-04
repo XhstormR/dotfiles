@@ -7,7 +7,7 @@ brew install eza
 brew install btop
 brew install coreutils
 brew install hugo
-brew install less
+brew install moar
 brew install nnn
 brew install chafa
 brew install sniffnet
