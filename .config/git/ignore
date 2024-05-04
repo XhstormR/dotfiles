@@ -1,4 +1,3 @@
-
 # Created by https://www.toptal.com/developers/gitignore/api/macos,windows,linux
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,windows,linux
 
@@ -44,6 +43,10 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+### macOS Patch ###
+# iCloud generated files
+*.icloud
 
 ### Windows ###
 # Windows thumbnail cache files
