@@ -1,4 +1,5 @@
-import = ["/Users/user/.config/alacritty/dracula.toml"]
+[general]
+import = ["dracula.toml"]
 working_directory = "/Users/user/Downloads"
 
 [env]
@@ -7,7 +8,7 @@ MAMBA_ROOT_PREFIX = "/Users/user/micromamba"
 SHELL = "/Users/user/micromamba/bin/fish"
 TERM = "screen-256color"
 
-[shell]
+[terminal.shell]
 program = "/Users/user/micromamba/bin/fish"
 
 [bell]

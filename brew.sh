@@ -27,6 +27,7 @@ brew install --cask google-chrome
 brew install --cask iina
 brew install --cask intellij-idea
 brew install --cask itsycal
+brew install --cask jordanbaird-ice
 brew install --cask karabiner-elements
 brew install --cask keepassxc
 brew install --cask maczip
