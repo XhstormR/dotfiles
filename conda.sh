@@ -21,6 +21,7 @@ packages=(
     trash-cli
     vim
     yt-dlp
+    openjdk
 )
 
 micromamba update --all
