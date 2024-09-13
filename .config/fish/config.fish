@@ -3,6 +3,7 @@ fish_config theme choose Dracula
 fish_add_path /usr/bin
 fish_add_path /usr/local/bin
 fish_add_path ~/.local/bin
+fish_add_path "$MAMBA_ROOT_PREFIX/lib/jvm/bin"
 
 eval micromamba shell hook --shell fish | source
 eval fzf --fish | source
@@ -77,6 +78,7 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias pgrep='pgrep -a'
 alias mkdir='mkdir -p'
+alias fd='fd --hyperlink=auto'
 
 alias vi='vim'
 alias cat='bat'
