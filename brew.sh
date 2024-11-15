@@ -4,7 +4,6 @@ brew update
 brew upgrade
 
 brew install eza
-brew install btop
 brew install coreutils
 brew install hugo
 brew install moar
@@ -19,6 +18,7 @@ brew install --cask aural
 brew install --cask android-file-transfer
 brew install --cask alacritty
 brew install --cask amethyst
+brew install --cask background-music
 brew install --cask maccy
 brew install --cask alt-tab
 brew install --cask keepingyouawake
