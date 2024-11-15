@@ -3,6 +3,7 @@
 packages=(
     aria2
     bat
+    btop
     curl
     fd-find
     fish
