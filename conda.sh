@@ -4,6 +4,7 @@ packages=(
     aria2
     bat
     btop
+    htop
     curl
     fd-find
     fish
@@ -11,11 +12,9 @@ packages=(
     sed
     gawk
     git-delta
-    htop
     hexyl
     jq
-    pycrypto
-    pycurl
+    zoxide
     ripgrep
     socat
     tmux
