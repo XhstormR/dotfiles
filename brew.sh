@@ -15,7 +15,6 @@ brew install micromamba
 #brew install chafa
 
 brew install --cask aural
-brew install --cask android-file-transfer
 brew install --cask alacritty
 brew install --cask amethyst
 brew install --cask background-music
@@ -40,6 +39,7 @@ brew install --cask shottr
 brew install --cask sloth
 brew install --cask sublime-text
 brew install --cask telegram
+#brew install --cask android-file-transfer
 #brew install --cask megasync
 #brew install --cask macfuse
 #brew install --cask mounty

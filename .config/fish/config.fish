@@ -2,7 +2,9 @@ fish_config theme choose Dracula
 
 fish_add_path /usr/bin
 fish_add_path /usr/local/bin
+fish_add_path /opt/homebrew/bin
 fish_add_path ~/.local/bin
+fish_add_path "$MAMBA_ROOT_PREFIX/bin"
 fish_add_path "$MAMBA_ROOT_PREFIX/lib/jvm/bin"
 
 eval micromamba shell hook --shell fish | source
@@ -34,7 +36,6 @@ export HISTCONTROL='ignoreboth'
 export GPG_TTY=(tty)
 
 export PAGER='moar'
-export NNN_PAGER=$PAGER
 export MOAR='--no-linenumbers -no-clear-on-exit -quit-if-one-screen -mousemode scroll'
 
 export FZF_ALT_C_COMMAND='fd -H -E .git -t d . $dir'
@@ -42,13 +43,14 @@ export FZF_CTRL_T_COMMAND='fd -H -E .git -t f . $dir'
 export FZF_DEFAULT_COMMAND='fd -H -E .git'
 export FZF_ALT_C_OPTS='--preview "eza -T -L3 {} | head -100"'
 export FZF_CTRL_T_OPTS='--preview "bat -f -r :100 {}"'
-export FZF_DEFAULT_OPTS='-0 --multi --border --info inline-right --marker ▏ --pointer ▌ --highlight-line --color marker:green,pointer:green,prompt:green,gutter:-1,selected-bg:238'
+export FZF_DEFAULT_OPTS='-0 --multi --border --style=full --info=inline-right --marker ▏ --pointer ▌ --highlight-line --color marker:green,pointer:green,prompt:green,gutter:-1,selected-bg:238'
 export FZF_TMUX=1
 export FZF_TMUX_OPTS='-p 90%'
 alias f='fzf'
 
 export NNN_BMS='t:~/.local/share/Trash/;'
 export NNN_PLUG='p:preview-tui;o:fzopen;c:fzcd;z:autojump;x:!chmod +x $nnn*;'
+export NNN_PAGER=$PAGER
 export NNN_TRASH='1'
 export NNN_COLORS='#0c'
 functions --copy n __n
