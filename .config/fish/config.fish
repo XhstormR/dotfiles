@@ -2,7 +2,9 @@ fish_config theme choose Dracula
 
 fish_add_path /usr/bin
 fish_add_path /usr/local/bin
+fish_add_path /opt/homebrew/bin
 fish_add_path ~/.local/bin
+fish_add_path "$MAMBA_ROOT_PREFIX/bin"
 fish_add_path "$MAMBA_ROOT_PREFIX/lib/jvm/bin"
 
 eval micromamba shell hook --shell fish | source
@@ -34,7 +36,6 @@ export HISTCONTROL='ignoreboth'
 export GPG_TTY=(tty)
 
 export PAGER='moar'
-export NNN_PAGER=$PAGER
 export MOAR='--no-linenumbers -no-clear-on-exit -quit-if-one-screen -mousemode scroll'
 
 export FZF_ALT_C_COMMAND='fd -H -E .git -t d . $dir'
@@ -49,6 +50,7 @@ alias f='fzf'
 
 export NNN_BMS='t:~/.local/share/Trash/;'
 export NNN_PLUG='p:preview-tui;o:fzopen;c:fzcd;z:autojump;x:!chmod +x $nnn*;'
+export NNN_PAGER=$PAGER
 export NNN_TRASH='1'
 export NNN_COLORS='#0c'
 functions --copy n __n

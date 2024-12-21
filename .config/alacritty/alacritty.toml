@@ -1,15 +1,14 @@
 [general]
 import = ["dracula.toml"]
-working_directory = "/Users/user/Downloads"
+working_directory = "/Users/leo/Downloads"
 
 [env]
-MAMBA_EXE = "/usr/local/bin/micromamba"
-MAMBA_ROOT_PREFIX = "/Users/user/micromamba"
-SHELL = "/Users/user/micromamba/bin/fish"
+MAMBA_ROOT_PREFIX = "/Users/leo/mamba"
+SHELL = "/Users/leo/mamba/bin/fish"
 TERM = "screen-256color"
 
 [terminal.shell]
-program = "/Users/user/micromamba/bin/fish"
+program = "/Users/leo/mamba/bin/fish"
 
 [bell]
 animation = "EaseOutSine"
