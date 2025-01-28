@@ -18,6 +18,7 @@ brew install --cask aural
 brew install --cask alacritty
 brew install --cask amethyst
 brew install --cask background-music
+brew install --cask deskpad
 brew install --cask maccy
 brew install --cask alt-tab
 brew install --cask keepingyouawake
