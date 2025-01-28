@@ -102,7 +102,7 @@ alias gd='git diff'
 
 alias now='date +"%F %T"'
 alias week='date +"%V"'
-alias myip='dig -4 +short myip.opendns.com @resolver1.opendns.com; curl -sk https://myip.ipip.net/'
+alias myip='dig -4 +short myip.opendns.com @resolver1.opendns.com; curl -sk https://myip.ipip.net/; curl -sk https://ipinfo.io/json'
 alias tree='l -T'
 alias diff='delta'
 alias rand='openssl rand -hex 30'
