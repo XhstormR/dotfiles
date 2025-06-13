@@ -77,7 +77,6 @@ alias fd='fd --hyperlink=auto'
 alias vi='vim'
 alias cat='bat'
 alias xxd='hexyl'
-alias rm='trash'
 
 alias ..='c ..'
 alias ...='c ../..'
@@ -109,19 +108,35 @@ alias jq='jq -r'
 alias xq='xmllint --format'
 alias e='subl'
 
+function rm
+    switch (uname)
+        case Darwin
+            trash $argv
+        case Windows_NT 'MINGW64_NT*'
+            # https://nircmd.nirsoft.net/moverecyclebin.html
+            for i in $argv
+                nircmdc.exe moverecyclebin $i
+            end
+        case Linux
+            command rm $argv
+        case '*'
+            echo "不支持的操作系统: $(uname)"
+    end
+end
+
 function o -a path
-    # set -l path (cygpath -w (pwd))
-
-    # if count $argv > /dev/null
-    #     echo $argv
-    # else
-    #     echo none
-    # end
-
     [ -n "$path" ]; or set -l path .
-    open $path
-    # explorer $path
-    # nautilus $path
+
+    switch (uname)
+        case Darwin
+            open $path
+        case Windows_NT 'MINGW64_NT*'
+            start $path
+        case Linux
+            xdg-open $path
+        case '*'
+            echo "不支持的操作系统: $(uname)"
+    end
 end
 
 function c
