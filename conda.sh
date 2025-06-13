@@ -5,6 +5,7 @@ packages=(
     bat
     btop
     htop
+    chafa
     curl
     fd-find
     fish
@@ -18,9 +19,9 @@ packages=(
     ripgrep
     socat
     tmux
-    trash-cli
     vim
     yt-dlp
+    yazi
     openjdk
 )
 
