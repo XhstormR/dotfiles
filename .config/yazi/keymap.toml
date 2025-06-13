@@ -1,0 +1,16 @@
+"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+
+[[mgr.prepend_keymap]]
+on   = "!"
+run  = 'shell "$SHELL" --block'
+desc = "Open $SHELL here"
+
+[[mgr.prepend_keymap]]
+on   = "T"
+run  = "plugin toggle-pane min-parent"
+desc = "Show or hide the parent pane"
+
+[[input.prepend_keymap]]
+on   = "<Esc>"
+run  = "close"
+desc = "Cancel input"

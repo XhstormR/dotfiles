@@ -4,7 +4,6 @@ function doSync() {
     rsync \
         --exclude ".git/" \
         --exclude ".idea/" \
-        --exclude "patch/" \
         --exclude "/*.sh" \
         --exclude "/README.md" \
         --exclude "/LICENSE" \
@@ -19,10 +18,6 @@ function doIt() {
     curl -o ~/.config/fish/conf.d/zoxide.fish https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/init.fish
 
     curl -o ~/.local/bin/fzf-tmux https://raw.githubusercontent.com/junegunn/fzf/master/bin/fzf-tmux && chmod +x ~/.local/bin/fzf-tmux
-
-    curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
-    curl -o ~/.config/fish/functions/n.fish https://raw.githubusercontent.com/jarun/nnn/master/misc/quitcd/quitcd.fish
-    patch ~/.config/nnn/plugins/preview-tui ./patch/preview-tui.patch
 
     curl -o ~/Library/Fonts/"JetBrainsMonoNerdFont-Regular.ttf" "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFont-Regular.ttf"
 }

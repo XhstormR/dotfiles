@@ -48,14 +48,6 @@ export FZF_TMUX=1
 export FZF_TMUX_OPTS='-p 90%'
 alias f='fzf'
 
-export NNN_BMS='t:~/.local/share/Trash/;'
-export NNN_PLUG='p:preview-tui;o:fzopen;c:fzcd;z:autojump;x:!chmod +x $nnn*;'
-export NNN_PAGER=$PAGER
-export NNN_TRASH='1'
-export NNN_COLORS='#0c'
-functions --copy n __n
-alias n='__n -adexoiUH -Te -Pp'
-
 export EZA_COLORS='da=2;0:gm=1;0'
 alias eza='eza --group-directories-first --color=auto --time-style=long-iso -abgF --git --icons --color-scale --sort=Extension --hyperlink'
 
