@@ -43,9 +43,7 @@ export FZF_CTRL_T_COMMAND='fd -H -E .git -t f . $dir'
 export FZF_DEFAULT_COMMAND='fd -H -E .git'
 export FZF_ALT_C_OPTS='--preview "eza -T -L3 {} | head -100"'
 export FZF_CTRL_T_OPTS='--preview "bat -f -r :100 {}"'
-export FZF_DEFAULT_OPTS='-0 --multi --border --style=full --info=inline-right --marker ▏ --pointer ▌ --highlight-line --color marker:green,pointer:green,prompt:green,gutter:-1,selected-bg:238'
-export FZF_TMUX=1
-export FZF_TMUX_OPTS='-p 90%'
+export FZF_DEFAULT_OPTS='-0 --multi --tmux 85% --border --style=full --info=inline-right --marker ▏ --pointer ▌ --highlight-line --color marker:green,pointer:green,prompt:green,gutter:-1,selected-bg:238'
 alias f='fzf'
 
 export EZA_COLORS='da=2;0:gm=1;0'
