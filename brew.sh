@@ -3,14 +3,9 @@
 brew update
 brew upgrade
 
-brew install eza
 brew install coreutils
-brew install hugo
-brew install moar
-brew install syncthing
 brew install sniffnet
 brew install sevenzip
-brew install micromamba
 
 brew install --cask aural
 brew install --cask alacritty

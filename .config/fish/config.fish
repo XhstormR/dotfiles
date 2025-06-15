@@ -4,7 +4,6 @@ fish_add_path /usr/bin
 fish_add_path /usr/local/bin
 fish_add_path /opt/homebrew/bin
 fish_add_path ~/.local/bin
-fish_add_path "$MAMBA_ROOT_PREFIX/bin"
 fish_add_path "$MAMBA_ROOT_PREFIX/lib/jvm/bin"
 
 eval micromamba shell hook --shell fish | source
