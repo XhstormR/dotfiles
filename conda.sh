@@ -4,6 +4,10 @@ packages=(
     aria2
     bat
     btop
+    eza
+    syncthing
+    moar
+    hugo
     htop
     chafa
     curl
@@ -24,6 +28,8 @@ packages=(
     yazi
     openjdk
 )
+
+micromamba self-update
 
 micromamba update --all
 

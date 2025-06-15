@@ -2,7 +2,7 @@
 
 channels:
   - conda-forge
-  - defaults
+  - nodefaults
 channel_priority: strict
 always_yes: true
 show_channel_urls: true
