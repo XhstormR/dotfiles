@@ -4,6 +4,10 @@ packages=(
     aria2
     bat
     btop
+    eza
+    syncthing
+    moar
+    hugo
     htop
     chafa
     curl
