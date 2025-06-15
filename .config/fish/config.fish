@@ -9,6 +9,7 @@ fish_add_path "$MAMBA_ROOT_PREFIX/lib/jvm/bin"
 
 eval micromamba shell hook --shell fish | source
 eval fzf --fish | source
+eval zoxide init fish | source
 
 set -g fish_prompt_pwd_dir_length 0
 # https://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=leo
