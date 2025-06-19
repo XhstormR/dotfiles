@@ -29,7 +29,7 @@ brew install --cask onyx
 brew install --cask phoenix-slides
 brew install --cask rectangle
 brew install --cask stats
-brew install --cask shottr
+brew install --cask pixpin
 brew install --cask sloth
 brew install --cask sublime-text
 brew install --cask telegram

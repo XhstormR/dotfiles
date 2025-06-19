@@ -34,5 +34,6 @@ pixi self-update
 pixi global update
 
 pixi global install ${packages[@]}
+pixi global install openjdk --expose java --expose javac --expose jar --expose jwebserver
 
 pixi clean cache -y
