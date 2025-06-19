@@ -29,10 +29,10 @@ packages=(
     openjdk
 )
 
-micromamba self-update
+pixi self-update
 
-micromamba update --all
+pixi global update
 
-micromamba install ${packages[@]}
+pixi global install ${packages[@]}
 
-micromamba clean --all
+pixi clean cache -y
