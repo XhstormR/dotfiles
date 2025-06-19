@@ -4,9 +4,9 @@ fish_add_path /usr/bin
 fish_add_path /usr/local/bin
 fish_add_path /opt/homebrew/bin
 fish_add_path ~/.local/bin
-fish_add_path "$MAMBA_ROOT_PREFIX/lib/jvm/bin"
+fish_add_path ~/.pixi/bin
+fish_add_path ~/.pixi/envs/openjdk/lib/jvm/bin
 
-eval micromamba shell hook --shell fish | source
 eval fzf --fish | source
 eval zoxide init fish | source
 
@@ -123,7 +123,7 @@ function rm
 end
 
 function o -a path
-    [ -n "$path" ]; or set -l path .
+    test -z "$path"; and set path .
 
     switch (uname)
         case Darwin

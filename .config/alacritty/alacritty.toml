@@ -3,12 +3,11 @@ import = ["dracula.toml"]
 working_directory = "/Users/leo/Downloads"
 
 [env]
-MAMBA_ROOT_PREFIX = "/Users/leo/mamba"
-SHELL = "/Users/leo/mamba/bin/fish"
+SHELL = "/Users/leo/.pixi/bin/fish"
 TERM = "tmux-256color"
 
 [terminal.shell]
-program = "/Users/leo/mamba/bin/fish"
+program = "/Users/leo/.pixi/bin/fish"
 
 [bell]
 animation = "EaseOutSine"

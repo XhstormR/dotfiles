@@ -17,7 +17,7 @@ function doIt() {
 
     curl -o ~/Library/Fonts/"JetBrainsMonoNerdFont-Regular.ttf" "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFont-Regular.ttf"
 
-    sh <(curl https://raw.githubusercontent.com/mamba-org/micromamba-releases/refs/heads/main/install.sh)
+    sh <(curl https://raw.githubusercontent.com/prefix-dev/pixi/refs/heads/main/install/install.sh)
 }
 
 cd "$(dirname "${BASH_SOURCE}")" || exit;

@@ -1,0 +1,8 @@
+[shell]
+change-ps1 = true
+
+[pypi-config]
+index-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+
+[mirrors]
+"https://conda.anaconda.org/conda-forge" = ["https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge"]
