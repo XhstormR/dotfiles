@@ -89,6 +89,7 @@ alias gd='git diff'
 
 alias now='date +"%F %T"'
 alias week='date +"%V"'
+alias localip='ifconfig -a | perl -nle"/(\d+\.\d+\.\d+\.\d+)/ and print \$1"'
 alias myip='dig -4 +short myip.opendns.com @resolver1.opendns.com; curl -sk https://myip.ipip.net/; curl -sk https://ipinfo.io/json'
 alias tree='l -T'
 alias diff='delta'

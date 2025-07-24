@@ -3,7 +3,6 @@
 brew update
 brew upgrade
 
-brew install coreutils
 brew install sniffnet
 brew install sevenzip
 
@@ -29,7 +28,7 @@ brew install --cask onyx
 brew install --cask phoenix-slides
 brew install --cask rectangle
 brew install --cask stats
-brew install --cask pixpin
+brew install --cask snipaste
 brew install --cask sloth
 brew install --cask sublime-text
 brew install --cask telegram
