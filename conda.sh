@@ -20,6 +20,7 @@ packages=(
     git-delta
     hexyl
     jq
+    zed
     zoxide
     ripgrep
     socat

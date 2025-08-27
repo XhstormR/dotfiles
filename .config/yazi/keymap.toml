@@ -7,8 +7,8 @@ desc = "Open $SHELL here"
 
 [[mgr.prepend_keymap]]
 on   = "T"
-run  = "plugin toggle-pane min-parent"
-desc = "Show or hide the parent pane"
+run  = "plugin toggle-pane min-preview"
+desc = "Show or hide the preview pane"
 
 [[input.prepend_keymap]]
 on   = "<Esc>"
