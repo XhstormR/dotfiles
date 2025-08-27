@@ -81,7 +81,7 @@
     untrackedCache = true
     whitespace = space-before-tab,-indent-with-non-tab,trailing-space
     pager = delta
-    editor = subl -n -w
+    editor = zed -n -w
 [diff]
     renames = copies
 [diff "bin"]

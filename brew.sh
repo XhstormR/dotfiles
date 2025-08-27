@@ -29,7 +29,6 @@ brew install --cask rectangle
 brew install --cask stats
 brew install --cask snipaste
 brew install --cask sloth
-brew install --cask sublime-text
 brew install --cask telegram
 #brew install --cask android-file-transfer
 #brew install --cask megasync

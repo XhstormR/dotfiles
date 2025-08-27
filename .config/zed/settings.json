@@ -1,0 +1,43 @@
+{
+    "minimap": {
+        "show": "always"
+    },
+    "inlay_hints": {
+        "enabled": true
+    },
+    "tabs": {
+        "file_icons": true,
+        "git_status": true,
+        "show_diagnostics": "errors"
+    },
+    "terminal": {
+        "shell": {
+            "program": "fish"
+        },
+        "copy_on_select": true,
+        "option_as_meta": true
+    },
+    "telemetry": {
+        "diagnostics": false,
+        "metrics": false
+    },
+    "auto_install_extensions": {
+        "java": true,
+        "dracula": true
+    },
+    "theme": "Dracula",
+    "tab_size": 4,
+    "wrap_guides": [80],
+    "buffer_font_size": 13,
+    "buffer_font_family": "JetBrainsMono Nerd Font",
+    "base_keymap": "JetBrains",
+    "autosave": "on_focus_change",
+    "format_on_save": "off", // Ctrl-Shift-I
+    "hide_mouse": "never",
+    "show_whitespaces": "all",
+    "scroll_beyond_last_line": "off",
+    "auto_signature_help": true,
+    "ensure_final_newline_on_save": true,
+    "remove_trailing_whitespace_on_save": true,
+    "enable_language_server": false
+}

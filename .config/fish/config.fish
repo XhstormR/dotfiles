@@ -28,8 +28,8 @@ set -g fish_greeting '
 '
 
 export LANG='C'
-export VISUAL='subl'
-export EDITOR='subl'
+export VISUAL='zed'
+export EDITOR='zed'
 export HISTCONTROL='ignoreboth'
 export GPG_TTY=(tty)
 
@@ -103,7 +103,7 @@ alias fs='du -sbh'
 alias cb='fish_clipboard_copy' # Clipboard
 alias jq='jq -r'
 alias xq='xmllint --format'
-alias e='subl'
+alias e='$VISUAL'
 
 function rm
     switch (uname)
@@ -204,14 +204,23 @@ end
 function fish_prompt
     set -l last_pipestatus $pipestatus
     set -l color_normal (set_color normal)
-    set -l color_status (set_color bryellow --bold)
+    set -l color_status (set_color normal)
 
     set -l suffix '❯'
     if fish_is_root_user
         set suffix '#'
     end
-    set -l prompt_login  (printf '%s┏━ %s%s' $color_status (prompt_login) $color_normal)
-    set -l prompt_suffix (printf '%s┗━━%s%s' $color_status $suffix $color_normal)
+
+    if not contains $last_pipestatus 0 141
+        set color_status (set_color brred --bold)
+    else
+        set color_status (set_color brgreen --bold)
+    end
+    set suffix (printf '%s%s%s' $color_status $suffix $color_normal)
+
+    set -l color_status (set_color bryellow --bold)
+    set -l prompt_login  (printf '%s┌─ %s%s' $color_status (prompt_login) $color_normal)
+    set -l prompt_suffix (printf '%s└──%s%s' $color_status $suffix $color_normal)
 
     set -l color_status (set_color brblue)
     set -l prompt_pwd_hyperlink (printf '\e]8;;file://%s\e\\\%s\e]8;;\e\\' (string escape --style=url -- $PWD) (prompt_pwd))
@@ -244,7 +253,7 @@ function fish_prompt
     set -l width_left (string length --visible $prompt_left)
     set -l width_right (string length --visible $prompt_right)
     set -l width_space (math max 0, $COLUMNS - $width_left - $width_right)
-    set -l prompt_space (string pad -w$width_space -c━ '')
+    set -l prompt_space (string pad -w$width_space -c─ '')
     set -l prompt_space (printf '%s%s%s' $color_status $prompt_space $color_normal)
 
     printf '%s%s%s\n%s ' \
