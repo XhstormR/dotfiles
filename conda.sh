@@ -4,7 +4,8 @@ packages=(
     aria2
     bat
     btop
-    coreutils
+    dua-cli
+    uutils-coreutils
     eza
     syncthing
     moar
