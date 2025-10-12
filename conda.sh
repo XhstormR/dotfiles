@@ -4,7 +4,7 @@ packages=(
     aria2
     bat
     btop
-    coreutils
+    uutils-coreutils
     eza
     syncthing
     moar

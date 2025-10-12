@@ -73,8 +73,6 @@
     encoding = utf-8
 [apply]
     whitespace = fix
-[branch]
-    sort = -committerdate
 [core]
     autocrlf = input
     ignorecase = false
@@ -98,9 +96,15 @@
 [rerere]
     enabled = true
     autoupdate = true
+[branch]
+    autosetuprebase = always
+[pull]
+    rebase = true
 [push]
-    default = simple
+    default = tracking
     followTags = true
+[receive]
+    fsckObjects = true
 [init]
     defaultBranch = main
 [delta]
