@@ -6,7 +6,6 @@ brew upgrade --greedy --force-bottle
 brew install sniffnet
 brew install sevenzip
 
-brew install --cask alacritty
 brew install --cask amethyst
 brew install --cask background-music
 brew install --cask deskpad
