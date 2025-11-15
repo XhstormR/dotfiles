@@ -8,7 +8,7 @@ packages=(
     uutils-coreutils
     eza
     syncthing
-    moar
+    moor
     hugo
     htop
     chafa
@@ -19,9 +19,9 @@ packages=(
     sed
     gawk
     git-delta
+    lazygit
     hexyl
     jq
-    zed
     zoxide
     ripgrep
     socat
@@ -30,6 +30,9 @@ packages=(
     yt-dlp
     yazi
     openjdk
+
+    alacritty
+    zed
 )
 
 pixi self-update

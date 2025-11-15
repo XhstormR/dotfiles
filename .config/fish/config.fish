@@ -8,7 +8,11 @@ fish_add_path ~/.pixi/bin
 eval fzf --fish | source
 eval zoxide init fish | source
 
+set -a fish_complete_path ~/.pixi/completions/fish
 set -g fish_prompt_pwd_dir_length 0
+set -g __fish_git_prompt_showcolorhints 1
+set -g __fish_git_prompt_show_informative_status 1
+
 # https://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=leo
 set -g fish_greeting '
    ██╗     ███████╗ ██████╗
@@ -33,15 +37,15 @@ export EDITOR='zed'
 export HISTCONTROL='ignoreboth'
 export GPG_TTY=(tty)
 
-export PAGER='moar'
-export MOAR='--no-linenumbers -no-clear-on-exit -quit-if-one-screen -mousemode scroll'
+export PAGER='moor'
+export MOOR='--no-linenumbers -no-clear-on-exit -quit-if-one-screen -terminal-fg -wrap -style dracula -mousemode scroll'
 
-export FZF_ALT_C_COMMAND='fd -H -E .git -t d . $dir'
-export FZF_CTRL_T_COMMAND='fd -H -E .git -t f . $dir'
-export FZF_DEFAULT_COMMAND='fd -H -E .git'
-export FZF_ALT_C_OPTS='--preview "eza -T -L3 {} | head -100"'
+export FZF_ALT_C_COMMAND='fd -t d . $dir'
+export FZF_CTRL_T_COMMAND='fd -t f . $dir'
+export FZF_DEFAULT_COMMAND='fd'
+export FZF_ALT_C_OPTS='--preview "eza --color=always -T -L3 {} | head -100"'
 export FZF_CTRL_T_OPTS='--preview "bat -f -r :100 {}" --bind "focus:bg-transform-header(file -bI {})"'
-export FZF_DEFAULT_OPTS='-0 --multi --tmux 85% --border --style=full --info=inline-right --marker ▏ --pointer ▌ --gutter " " --highlight-line --color marker:green,pointer:green,prompt:green,selected-bg:238,border:#9999cc'
+export FZF_DEFAULT_OPTS='-0 -1 --exact --multi --ansi --tmux 85% --border --style=full --info=inline-right --marker ▏ --pointer ▌ --gutter " " --highlight-line --color marker:green,pointer:green,prompt:green,selected-bg:238,border:#9999cc'
 alias f='fzf'
 
 export EZA_COLORS='da=2;0:gm=1;0'
@@ -69,7 +73,7 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias pgrep='pgrep -a'
 alias mkdir='mkdir -p'
-alias fd='fd --hyperlink=auto'
+alias fd='fd -H -L -E .git --color=always --hyperlink=auto'
 
 alias vi='vim'
 alias cat='bat'
@@ -90,8 +94,6 @@ alias gd='git diff'
 
 alias now='date +"%F %T"'
 alias week='date +"%V"'
-alias localip='ifconfig -a | perl -nle"/(\d+\.\d+\.\d+\.\d+)/ and print \$1"'
-alias myip='dig -4 +short myip.opendns.com @resolver1.opendns.com; curl -sk https://myip.ipip.net/; curl -sk https://ipinfo.io/json'
 alias tree='l -T'
 alias diff='delta'
 alias rand='openssl rand -hex 30'
@@ -100,11 +102,12 @@ alias reload='exec fish'
 alias map='xargs -n1'
 alias cpu='top -o cpu'
 alias mem='top -o rsize'
-alias fs='du -sbh'
 alias cb='fish_clipboard_copy' # Clipboard
 alias jq='jq -r'
 alias xq='xmllint --format'
 alias e='$VISUAL'
+alias ip_lan='__fish_print_addresses | perl -nle"/(\d+\.\d+\.\d+\.\d+)/ and print \$1"'
+alias ip_wan='dig -4 +short myip.opendns.com @resolver1.opendns.com; curl -sk https://myip.ipip.net/; curl -sk https://ipinfo.io/json'
 
 function rm
     switch (uname)
@@ -162,17 +165,18 @@ function take
     mkdir -p $argv && cd $argv
 end
 
-function fkill -a pattern
-  if test -n "$pattern"
-    pkill -9 $pattern
-    return
-  end
+function pkill -a pattern
+    if test -n "$pattern"
+        command pkill -9 $pattern
+        return
+    end
 
-  set -l header (ps aux | head -1)
-  set -l pid (ps aux | fzf -e --header "$header" | tr -s ' ' | cut -d ' ' -f 2)
-  if test -n "$pid"
-    kill -9 $pid
-  end
+    set -l ps_preview_fmt (string join ',' 'pid' 'ppid=PARENT' 'user' '%cpu' 'rss=RSS_IN_KB' 'start=START_TIME' 'command')
+    set -l processes_selected (ps -A -opid,command | fzf --exact --multi --prompt="Processes> " --header-lines=1 --preview="ps -o '$ps_preview_fmt' -p {1} || echo 'Cannot preview {1} because it exited.'" --preview-window="down:4:wrap")
+    set -l pids_selected (printf '%s\n' $processes_selected | awk '{print $1}')
+    if test -n "$pids_selected"
+        kill -9 $pids_selected
+    end
 end
 
 function __proxy_on
@@ -227,24 +231,24 @@ function fish_prompt
     set -l prompt_pwd_hyperlink (printf '\e]8;;file://%s\e\\\%s\e]8;;\e\\' (string escape --style=url -- $PWD) (prompt_pwd))
     set -l prompt_pwd (printf '%s%s%s' $color_status $prompt_pwd_hyperlink $color_normal)
 
-    # set -l prompt_vcs (fish_vcs_prompt) # too slow
+    set -l prompt_vcs (fish_vcs_prompt) # too slow
     if test -n "$prompt_vcs"
-        set prompt_vcs (printf '%s ' $prompt_vcs)
+        set prompt_vcs (printf '%s' $prompt_vcs)
     end
 
     set -l color_status  (set_color $fish_color_status)
     set -l color_statusb (set_color $fish_color_status --bold)
     set -l prompt_status (__fish_print_pipestatus "[" "]" "|" "$color_status" "$color_statusb" $last_pipestatus)
     if test -n "$prompt_status"
-        set prompt_status (printf '%s ' $prompt_status)
+        set prompt_status (printf ' %s' $prompt_status)
     end
 
     set -l prompt_proxy ''
     if set -q all_proxy
-        set prompt_proxy '🚀 '
+        set prompt_proxy ' 🚀'
     end
 
-    set -l prompt_left (printf '%s:%s %s%s%s' $prompt_login $prompt_pwd $prompt_vcs $prompt_status $prompt_proxy)
+    set -l prompt_left (printf '%s:%s%s%s%s ' $prompt_login $prompt_pwd $prompt_vcs $prompt_status $prompt_proxy)
 
     set -l prompt_time (date +"%T")
     set -l prompt_duration (math $CMD_DURATION / 1000)
