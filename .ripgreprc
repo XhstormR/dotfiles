@@ -6,5 +6,7 @@
 
 --hyperlink-format=file://{host}{path}
 
+--no-require-git
+
 --glob
 !.git/*

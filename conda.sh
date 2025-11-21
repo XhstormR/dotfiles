@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 
 packages=(
+    7zip
     aria2
     bat
     btop
+    bottom
     dua-cli
     uutils-coreutils
     eza
     syncthing
     moor
     hugo
-    htop
     chafa
     curl
     fd-find

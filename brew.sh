@@ -4,7 +4,6 @@ brew update
 brew upgrade --greedy --force-bottle
 
 brew install sniffnet
-brew install sevenzip
 
 brew install --cask amethyst
 brew install --cask background-music
