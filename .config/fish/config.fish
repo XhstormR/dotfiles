@@ -32,8 +32,8 @@ set -g fish_greeting '
 '
 
 export LANG='C'
-export VISUAL='zed'
-export EDITOR='zed'
+export EDITOR='code'
+export VISUAL='code'
 export HISTCONTROL='ignoreboth'
 export GPG_TTY=(tty)
 
@@ -161,11 +161,11 @@ function v
     $argv[1] --version || $argv[1] -version || $argv[1] version
 end
 
-function take
+function md
     mkdir -p $argv && cd $argv
 end
 
-function pkill -a pattern
+function fkill -a pattern
     if test -n "$pattern"
         command pkill -9 $pattern
         return

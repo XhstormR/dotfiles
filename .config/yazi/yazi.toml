@@ -1,12 +1,11 @@
 "$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
 
 [mgr]
-ratio = [ 1, 3, 4 ]
+ratio = [1, 3, 4]
 show_hidden = true
 sort_by = "extension"
 linemode = "size_and_mtime"
 
 [open]
-prepend_rules = [
-    { mime = "{audio,video}/*", use = [ "open", "reveal" ] }
-]
+prepend_rules = [{ mime = "{audio,video}/*", use = ["open", "reveal"] }]
+append_rules = [{ name = "*", use = "edit" }]
