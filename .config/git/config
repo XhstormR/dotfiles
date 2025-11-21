@@ -79,7 +79,7 @@
     untrackedCache = true
     whitespace = space-before-tab,-indent-with-non-tab,trailing-space
     pager = delta
-    editor = zed -n -w
+    editor = code -n -w
 [diff]
     renames = copies
 [diff "bin"]
@@ -92,7 +92,8 @@
 [fetch]
     prune = true
 [rebase]
-    autosquash = true
+    autoStash = true
+    autoSquash = true
 [rerere]
     enabled = true
     autoupdate = true
@@ -103,6 +104,7 @@
 [push]
     default = tracking
     followTags = true
+    autoSetupRemote = true
 [receive]
     fsckObjects = true
 [init]

@@ -32,8 +32,8 @@ set -g fish_greeting '
 '
 
 export LANG='C'
-export VISUAL='zed'
-export EDITOR='zed'
+export EDITOR='code'
+export VISUAL='code'
 export HISTCONTROL='ignoreboth'
 export GPG_TTY=(tty)
 
@@ -49,7 +49,7 @@ export FZF_DEFAULT_OPTS='-0 -1 --exact --multi --ansi --tmux 85% --border --styl
 alias f='fzf'
 
 export EZA_COLORS='da=2;0:gm=1;0'
-alias eza='eza --group-directories-first --color=auto --time-style=long-iso -abgF --git-repos-no-status --flags --icons --color-scale --sort=Extension --hyperlink'
+alias eza='eza -abgF --group-directories-first --color=auto --time-style=long-iso --git-repos-no-status --octal-permissions --flags --icons --color-scale --sort=Extension --hyperlink'
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
@@ -161,45 +161,30 @@ function v
     $argv[1] --version || $argv[1] -version || $argv[1] version
 end
 
-function take
+function md
     mkdir -p $argv && cd $argv
 end
 
-function pkill -a pattern
+function fkill -a pattern
     if test -n "$pattern"
         command pkill -9 $pattern
         return
     end
 
     set -l ps_preview_fmt (string join ',' 'pid' 'ppid=PARENT' 'user' '%cpu' 'rss=RSS_IN_KB' 'start=START_TIME' 'command')
-    set -l processes_selected (ps -A -opid,command | fzf --exact --multi --prompt="Processes> " --header-lines=1 --preview="ps -o '$ps_preview_fmt' -p {1} || echo 'Cannot preview {1} because it exited.'" --preview-window="down:4:wrap")
+    set -l processes_selected (ps -A -opid,command | fzf --prompt="Processes> " --header-lines=1 --preview="ps -o '$ps_preview_fmt' -p {1} || echo 'Cannot preview {1} because it exited.'" --preview-window="down:4:wrap")
     set -l pids_selected (printf '%s\n' $processes_selected | awk '{print $1}')
     if test -n "$pids_selected"
         kill -9 $pids_selected
     end
 end
 
-function __proxy_on
-    set -xU all_proxy socks5h://127.0.0.1:1080
-    set -xU http_proxy http://127.0.0.1:1080
-    set -xU https_proxy http://127.0.0.1:1080
-    set -xU GIT_SSH_COMMAND 'ssh -o ProxyCommand="socat - PROXY:127.0.0.1:%h:%p,proxyport=1080"'
-end
-
-function __proxy_off
-    set -e all_proxy
-    set -e http_proxy
-    set -e https_proxy
-    set -e GIT_SSH_COMMAND
-end
-
-function proxy_toggle
-    if set -q all_proxy
-        __proxy_off
-    else
-        __proxy_on
+function fdocker
+    set -l container_selected (docker ps -a | fzf --prompt="Container> " --header-lines=1 --preview="docker stats --no-stream {1} || echo 'Cannot preview {1} because it exited.'" --preview-window="down:4:wrap")
+    set -l cid_selected (printf '%s\n' $container_selected[1] | awk '{print $1}')
+    if test -n "$cid_selected"
+        docker start $cid_selected && docker exec -it $cid_selected sh
     end
-    true
 end
 
 function fish_user_key_bindings
