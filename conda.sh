@@ -17,6 +17,7 @@ packages=(
     fd-find
     fish
     fzf
+    ffmpeg
     sed
     gawk
     git-delta
@@ -31,6 +32,11 @@ packages=(
     yt-dlp
     yazi
     openjdk
+    duckdb-cli
+
+    lima-vm
+    docker-cli
+    docker-compose
 
     alacritty
     zed

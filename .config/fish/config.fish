@@ -31,7 +31,7 @@ set -g fish_greeting '
        \m___m__|_|    \m_m_|   \mm_|
 '
 
-export LANG='C'
+export LANG='C.UTF-8'
 export EDITOR='code'
 export VISUAL='code'
 export HISTCONTROL='ignoreboth'
@@ -43,9 +43,9 @@ export MOOR='--no-linenumbers -no-clear-on-exit -quit-if-one-screen -terminal-fg
 export FZF_ALT_C_COMMAND='fd -t d . $dir'
 export FZF_CTRL_T_COMMAND='fd -t f . $dir'
 export FZF_DEFAULT_COMMAND='fd'
-export FZF_ALT_C_OPTS='--preview "eza --color=always -T -L3 {} | head -100"'
-export FZF_CTRL_T_OPTS='--preview "bat -f -r :100 {}" --bind "focus:bg-transform-header(file -bI {})"'
-export FZF_DEFAULT_OPTS='-0 -1 --exact --multi --ansi --tmux 85% --border --style=full --info=inline-right --marker ▏ --pointer ▌ --gutter " " --highlight-line --color marker:green,pointer:green,prompt:green,selected-bg:238,border:#9999cc'
+export FZF_ALT_C_OPTS='--preview "eza --color=always --tree --level 3 {}"'
+export FZF_CTRL_T_OPTS='--preview "bat --color=always --line-range :200 {}" --preview-window "~4" --bind "focus:bg-transform-header(file -bI {})"'
+export FZF_DEFAULT_OPTS='-0 -1 --gap --wrap --multi --ansi --tmux 85% --border --style=full --info=inline-right --marker-multi-line "╔║╚" --marker "║" --pointer ▌ --gutter " " --highlight-line --color marker:green,pointer:green,prompt:green,selected-bg:238,border:#9999cc --preview-window "wrap:70%" --bind "alt-a:select-all,alt-d:deselect-all,ctrl-/:toggle-preview"'
 alias f='fzf'
 
 export EZA_COLORS='da=2;0:gm=1;0'
@@ -73,7 +73,8 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias pgrep='pgrep -a'
 alias mkdir='mkdir -p'
-alias fd='fd -H -L -E .git --color=always --hyperlink=auto'
+alias fd='fd --hidden --follow --exclude .git --color=always --hyperlink=auto'
+alias yt-dlp='yt-dlp --embed-metadata --cookies-from-browser chrome'
 
 alias vi='vim'
 alias cat='bat'
@@ -105,7 +106,7 @@ alias mem='top -o rsize'
 alias cb='fish_clipboard_copy' # Clipboard
 alias jq='jq -r'
 alias xq='xmllint --format'
-alias e='$VISUAL'
+alias e='$EDITOR'
 alias ip_lan='__fish_print_addresses | perl -nle"/(\d+\.\d+\.\d+\.\d+)/ and print \$1"'
 alias ip_wan='dig -4 +short myip.opendns.com @resolver1.opendns.com; curl -sk https://myip.ipip.net/; curl -sk https://ipinfo.io/json'
 
@@ -148,9 +149,14 @@ function z
     __zoxide_z $argv && ll
 end
 
+function a
+    set -l archive (basename (pwd))
+    7zz a -y -aoa -sccUTF-8 $archive $argv
+end
+
 function x
-    set -l name (basename $argv[1] | string split -r -m1 .)[1]
-    7zz x $argv[1] -y -o$name
+    set -l dirname (basename $argv[1] | string split --right --max 1 .)[1]
+    7zz x -y -aoa -sccUTF-8 -o$dirname $argv[1]
 end
 
 function h
@@ -171,19 +177,59 @@ function fkill -a pattern
         return
     end
 
-    set -l ps_preview_fmt (string join ',' 'pid' 'ppid=PARENT' 'user' '%cpu' 'rss=RSS_IN_KB' 'start=START_TIME' 'command')
-    set -l processes_selected (ps -A -opid,command | fzf --prompt="Processes> " --header-lines=1 --preview="ps -o '$ps_preview_fmt' -p {1} || echo 'Cannot preview {1} because it exited.'" --preview-window="down:4:wrap")
-    set -l pids_selected (printf '%s\n' $processes_selected | awk '{print $1}')
+    set -l cmd_prefix 'ps -e -opid,user,command'
+    set -l cmd_selected (fzf \
+        --bind "start:reload($cmd_prefix)" \
+        --bind "ctrl-r:reload($cmd_prefix)" \
+        --header 'Press CTRL-R to reload' \
+        --header-lines=1 \
+        --prompt='Processes> ' \
+        --preview='ps -f -p {1} || echo "Cannot preview {1} because it exited."' \
+        --preview-window="down:4:wrap" \
+        --layout=reverse \
+    )
+    set -l pids_selected (printf '%s\n' $cmd_selected | awk '{print $1}')
     if test -n "$pids_selected"
         kill -9 $pids_selected
     end
 end
 
 function fdocker
-    set -l container_selected (docker ps -a | fzf --prompt="Container> " --header-lines=1 --preview="docker stats --no-stream {1} || echo 'Cannot preview {1} because it exited.'" --preview-window="down:4:wrap")
-    set -l cid_selected (printf '%s\n' $container_selected[1] | awk '{print $1}')
+    set -l cmd_prefix 'docker ps -a'
+    set -l cmd_selected (fzf \
+        --bind "start:reload($cmd_prefix)" \
+        --bind "ctrl-r:reload($cmd_prefix)" \
+        --header 'Press CTRL-R to reload' \
+        --header-lines=1 \
+        --prompt='Container> ' \
+        --preview='docker stats --no-stream {1} || echo "Cannot preview {1} because it exited."' \
+        --preview-window="down:4:wrap" \
+        --layout=reverse \
+    )
+    set -l cid_selected (printf '%s\n' $cmd_selected[1] | awk '{print $1}')
     if test -n "$cid_selected"
         docker start $cid_selected && docker exec -it $cid_selected sh
+    end
+end
+
+function frg
+    set -l cmd_prefix 'rg --no-heading --column --color=always --'
+    set -l cmd_selected (fzf \
+        --disabled \
+        --query "$argv" \
+        --bind "start:reload($cmd_prefix {q})" \
+        --bind "change:reload($cmd_prefix {q} || true)" \
+        --bind "ctrl-o:execute($EDITOR --goto {1}:{2}:{3})" \
+        --bind "focus:bg-transform-header(file -bI {1})" \
+        --prompt='Search> ' \
+        --delimiter ':' \
+        --preview 'bat --color=always --theme="Solarized (dark)" --highlight-line {2} -- {1}' \
+        --preview-window '~4,+{2}/3,<80(up)' \
+        --layout=reverse \
+    )
+    set -l files_selected (printf '%s\n' $cmd_selected | awk -F: '{print $1}' | sort -u | string join ' ')
+    if test -n "$files_selected"
+        commandline $files_selected
     end
 end
 

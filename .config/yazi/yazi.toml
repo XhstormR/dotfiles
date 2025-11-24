@@ -6,6 +6,9 @@ show_hidden = true
 sort_by = "extension"
 linemode = "size_and_mtime"
 
+[preview]
+wrap = "yes"
+
 [open]
 prepend_rules = [{ mime = "{audio,video}/*", use = ["open", "reveal"] }]
 append_rules = [{ name = "*", use = "edit" }]
