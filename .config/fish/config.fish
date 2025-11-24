@@ -31,7 +31,7 @@ set -g fish_greeting '
        \m___m__|_|    \m_m_|   \mm_|
 '
 
-export LANG='C'
+export LANG='C.UTF-8'
 export EDITOR='code'
 export VISUAL='code'
 export HISTCONTROL='ignoreboth'
@@ -45,7 +45,7 @@ export FZF_CTRL_T_COMMAND='fd -t f . $dir'
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_ALT_C_OPTS='--preview "eza --color=always -T -L3 {} | head -100"'
 export FZF_CTRL_T_OPTS='--preview "bat -f -r :100 {}" --bind "focus:bg-transform-header(file -bI {})"'
-export FZF_DEFAULT_OPTS='-0 -1 --exact --multi --ansi --tmux 85% --border --style=full --info=inline-right --marker ▏ --pointer ▌ --gutter " " --highlight-line --color marker:green,pointer:green,prompt:green,selected-bg:238,border:#9999cc'
+export FZF_DEFAULT_OPTS='-0 -1 --exact --multi --ansi --tmux 85% --border --style=full --info=inline-right --marker ▏ --pointer ▌ --gutter " " --highlight-line --color marker:green,pointer:green,prompt:green,selected-bg:238,border:#9999cc --preview-window "wrap:70%" --bind "ctrl-/:change-preview-window(hidden|70%)"'
 alias f='fzf'
 
 export EZA_COLORS='da=2;0:gm=1;0'
@@ -74,6 +74,7 @@ alias fgrep='fgrep --color=auto'
 alias pgrep='pgrep -a'
 alias mkdir='mkdir -p'
 alias fd='fd -H -L -E .git --color=always --hyperlink=auto'
+alias yt-dlp='yt-dlp --embed-metadata --cookies-from-browser chrome'
 
 alias vi='vim'
 alias cat='bat'
@@ -148,9 +149,14 @@ function z
     __zoxide_z $argv && ll
 end
 
+function a
+    set -l archive (basename (pwd))
+    7zz a -y -aoa -sccUTF-8 $archive $argv
+end
+
 function x
-    set -l name (basename $argv[1] | string split -r -m1 .)[1]
-    7zz x $argv[1] -y -o$name
+    set -l dirname (basename $argv[1] | string split --right --max 1 .)[1]
+    7zz x -y -aoa -sccUTF-8 -o$dirname $argv[1]
 end
 
 function h
