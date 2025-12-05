@@ -37,8 +37,8 @@ export VISUAL='code'
 export HISTCONTROL='ignoreboth'
 export GPG_TTY=(tty)
 
-export PAGER='moor'
-export MOOR='--no-linenumbers -no-clear-on-exit -quit-if-one-screen -terminal-fg -wrap -style dracula -mousemode scroll'
+export PAGER='less'
+export LESS="--raw-control-chars --quit-if-one-screen --redraw-on-quit --mouse --status-line --ignore-case --long-prompt --use-color --incsearch --file-size --follow-name"
 
 export FZF_ALT_C_COMMAND='fd -t d . $dir'
 export FZF_CTRL_T_COMMAND='fd -t f . $dir'
