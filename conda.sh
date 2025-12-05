@@ -10,7 +10,7 @@ packages=(
     uutils-coreutils
     eza
     syncthing
-    moor
+    less
     hugo
     chafa
     curl
