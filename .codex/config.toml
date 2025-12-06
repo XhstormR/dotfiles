@@ -1,0 +1,16 @@
+# https://github.com/openai/codex/blob/main/docs/config.md
+
+profile = "my-gpt-5"
+
+[profiles.my-gpt-5]
+model = "gpt-5.1-chat"
+model_provider = "azure-chat"
+model_reasoning_effort = "high"
+model_reasoning_summary = "detailed"
+
+[model_providers.azure-chat]
+name = "azure-chat"
+wire_api = "chat"
+base_url = "https://safuapi.prod.secfdg.net/openai/deployments/gpt-5.1-chat"
+query_params = { api-version = "2025-04-01-preview" }
+env_key = "OPENAI_API_KEY"
