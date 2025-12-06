@@ -10,7 +10,7 @@ replace_with="$1"
 shift
 
 if command -v rg &>/dev/null ; then
-  items=$(rg -l --color never "$find_this" --fixed-strings --glob "$@")
+  items=$(rg -l --color never "$find_this" --fixed-strings --case-sensitive --glob "$@")
 else
   items=$(ag -l --nocolor "$find_this" "$@")
 fi

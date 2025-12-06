@@ -2,8 +2,8 @@ fish_config theme choose Dracula
 
 fish_add_path /usr/local/bin
 fish_add_path /opt/homebrew/bin
-fish_add_path ~/.local/bin
 fish_add_path ~/.pixi/bin
+fish_add_path ~/.local/bin
 
 eval fzf --fish | source
 eval zoxide init fish | source
@@ -32,6 +32,7 @@ set -g fish_greeting '
 '
 
 export LANG='C.UTF-8'
+export LC_ALL='C.UTF-8'
 export EDITOR='code'
 export VISUAL='code'
 export HISTCONTROL='ignoreboth'
@@ -44,8 +45,8 @@ export FZF_ALT_C_COMMAND='fd -t d . $dir'
 export FZF_CTRL_T_COMMAND='fd -t f . $dir'
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_ALT_C_OPTS='--preview "eza --color=always --tree --level 3 {}"'
-export FZF_CTRL_T_OPTS='--preview "bat --color=always --line-range :200 {}" --preview-window "~4" --bind "focus:bg-transform-header(file -bI {})"'
-export FZF_DEFAULT_OPTS='-0 -1 --gap --wrap --multi --ansi --tmux 85% --border --style=full --info=inline-right --marker-multi-line "╔║╚" --marker "║" --pointer ▌ --gutter " " --highlight-line --color marker:green,pointer:green,prompt:green,selected-bg:238,border:#9999cc --preview-window "wrap:70%" --bind "alt-a:select-all,alt-d:deselect-all,ctrl-/:toggle-preview"'
+export FZF_CTRL_T_OPTS='--preview "bat --color=always --line-range :200 {}" --preview-window "~4" --bind "ctrl-o:execute-silent($EDITOR --goto {})" --bind "focus:bg-transform-header(file -bI {}),f2:execute(cat {})"'
+export FZF_DEFAULT_OPTS='-0 -1 --gap --wrap --multi --ansi --tmux 85% --border --style=full --info=inline-right --marker-multi-line "╔║╚" --marker "║" --pointer ▌ --gutter " " --highlight-line --color marker:green,pointer:green,prompt:green,selected-bg:238,border:#9999cc --preview-window "wrap:70%" --bind "alt-a:select-all,alt-d:deselect-all,ctrl-/:toggle-preview,ctrl-y:execute-silent(echo {} | cb)+abort"'
 alias f='fzf'
 
 export EZA_COLORS='da=2;0:gm=1;0'
@@ -171,7 +172,7 @@ function md
     mkdir -p $argv && cd $argv
 end
 
-function fkill -a pattern
+function fzf-kill -a pattern
     if test -n "$pattern"
         command pkill -9 $pattern
         return
@@ -181,7 +182,9 @@ function fkill -a pattern
     set -l cmd_selected (fzf \
         --bind "start:reload($cmd_prefix)" \
         --bind "ctrl-r:reload($cmd_prefix)" \
-        --header 'Press CTRL-R to reload' \
+        --bind "enter:execute-silent(kill -9 {1})+reload($cmd_prefix)" \
+        --header 'Press Enter to kill
+Press CTRL-R to reload' \
         --header-lines=1 \
         --prompt='Processes> ' \
         --preview='ps -f -p {1} || echo "Cannot preview {1} because it exited."' \
@@ -194,7 +197,7 @@ function fkill -a pattern
     end
 end
 
-function fdocker
+function fzf-docker
     set -l cmd_prefix 'docker ps -a'
     set -l cmd_selected (fzf \
         --bind "start:reload($cmd_prefix)" \
@@ -212,14 +215,15 @@ function fdocker
     end
 end
 
-function frg
+function fzf-rg
     set -l cmd_prefix 'rg --no-heading --column --color=always --'
     set -l cmd_selected (fzf \
         --disabled \
         --query "$argv" \
         --bind "start:reload($cmd_prefix {q})" \
         --bind "change:reload($cmd_prefix {q} || true)" \
-        --bind "ctrl-o:execute($EDITOR --goto {1}:{2}:{3})" \
+        --bind "ctrl-o:execute-silent($EDITOR --goto {1}:{2}:{3})" \
+        --bind "f2:execute(cat {1})" \
         --bind "focus:bg-transform-header(file -bI {1})" \
         --prompt='Search> ' \
         --delimiter ':' \
