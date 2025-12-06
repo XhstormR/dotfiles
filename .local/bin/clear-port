@@ -5,6 +5,8 @@
 # clear-port 3000
 
 if [ -n "$1" ]; then
+  whats-in-port "$1" || exit 1
+
   port_num="$(lsof -s TCP:LISTEN -i TCP:"$1" -nt)"
   if [ $? -eq 0 ]; then
     kill -9 -- "$port_num"

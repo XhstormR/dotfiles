@@ -7,7 +7,7 @@ function doSync() {
         --exclude "/*.sh" \
         --exclude "/README.md" \
         --exclude "/LICENSE" \
-        -avh --no-perms . ~;
+        -avhP --no-perms . ~;
 }
 
 function doIt() {
