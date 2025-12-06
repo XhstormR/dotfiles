@@ -1,0 +1,32 @@
+{
+    "permissions": {
+        "allow": [
+            "SlashCommand(/**:*)",
+            "Bash(.specify/**/*:*)",
+            "Bash(git:*)",
+            "Bash(gh:*)",
+            "Bash(bun:*)",
+            "Bash(ls:*)",
+            "Bash(time:*)",
+            "Bash(test:*)",
+            "Bash(mkdir:*)",
+            "Bash(mv:*)",
+            "Bash(cat:*)",
+            "Bash(tee:*)",
+            "Bash(echo:*)",
+            "Bash(find:*)"
+        ],
+        "deny": [
+            "Read(./.env)",
+            "Read(./.env.*)",
+            "Read(./secrets/**)"
+        ]
+    },
+    "env": {
+        "ANTHROPIC_BASE_URL": "https://litellm.safuapi.prod.secfdg.net",
+        "ANTHROPIC_AUTH_TOKEN": "sk-innP6c3duu05DtIVmglJyw",
+        "ANTHROPIC_MODEL": "anthropic/claude-sonnet-4.5"
+    },
+    "enableAllProjectMcpServers": true,
+    "alwaysThinkingEnabled": true
+}
