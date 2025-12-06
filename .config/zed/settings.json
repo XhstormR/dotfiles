@@ -27,7 +27,11 @@
     },
     "theme": "Dracula",
     "tab_size": 4,
-    "wrap_guides": [80],
+    "hard_tabs": false,
+    "soft_wrap": "editor_width",
+    "wrap_guides": [
+        80
+    ],
     "buffer_font_size": 13,
     "buffer_font_family": "JetBrainsMono Nerd Font",
     "base_keymap": "JetBrains",

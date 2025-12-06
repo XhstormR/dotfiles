@@ -66,6 +66,8 @@
 
     # Show the user email for the current repository.
     whoami = config user.email
+
+    wdiff = diff --word-diff=color --unified=1
 [user]
     name = XhstormR
     email = 10527522+XhstormR@users.noreply.github.com
@@ -76,6 +78,7 @@
 [core]
     autocrlf = input
     ignorecase = false
+    fsmonitor = true
     untrackedCache = true
     whitespace = space-before-tab,-indent-with-non-tab,trailing-space
     pager = delta
@@ -107,6 +110,8 @@
     autoSetupRemote = true
 [receive]
     fsckObjects = true
+[log]
+    date = iso
 [init]
     defaultBranch = main
 [delta]

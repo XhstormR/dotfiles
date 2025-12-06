@@ -1,0 +1,48 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://litellm.safuapi.prod.secfdg.net",
+    "ANTHROPIC_AUTH_TOKEN": "sk-innP6c3duu05DtIVmglJyw",
+    "ANTHROPIC_MODEL": "anthropic/claude-sonnet-4.5"
+  },
+  "permissions": {
+    "allow": [
+      "mcp__context7",
+      "mcp__sequential-thinking",
+      "SlashCommand",
+      "WebFetch",
+      "Bash",
+      "Bash(git:*)",
+      "Bash(gh:*)",
+      "Bash(bun:*)",
+      "Bash(ls:*)",
+      "Bash(time:*)",
+      "Bash(test:*)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(cat:*)",
+      "Bash(tee:*)",
+      "Bash(echo:*)",
+      "Bash(find:*)",
+      "Bash(printf:*)",
+      "Bash(ng:*)",
+      "Bash(npx:*)",
+      "Bash(npm:*)"
+    ],
+    "deny": [
+      "Bash(rm:*)",
+      "Bash(sudo:*)",
+      "Bash(chmod:*)",
+      "Bash(chown:*)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledPlugins": {
+    "feature-dev@claude-code-plugins": true,
+    "frontend-design@claude-code-plugins": true,
+    "superpowers@superpowers-marketplace": true
+  },
+  "alwaysThinkingEnabled": true
+}
