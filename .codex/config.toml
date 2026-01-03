@@ -16,10 +16,6 @@ notifications = true
 [features]
 web_search_request = true
 
-[mcp_servers.context7]
-command = "npx"
-args = ["-y", "@upstash/context7-mcp@latest"]
-
 [profiles.my-gpt-5]
 model = "gpt-5.1-chat"
 model_provider = "azure-chat"

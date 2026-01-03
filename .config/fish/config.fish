@@ -90,7 +90,7 @@ alias dc='c ~/Documents'
 alias dl='c ~/Downloads'
 alias dp='c ~/IdeaProjects'
 
-alias g='git'
+alias g='lazygit'
 alias gs='git status'
 alias gd='git diff'
 
@@ -100,7 +100,6 @@ alias tree='l -T'
 alias diff='delta'
 alias rand='openssl rand -hex 30'
 alias aria2c='aria2c -s16 -x16 -k1M'
-alias reload='exec fish'
 alias map='xargs -n1'
 alias cpu='top -o cpu'
 alias mem='top -o rsize'
@@ -110,6 +109,9 @@ alias xq='xmllint --format'
 alias e='$EDITOR'
 alias ip_lan='__fish_print_addresses | perl -nle"/(\d+\.\d+\.\d+\.\d+)/ and print \$1"'
 alias ip_wan='dig -4 +short myip.opendns.com @resolver1.opendns.com; curl -sk https://myip.ipip.net/; curl -sk https://ipinfo.io/json'
+alias serveme='jwebserver -b 0.0.0.0 --port 8080'
+alias reload='exec fish'
+alias update='brew update && brew upgrade --greedy --force-bottle && pixi global update'
 
 function rm
     switch (uname)
