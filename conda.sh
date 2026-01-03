@@ -2,6 +2,7 @@
 
 packages=(
     7zip
+    ast-grep
     aria2
     bat
     btop
@@ -31,6 +32,7 @@ packages=(
     vim
     yt-dlp
     yazi
+    whisper.cpp
     openjdk
     duckdb-cli
 
