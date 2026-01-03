@@ -30,10 +30,11 @@
     "hard_tabs": false,
     "soft_wrap": "editor_width",
     "wrap_guides": [
-        80
+        80,
+        120
     ],
-    "buffer_font_size": 13,
-    "buffer_font_family": "JetBrainsMono Nerd Font",
+    "buffer_font_size": 14,
+    "buffer_font_family": "Maple Mono Normal NF CN",
     "base_keymap": "JetBrains",
     "autosave": "on_focus_change",
     "format_on_save": "off", // Ctrl-Shift-I
