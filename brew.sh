@@ -11,6 +11,7 @@ brew install --cask background-music
 brew install --cask deskpad
 brew install --cask maccy
 brew install --cask alt-tab
+brew install --cask input-source-pro
 brew install --cask keepingyouawake
 brew install --cask google-chrome
 brew install --cask vlc

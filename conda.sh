@@ -2,6 +2,7 @@
 
 packages=(
     7zip
+    ast-grep
     aria2
     bat
     btop
