@@ -11,6 +11,7 @@ brew install --cask background-music
 brew install --cask deskpad
 brew install --cask maccy
 brew install --cask alt-tab
+brew install --cask input-source-pro
 brew install --cask keepingyouawake
 brew install --cask google-chrome
 brew install --cask vlc
@@ -22,6 +23,7 @@ brew install --cask karabiner-elements
 brew install --cask keepassxc
 brew install --cask maczip
 brew install --cask middleclick
+brew install --cask mos
 brew install --cask onyx
 brew install --cask phoenix-slides
 brew install --cask rectangle
