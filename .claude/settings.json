@@ -2,7 +2,8 @@
   "env": {
     "ANTHROPIC_BASE_URL": "https://litellm.safuapi.prod.secfdg.net",
     "ANTHROPIC_AUTH_TOKEN": "sk-innP6c3duu05DtIVmglJyw",
-    "ANTHROPIC_MODEL": "anthropic/claude-sonnet-4.5"
+    "ANTHROPIC_MODEL": "anthropic/claude-sonnet-4.5",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
   "permissions": {
     "allow": [
