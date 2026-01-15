@@ -37,6 +37,7 @@ export EDITOR='code'
 export VISUAL='code'
 export HISTCONTROL='ignoreboth'
 export GPG_TTY=(tty)
+export SHELL=(command -v fish)
 
 export PAGER='less'
 export LESS="--raw-control-chars --quit-if-one-screen --redraw-on-quit --mouse --status-line --ignore-case --long-prompt --use-color --incsearch --file-size --follow-name"
