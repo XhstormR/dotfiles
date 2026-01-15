@@ -2,5 +2,7 @@ git:
   pagers:
     - pager: delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
 gui:
+  language: zh-CN
   nerdFontsVersion: "3"
   expandFocusedSidePanel: true
+  showBranchCommitHash: true

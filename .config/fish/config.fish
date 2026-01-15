@@ -7,6 +7,7 @@ fish_add_path ~/.local/bin
 
 eval fzf --fish | source
 eval zoxide init fish | source
+eval brew shellenv | source
 
 set -a fish_complete_path ~/.pixi/completions/fish
 set -g fish_prompt_pwd_dir_length 0
@@ -76,7 +77,7 @@ alias fgrep='fgrep --color=auto'
 alias pgrep='pgrep -a'
 alias mkdir='mkdir -p'
 alias fd='fd --hidden --follow --exclude .git --color=always --hyperlink=auto'
-alias yt-dlp='yt-dlp --embed-metadata --cookies-from-browser chrome'
+alias yt-dlp='yt-dlp --embed-metadata' # --cookies-from-browser chrome
 
 alias vi='vim'
 alias cat='bat'
