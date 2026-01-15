@@ -2,8 +2,8 @@
 
 function y
     set tmp (mktemp -t "yazi-cwd.XXXXXX")
-    yazi $argv --cwd-file="$tmp"
-    if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+    command yazi $argv --cwd-file="$tmp"
+    if read -z cwd < "$tmp"; and [ "$cwd" != "$PWD" ]; and test -d "$cwd"
         cd -- "$cwd"
     end
     command rm -f -- "$tmp"

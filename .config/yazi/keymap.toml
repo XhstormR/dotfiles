@@ -10,6 +10,11 @@ on   = "T"
 run  = "plugin toggle-pane min-preview"
 desc = "Show or hide the preview pane"
 
+[[mgr.prepend_keymap]]
+on   = "F"
+run  = "plugin smart-filter"
+desc = "Smart filter"
+
 [[input.prepend_keymap]]
 on   = "<Esc>"
 run  = "close"
