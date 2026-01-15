@@ -1,0 +1,21 @@
+{
+    "config-schema": "https://github.com/sinelaw/fresh/blob/master/crates/fresh-editor/plugins/config-schema.json",
+    "theme": "dracula",
+    "locale": "zh-CN",
+    "editor": {
+        "enable_semantic_tokens_full": true,
+        "auto_save_enabled": true,
+        "trim_trailing_whitespace_on_save": true,
+        "ensure_final_newline_on_save": true,
+        "show_horizontal_scrollbar": false,
+        "use_terminal_bg": true,
+        "rulers": [80, 120]
+    },
+    "file_explorer": {
+        "show_hidden": true,
+        "show_gitignored": true
+    },
+    "file_browser": {
+        "show_hidden": true
+    }
+}

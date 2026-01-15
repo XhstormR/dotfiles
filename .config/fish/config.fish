@@ -7,6 +7,7 @@ fish_add_path ~/.local/bin
 
 eval fzf --fish | source
 eval zoxide init fish | source
+eval brew shellenv | source
 
 set -a fish_complete_path ~/.pixi/completions/fish
 set -g fish_prompt_pwd_dir_length 0
@@ -76,7 +77,7 @@ alias fgrep='fgrep --color=auto'
 alias pgrep='pgrep -a'
 alias mkdir='mkdir -p'
 alias fd='fd --hidden --follow --exclude .git --color=always --hyperlink=auto'
-alias yt-dlp='yt-dlp --embed-metadata --cookies-from-browser chrome'
+alias yt-dlp='yt-dlp --embed-metadata' # --cookies-from-browser chrome
 
 alias vi='vim'
 alias cat='bat'
@@ -112,7 +113,7 @@ alias ip_lan='__fish_print_addresses | perl -nle"/(\d+\.\d+\.\d+\.\d+)/ and prin
 alias ip_wan='curl -sk https://myip.ipip.net/; dig -4 +short myip.opendns.com @resolver1.opendns.com; curl -sk https://ipinfo.io/json'
 alias serveme='jwebserver -b 0.0.0.0 --port 8080'
 alias reload='exec fish'
-alias update='brew update && brew upgrade --greedy --force-bottle && pixi global update'
+alias update='brew update && brew upgrade --greedy --force-bottle && pixi self-update && pixi global update'
 
 function rm
     switch (uname)

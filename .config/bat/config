@@ -1,3 +1,5 @@
 --style=full
 
 --italic-text=always
+
+--theme=Dracula

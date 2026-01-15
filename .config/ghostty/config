@@ -1,3 +1,5 @@
+# https://ghostty.org/docs/config/reference
+
 command = ~/.pixi/bin/fish
 working-directory = /Users/user/Downloads
 term = xterm-256color
@@ -19,6 +21,7 @@ maximize = true
 window-theme = dark
 window-padding-balance = true
 window-save-state = always
+window-inherit-working-directory = true
 
 confirm-close-surface = false
 quit-after-last-window-closed = true

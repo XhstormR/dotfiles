@@ -10,6 +10,7 @@ brew install --cask loop
 brew install --cask amethyst
 brew install --cask background-music
 brew install --cask deskpad
+brew install --cask easydict
 brew install --cask maccy
 brew install --cask alt-tab
 brew install --cask input-source-pro

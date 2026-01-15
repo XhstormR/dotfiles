@@ -2,39 +2,50 @@
 
 packages=(
     7zip
-    ast-grep
     aria2
     bat
-    btop
-    bottom
+    eza
     dua-cli
     uutils-coreutils
-    eza
+    moreutils
     syncthing
     less
     hugo
-    poppler
     resvg
     chafa
     curl
-    fd-find
     fish
-    fzf
     sed
     gawk
     git-delta
     lazygit
     hexyl
     jq
-    zoxide
-    ripgrep
     socat
     tmux
-    vim
     yazi
     whisper.cpp
-    openjdk
     duckdb-cli
+
+    fd-find
+    fzf
+    zoxide
+    ripgrep
+    ast-grep
+
+    btop
+    bottom
+
+    poppler
+    qpdf
+
+    fresh-editor
+    msedit
+    vim
+
+    openjdk
+    bun
+    uv
 
     yt-dlp
     ffmpeg
