@@ -2,13 +2,13 @@
 
 packages=(
     7zip
-    ast-grep
     aria2
     bat
     btop
     bottom
     dua-cli
     uutils-coreutils
+    moreutils
     eza
     syncthing
     less
@@ -28,13 +28,16 @@ packages=(
     jq
     zoxide
     ripgrep
+    ast-grep
     socat
     tmux
     vim
     yazi
     whisper.cpp
-    openjdk
     duckdb-cli
+
+    openjdk
+    bun
 
     yt-dlp
     ffmpeg

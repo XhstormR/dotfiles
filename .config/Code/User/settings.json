@@ -27,6 +27,7 @@
     "editor.mouseWheelZoom": true,
     "editor.detectIndentation": false,
     "editor.scrollBeyondLastLine": false,
+    "editor.wrapOnEscapedLineFeeds": true,
     "editor.renderControlCharacters": true,
     "editor.guides.bracketPairs": true,
     "editor.inlineSuggest.enabled": true,
@@ -37,6 +38,7 @@
     "editor.renderLineHighlight": "all",
     "editor.renderWhitespace": "all",
     "editor.snippetSuggestions": "top",
+    "editor.wordWrap": "on",
     "editor.rulers": [
         80,
         120
@@ -85,7 +87,8 @@
     },
     "claudeCode.disableLoginPrompt": true,
     "claudeCode.preferredLocation": "panel",
-    "claudeCode.selectedModel": "anthropic/claude-sonnet-4.5",
+    "claudeCode.initialPermissionMode": "acceptEdits",
+    "claudeCode.selectedModel": "anthropic/claude-opus-4.6",
     "java.autobuild.enabled": false,
     "java.import.maven.enabled": false,
     "java.import.gradle.enabled": false,
