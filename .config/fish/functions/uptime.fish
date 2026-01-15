@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 function uptime
-    set -l diff (expr (date +%s) - (date +%s -d (command uptime -s)))
+    set -l diff (expr (date +%s) - (date -d (command uptime -s) +%s))
     set -l d (math --scale 0 $diff / 86400); set diff (math $diff % 86400)
     set -l h (math --scale 0 $diff /  3600); set diff (math $diff %  3600)
     set -l m (math --scale 0 $diff /    60); set diff (math $diff %    60)

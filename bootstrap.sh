@@ -1,5 +1,22 @@
 #!/usr/bin/env bash
 
+function doIt() {
+    doSync
+
+    addMCP
+
+    sh <(curl https://raw.githubusercontent.com/prefix-dev/pixi/refs/heads/main/install/install.sh)
+
+    curl -O https://github.com/subframe7536/maple-font/releases/download/v7.9/MapleMonoNormal-NF-CN-unhinted.zip
+    unzip -o MapleMonoNormal-NF-CN-unhinted.zip -d ~/Library/Fonts/
+    rm MapleMonoNormal-NF-CN-unhinted.zip
+
+    ln -s ~/.config/Code/User ~/Library/'Application Support'/Code/User
+
+    # MacOS: Remove Caps Lock delay
+    hidutil property --set '{"CapsLockDelayOverride":0}'
+}
+
 function doSync() {
     rsync \
         --exclude ".git/" \
@@ -8,22 +25,6 @@ function doSync() {
         --exclude "/README.md" \
         --exclude "/LICENSE" \
         -avhP --no-perms . ~;
-}
-
-function doIt() {
-    doSync
-
-    addMCP
-
-    curl -o ~/.config/alacritty/dracula.toml https://raw.githubusercontent.com/dracula/alacritty/master/dracula.toml
-
-    curl -O https://github.com/subframe7536/maple-font/releases/download/v7.9/MapleMonoNormal-NF-CN-unhinted.zip
-    unzip -o MapleMonoNormal-NF-CN-unhinted.zip -d ~/Library/Fonts/
-    rm MapleMonoNormal-NF-CN-unhinted.zip
-
-    sh <(curl https://raw.githubusercontent.com/prefix-dev/pixi/refs/heads/main/install/install.sh)
-
-    ln -s ~/.config/Code/User ~/Library/'Application Support'/Code/User
 }
 
 function addMCP() {

@@ -2,12 +2,11 @@
 import = ["dracula.toml"]
 working_directory = "/Users/leo/Downloads"
 
-[env]
-SHELL = "/Users/leo/.pixi/bin/fish"
-TERM = "xterm-256color"
-
 [terminal.shell]
 program = "/Users/leo/.pixi/bin/fish"
+
+[env]
+TERM = "xterm-256color"
 
 [bell]
 animation = "EaseOutSine"

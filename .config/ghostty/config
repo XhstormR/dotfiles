@@ -1,0 +1,38 @@
+command = ~/.pixi/bin/fish
+working-directory = /Users/user/Downloads
+term = xterm-256color
+
+shell-integration = fish
+shell-integration-features = true
+
+background-opacity = 0.8
+background-opacity-cells = true
+
+font-family = Maple Mono Normal NF CN
+font-size = 14
+font-thicken = true
+bold-color = bright
+
+theme = Dracula
+
+maximize = true
+window-theme = dark
+window-padding-balance = true
+window-save-state = always
+
+confirm-close-surface = false
+quit-after-last-window-closed = true
+
+copy-on-select = clipboard
+clipboard-read = allow
+clipboard-write = allow
+clipboard-trim-trailing-spaces = true
+
+macos-option-as-alt = true
+
+bell-features = system
+
+# Ctrl+`
+keybind = global:ctrl+backquote=toggle_quick_terminal
+quick-terminal-size = 70%,100%
+quick-terminal-autohide = true

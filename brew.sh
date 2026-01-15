@@ -4,6 +4,7 @@ brew update
 brew upgrade --greedy --force-bottle
 
 brew install sniffnet
+brew install flow-control
 
 brew install --cask loop
 brew install --cask amethyst
@@ -18,6 +19,7 @@ brew install --cask vlc
 brew install --cask iina
 brew install --cask intellij-idea
 brew install --cask itsycal
+brew install --cask ghostty
 brew install --cask jordanbaird-ice
 brew install --cask karabiner-elements
 brew install --cask keepassxc
@@ -31,11 +33,11 @@ brew install --cask stats
 brew install --cask snipaste
 brew install --cask sloth
 brew install --cask telegram
+brew install --cask visual-studio-code
 #brew install --cask android-file-transfer
 #brew install --cask megasync
 #brew install --cask macfuse
 #brew install --cask mounty
 #brew install --cask orbstack
-#brew install --cask macwhisper
 
 brew cleanup --prune=all
