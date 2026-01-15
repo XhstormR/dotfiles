@@ -7,7 +7,7 @@ function Linemode:size_and_mtime()
 	end
 
 	local size = self._file:size()
-	return string.format("%s %s", size and ya.readable_size(size) or "-", time)
+	return string.format("%6s %s", size and ya.readable_size(size) or "-", time)
 end
 
 Status:children_add(function()
@@ -34,3 +34,7 @@ Status:children_add(function()
 end, 500, Status.RIGHT)
 
 require("full-border"):setup()
+
+require("git"):setup {
+	order = 0,
+}

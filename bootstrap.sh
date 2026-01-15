@@ -11,6 +11,7 @@ function doIt() {
     unzip -o MapleMonoNormal-NF-CN-unhinted.zip -d ~/Library/Fonts/
     rm MapleMonoNormal-NF-CN-unhinted.zip
 
+    mkdir -p ~/Library/'Application Support'/Code/User
     ln -s ~/.config/Code/User ~/Library/'Application Support'/Code/User
 
     # MacOS: Remove Caps Lock delay

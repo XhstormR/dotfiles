@@ -1,14 +1,26 @@
 {
+    "git_panel": {
+        "tree_view": true,
+    },
+    "indent_guides": {
+        "enabled": true,
+        "coloring": "indent_aware",
+    },
     "minimap": {
         "thumb": "always",
         "show": "always",
     },
+    "scrollbar": {
+        "show": "always",
+    },
     "inlay_hints": {
         "enabled": true,
+        "show_background": true,
     },
     "tabs": {
         "file_icons": true,
         "git_status": true,
+        "show_close_button": "always",
         "show_diagnostics": "errors",
     },
     "terminal": {
