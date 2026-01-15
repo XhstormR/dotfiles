@@ -37,6 +37,7 @@ export EDITOR='code'
 export VISUAL='code'
 export HISTCONTROL='ignoreboth'
 export GPG_TTY=(tty)
+export SHELL=(command -v fish)
 
 export PAGER='less'
 export LESS="--raw-control-chars --quit-if-one-screen --redraw-on-quit --mouse --status-line --ignore-case --long-prompt --use-color --incsearch --file-size --follow-name"
@@ -108,7 +109,7 @@ alias jq='jq -r'
 alias xq='xmllint --format'
 alias e='$EDITOR'
 alias ip_lan='__fish_print_addresses | perl -nle"/(\d+\.\d+\.\d+\.\d+)/ and print \$1"'
-alias ip_wan='dig -4 +short myip.opendns.com @resolver1.opendns.com; curl -sk https://myip.ipip.net/; curl -sk https://ipinfo.io/json'
+alias ip_wan='curl -sk https://myip.ipip.net/; dig -4 +short myip.opendns.com @resolver1.opendns.com; curl -sk https://ipinfo.io/json'
 alias serveme='jwebserver -b 0.0.0.0 --port 8080'
 alias reload='exec fish'
 alias update='brew update && brew upgrade --greedy --force-bottle && pixi global update'

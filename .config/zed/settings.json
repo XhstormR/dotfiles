@@ -1,48 +1,49 @@
 {
     "minimap": {
-        "show": "always"
+        "thumb": "always",
+        "show": "always",
     },
     "inlay_hints": {
-        "enabled": true
+        "enabled": true,
     },
     "tabs": {
         "file_icons": true,
         "git_status": true,
-        "show_diagnostics": "errors"
+        "show_diagnostics": "errors",
     },
     "terminal": {
-        "shell": {
-            "program": "fish"
-        },
+        "font_family": "Maple Mono Normal NF CN",
+        "font_size": 14,
         "copy_on_select": true,
-        "option_as_meta": true
+        "option_as_meta": true,
+        "shell": {
+            "program": "fish",
+        },
     },
     "telemetry": {
         "diagnostics": false,
-        "metrics": false
+        "metrics": false,
     },
     "auto_install_extensions": {
         "java": true,
-        "dracula": true
+        "dracula": true,
     },
     "theme": "Dracula",
     "tab_size": 4,
     "hard_tabs": false,
     "soft_wrap": "editor_width",
-    "wrap_guides": [
-        80,
-        120
-    ],
-    "buffer_font_size": 14,
+    "wrap_guides": [80, 120],
     "buffer_font_family": "Maple Mono Normal NF CN",
+    "buffer_font_size": 14,
     "base_keymap": "JetBrains",
     "autosave": "on_focus_change",
-    "format_on_save": "off", // Ctrl-Shift-I
+    "format_on_save": "on", // Ctrl-Shift-I
     "hide_mouse": "never",
     "show_whitespaces": "all",
+    "current_line_highlight": "all",
     "scroll_beyond_last_line": "off",
     "auto_signature_help": true,
     "ensure_final_newline_on_save": true,
     "remove_trailing_whitespace_on_save": true,
-    "enable_language_server": false
+    "enable_language_server": false,
 }

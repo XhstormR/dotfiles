@@ -1,8 +1,13 @@
 {
     "workbench.colorTheme": "Dracula Theme",
-    "workbench.startupEditor": "newUntitledFile",
+    "workbench.colorCustomizations": {
+        "tree.indentGuidesStroke": "#05ef3c",
+        "tree.inactiveIndentGuidesStroke": "#37373e",
+        "editor.lineHighlightBackground": "#45475b",
+    },
     "workbench.tree.indent": 18,
     "workbench.tree.renderIndentGuides": "always",
+    "workbench.startupEditor": "newUntitledFile",
     "workbench.editor.wrapTabs": true,
     "workbench.editor.revealIfOpen": true,
     "workbench.editor.showTabIndex": true,

@@ -20,7 +20,6 @@ packages=(
     fd-find
     fish
     fzf
-    ffmpeg
     sed
     gawk
     git-delta
@@ -32,11 +31,15 @@ packages=(
     socat
     tmux
     vim
-    yt-dlp
     yazi
     whisper.cpp
     openjdk
     duckdb-cli
+
+    yt-dlp
+    ffmpeg
+    exiftool
+    mediainfo
 
     lima-vm
     docker-cli
