@@ -1,7 +1,7 @@
 # https://ghostty.org/docs/config/reference
 
 command = ~/.pixi/bin/fish
-working-directory = /Users/user/Downloads
+working-directory = /Users/leo/Downloads
 term = xterm-256color
 
 shell-integration = fish

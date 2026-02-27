@@ -8,7 +8,6 @@ brew install flow-control
 
 brew install --cask loop
 brew install --cask amethyst
-brew install --cask background-music
 brew install --cask deskpad
 brew install --cask easydict
 brew install --cask maccy
@@ -36,6 +35,7 @@ brew install --cask sloth
 brew install --cask telegram
 brew install --cask visual-studio-code
 #brew install --cask android-file-transfer
+#brew install --cask background-music
 #brew install --cask megasync
 #brew install --cask macfuse
 #brew install --cask mounty

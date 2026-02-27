@@ -2,7 +2,7 @@
 change-ps1 = true
 
 [pypi-config]
-index-url = "https://mirrors.sustech.edu.cn/pypi/web/simple"
+index-url = "https://mirrors.ustc.edu.cn/pypi/simple"
 
 [mirrors]
-"https://conda.anaconda.org/conda-forge" = ["https://mirrors.sustech.edu.cn/anaconda/cloud/conda-forge"]
+"https://conda.anaconda.org/conda-forge" = ["https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge"]
