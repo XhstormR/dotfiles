@@ -11,8 +11,8 @@ function doIt() {
     unzip -o MapleMonoNormal-NF-CN-unhinted.zip -d ~/Library/Fonts/
     rm MapleMonoNormal-NF-CN-unhinted.zip
 
-    mkdir -p ~/Library/'Application Support'/Code/User
-    ln -s ~/.config/Code/User ~/Library/'Application Support'/Code/User
+    mkdir -p ~/Library/'Application Support'/Code
+    ln -s ~/.config/Code/User ~/Library/'Application Support'/Code
 
     # MacOS: Remove Caps Lock delay
     hidutil property --set '{"CapsLockDelayOverride":0}'

@@ -6,8 +6,6 @@ packages=(
     bat
     eza
     dua-cli
-    uutils-coreutils
-    moreutils
     syncthing
     less
     hugo
@@ -32,6 +30,10 @@ packages=(
     zoxide
     ripgrep
     ast-grep
+
+    util-linux
+    uutils-coreutils
+    moreutils
 
     btop
     bottom

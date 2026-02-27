@@ -76,7 +76,7 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias pgrep='pgrep -a'
 alias mkdir='mkdir -p'
-alias fd='fd --hidden --follow --exclude .git --color=always --hyperlink=auto'
+alias fd='fd --hidden --follow --exclude .git --color=auto --hyperlink=auto'
 alias yt-dlp='yt-dlp --embed-metadata' # --cookies-from-browser chrome
 
 alias vi='vim'
