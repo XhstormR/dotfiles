@@ -16,6 +16,14 @@ function doIt() {
 
     # MacOS: Remove Caps Lock delay
     hidutil property --set '{"CapsLockDelayOverride":0}'
+
+    # 关闭智能引号、智能破折号、句号替换、自动大写首字母
+    defaults write -g NSAutomaticCapitalizationEnabled -bool false
+    defaults write -g NSAutomaticDashSubstitutionEnabled -bool false
+    defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false
+    defaults write -g NSAutomaticPeriodSubstitutionEnabled -bool false
+    # Show hidden files in Finder
+    defaults write com.apple.finder AppleShowAllFiles -bool true
 }
 
 function doSync() {
@@ -33,6 +41,7 @@ function addMCP() {
     claude mcp add --scope user --transport stdio context7 -- npx -y @upstash/context7-mcp@latest
     claude mcp add --scope user --transport stdio playwright-mcp -- npx -y @playwright/mcp@latest
     claude mcp add --scope user --transport stdio chrome-devtools-mcp -- npx -y chrome-devtools-mcp@latest
+    claude mcp add --scope user --transport stdio mcp-feedback-enhanced -- uvx mcp-feedback-enhanced@latest
     claude mcp add --scope user --transport http  grep -- https://mcp.grep.app
 
     claude mcp add --scope user --transport stdio angular-cli -- npx -y @angular/cli@latest mcp

@@ -70,17 +70,6 @@
     "git.enableSmartCommit": true,
     "git.ignoreLimitWarning": true,
     "git.openRepositoryInParentFolders": "always",
-    "github.copilot.chat.azureModels": {
-        "my-gpt-5": {
-            "name": "my-gpt-5",
-            "url": "https://safuapi.prod.secfdg.net/openai/deployments/gpt-5.1-chat/chat/completions?api-version=2025-04-01-preview",
-            "toolCalling": true,
-            "vision": true,
-            "thinking": true,
-            "maxInputTokens": 272000,
-            "maxOutputTokens": 128000,
-        }
-    },
     "chat.tools.terminal.autoApprove": {
         "rm": false,
         "/.*/": true,

@@ -4,7 +4,12 @@
     "locale": "zh-CN",
     "editor": {
         "enable_semantic_tokens_full": true,
+        "diagnostics_inline_text": true,
+        "auto_indent": true,
         "auto_save_enabled": true,
+        "whitespace_spaces_leading": true,
+        "whitespace_spaces_inner": true,
+        "whitespace_spaces_trailing": true,
         "trim_trailing_whitespace_on_save": true,
         "ensure_final_newline_on_save": true,
         "show_horizontal_scrollbar": false,
