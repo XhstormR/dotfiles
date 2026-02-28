@@ -82,7 +82,7 @@
     untrackedCache = true
     whitespace = space-before-tab,-indent-with-non-tab,trailing-space
     pager = delta
-    editor = code -n -w
+    editor = zed -n -w
 [diff]
     renames = copies
 [diff "bin"]

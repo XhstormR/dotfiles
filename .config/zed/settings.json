@@ -1,4 +1,62 @@
 {
+    "context_servers": {
+        "sequential-thinking": {
+            "enabled": true,
+            "remote": false,
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-sequential-thinking@latest",
+            ],
+        },
+        "context7": {
+            "enabled": true,
+            "remote": false,
+            "command": "npx",
+            "args": ["-y", "@upstash/context7-mcp@latest"],
+        },
+        "grep": {
+            "enabled": true,
+            "remote": true,
+            "url": "https://mcp.grep.app",
+            "settings": {},
+        },
+    },
+    "language_models": {
+        "openai_compatible": {
+            "litellm": {
+                "api_url": "https://litellm.safuapi.prod.secfdg.net",
+                "available_models": [
+                    {
+                        "name": "anthropic/claude-opus-4.6",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 32000,
+                        "max_completion_tokens": 200000,
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "chat_completions": true,
+                        },
+                    },
+                ],
+            },
+        },
+    },
+    "agent": {
+        "default_model": {
+            "provider": "litellm",
+            "model": "anthropic/claude-opus-4.6",
+            "enable_thinking": false,
+        },
+        "notify_when_agent_waiting": "all_screens",
+        "play_sound_when_agent_done": true,
+        "show_turn_stats": true,
+    },
+    "edit_predictions": {
+        "provider": "zed",
+    },
     "git_panel": {
         "tree_view": true,
     },

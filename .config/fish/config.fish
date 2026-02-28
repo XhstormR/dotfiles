@@ -34,8 +34,8 @@ set -g fish_greeting '
 
 export LANG='C.UTF-8'
 export LC_ALL='C.UTF-8'
-export EDITOR='code'
-export VISUAL='code'
+export EDITOR='zed'
+export VISUAL='zed'
 export HISTCONTROL='ignoreboth'
 export GPG_TTY=(tty)
 export SHELL=(command -v fish)
@@ -43,11 +43,17 @@ export SHELL=(command -v fish)
 export PAGER='less'
 export LESS="--raw-control-chars --quit-if-one-screen --redraw-on-quit --mouse --status-line --ignore-case --long-prompt --use-color --incsearch --file-size --follow-name"
 
+export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
+export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
+export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
+export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
+
 export FZF_ALT_C_COMMAND='fd -t d . $dir'
 export FZF_CTRL_T_COMMAND='fd -t f . $dir'
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_ALT_C_OPTS='--preview "eza --color=always --tree --level 3 {}"'
 export FZF_CTRL_T_OPTS='--preview "bat --color=always --line-range :200 {}" --preview-window "~4" --bind "ctrl-o:execute-silent($EDITOR --goto {})" --bind "focus:bg-transform-header(file -bI {}),f2:execute(cat {})"'
+export FZF_COMPLETION_OPTS='--border --info=inline'
 export FZF_DEFAULT_OPTS='-0 -1 --gap --wrap --multi --ansi --tmux 85% --border --style=full --info=inline-right --marker-multi-line "╔║╚" --marker "║" --pointer ▌ --gutter " " --highlight-line --color marker:green,pointer:green,prompt:green,selected-bg:238,border:#9999cc --preview-window "wrap:70%" --bind "alt-a:select-all,alt-d:deselect-all,ctrl-/:toggle-preview,ctrl-y:execute-silent(echo {} | cb)+abort"'
 alias f='fzf'
 
@@ -132,7 +138,7 @@ function rm
 end
 
 function o -a path
-    test -z "$path"; and set path .
+    test -z "$path" && set path .
 
     switch (uname)
         case Darwin
@@ -313,14 +319,9 @@ end
 function postexec --on-event fish_postexec
 end
 
-if type tmux > /dev/null 2>&1 ; and not set -q TMUX
+if type tmux > /dev/null 2>&1 && not set -q TMUX && not set -q GHOSTTY_QUICK_TERMINAL
     tmux -2u attach -c (pwd) || tmux -2u new
 end
-
-## MacOS
-# Show/hide hidden files in Finder
-alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
 # Recursively delete .DS_Store files
 alias cleanup="fd '.DS_Store' --hidden --no-ignore --type file -X rm -v"

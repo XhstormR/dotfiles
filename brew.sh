@@ -9,12 +9,15 @@ brew install flow-control
 brew install --cask loop
 brew install --cask amethyst
 brew install --cask deskpad
+brew install --cask markedit
+brew install --cask textgrabber2
 brew install --cask easydict
 brew install --cask maccy
 brew install --cask alt-tab
 brew install --cask input-source-pro
 brew install --cask keepingyouawake
 brew install --cask google-chrome
+brew install --cask viz
 brew install --cask vlc
 brew install --cask iina
 brew install --cask intellij-idea
@@ -32,8 +35,10 @@ brew install --cask rectangle
 brew install --cask stats
 brew install --cask snipaste
 brew install --cask sloth
+brew install --cask solvespace
 brew install --cask telegram
 brew install --cask visual-studio-code
+brew install --cask handy
 #brew install --cask android-file-transfer
 #brew install --cask background-music
 #brew install --cask megasync

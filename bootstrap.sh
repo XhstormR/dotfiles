@@ -5,6 +5,8 @@ function doIt() {
 
     addMCP
 
+    setupMac
+
     sh <(curl https://raw.githubusercontent.com/prefix-dev/pixi/refs/heads/main/install/install.sh)
 
     curl -O https://github.com/subframe7536/maple-font/releases/download/v7.9/MapleMonoNormal-NF-CN-unhinted.zip
@@ -13,9 +15,6 @@ function doIt() {
 
     mkdir -p ~/Library/'Application Support'/Code
     ln -s ~/.config/Code/User ~/Library/'Application Support'/Code
-
-    # MacOS: Remove Caps Lock delay
-    hidutil property --set '{"CapsLockDelayOverride":0}'
 }
 
 function doSync() {
@@ -33,10 +32,39 @@ function addMCP() {
     claude mcp add --scope user --transport stdio context7 -- npx -y @upstash/context7-mcp@latest
     claude mcp add --scope user --transport stdio playwright-mcp -- npx -y @playwright/mcp@latest
     claude mcp add --scope user --transport stdio chrome-devtools-mcp -- npx -y chrome-devtools-mcp@latest
+    claude mcp add --scope user --transport stdio mcp-feedback-enhanced -- uvx mcp-feedback-enhanced@latest
     claude mcp add --scope user --transport http  grep -- https://mcp.grep.app
 
+    claude mcp add --scope user --transport stdio svelte -- npx -y @sveltejs/mcp@latest
     claude mcp add --scope user --transport stdio angular-cli -- npx -y @angular/cli@latest mcp
     claude mcp add --scope user --transport stdio daisyui-doc -- npx -y mcp-remote@latest https://gitmcp.io/saadeghi/daisyui
+    claude mcp add --scope user --transport http  astro-docs -- https://mcp.docs.astro.build/mcp
+}
+
+function setupMac() {
+    # MacOS: Remove Caps Lock delay
+    hidutil property --set '{"CapsLockDelayOverride":0}'
+
+    # 关闭智能引号、智能破折号、句号替换、自动大写首字母，显示隐藏文件
+    defaults write -g NSAutomaticCapitalizationEnabled -bool false
+    defaults write -g NSAutomaticDashSubstitutionEnabled -bool false
+    defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false
+    defaults write -g NSAutomaticPeriodSubstitutionEnabled -bool false
+    defaults write -g NSWindowShouldDragOnGesture -bool true
+    defaults write com.apple.finder AppleShowAllFiles -bool true
+
+    # 设置默认应用
+    duti -s com.google.Chrome pdf all
+    duti -s com.google.Chrome html all
+    duti -s dev.zedapp.zed-0 sh all
+    duti -s dev.zedapp.zed-0 txt all
+    duti -s dev.zedapp.zed-0 fish all
+    duti -s dev.zedapp.zed-0 json all
+    duti -s com.colliderli.iina aac all
+    duti -s com.colliderli.iina mp3 all
+    duti -s com.colliderli.iina m4a all
+    duti -s com.colliderli.iina wav all
+    duti -s com.colliderli.iina flac all
 }
 
 cd "$(dirname "${BASH_SOURCE}")" || exit;
