@@ -7,7 +7,7 @@ desc = "Open $SHELL here"
 
 [[mgr.prepend_keymap]]
 on = "e"
-run = 'shell "edit %h" --block'
+run = 'shell "fresh %h" --block'
 desc = "Edit the current file"
 
 [[mgr.prepend_keymap]]
