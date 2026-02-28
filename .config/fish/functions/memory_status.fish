@@ -15,14 +15,16 @@ end
 function __darwin_memory_status
     set sizeTier (math 2^30) # GB: 1024 * 1024 * 1024
     set vmstat (
-        for page in (vm_stat | string match -r [0-9]+)
-            math $page x 4096 / $sizeTier
+        set pages (vm_stat | string match -r [0-9]+)
+        set page_size $pages[1]
+        for page in $pages
+            math $page x $page_size / $sizeTier
         end
     )
 
     # 总内存
     # set total (math (sysctl -n hw.memsize) / $sizeTier)
-    set total (math $vmstat[2] + $vmstat[3] + $vmstat[4] + $vmstat[5] + $vmstat[7] + $vmstat[17])
+    set total (math $vmstat[2] + $vmstat[3] + $vmstat[4] + $vmstat[5] + $vmstat[6] + $vmstat[7] + $vmstat[17])
     # 联动内存
     set pwired $vmstat[7]
     # 可回收内存
