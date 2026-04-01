@@ -54,7 +54,7 @@ export FZF_DEFAULT_COMMAND='fd'
 export FZF_ALT_C_OPTS='--preview "eza --color=always --tree --level 3 {}"'
 export FZF_CTRL_T_OPTS='--preview "bat --color=always --line-range :200 {}" --preview-window "~4" --bind "ctrl-o:execute-silent($EDITOR --goto {})" --bind "focus:bg-transform-header(file -bI {}),f2:execute(cat {})"'
 export FZF_COMPLETION_OPTS='--border --info=inline'
-export FZF_DEFAULT_OPTS='-0 -1 --gap --wrap --multi --ansi --tmux 85% --border --style=full --info=inline-right --marker-multi-line "╔║╚" --marker "║" --pointer ▌ --gutter " " --highlight-line --color marker:green,pointer:green,prompt:green,selected-bg:238,border:#9999cc --preview-window "wrap:70%" --bind "alt-a:select-all,alt-d:deselect-all,ctrl-/:toggle-preview,ctrl-y:execute-silent(echo {} | cb)+abort"'
+export FZF_DEFAULT_OPTS='-0 -1 --gap --wrap --multi --ansi --popup 85% --border --style=full --info=inline-right --marker-multi-line "╔║╚" --marker "║" --pointer ▌ --gutter " " --highlight-line --color marker:green,pointer:green,prompt:green,selected-bg:238,border:#9999cc --preview-window "wrap:70%" --bind "alt-a:select-all,alt-d:deselect-all,ctrl-/:toggle-preview,ctrl-y:execute-silent(echo {} | cb)+abort"'
 alias f='fzf'
 
 export EZA_COLORS='da=2;0:gm=1;0'

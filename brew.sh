@@ -29,6 +29,7 @@ brew install --cask keepassxc
 brew install --cask maczip
 brew install --cask middleclick
 brew install --cask mos
+brew install --cask obs
 brew install --cask onyx
 brew install --cask phoenix-slides
 brew install --cask rectangle

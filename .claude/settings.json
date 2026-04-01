@@ -1,15 +1,22 @@
 {
     "model": "anthropic/claude-opus-4.6",
+    "modelOverrides": {
+        "claude-opus-4-6": "anthropic/claude-opus-4.6",
+        "claude-sonnet-4-6": "anthropic/claude-opus-4.6"
+    },
     "env": {
         "ANTHROPIC_BASE_URL": "https://litellm.safuapi.prod.secfdg.net",
         "ANTHROPIC_AUTH_TOKEN": "sk-innP6c3duu05DtIVmglJyw",
+        "ANTHROPIC_CUSTOM_MODEL_OPTION": "anthropic/claude-opus-4.6",
         "ANTHROPIC_MODEL": "anthropic/claude-opus-4.6",
-        "ENABLE_TOOL_SEARCH": "true",
+        "CLAUDE_CODE_SUBAGENT_MODEL": "anthropic/claude-opus-4.6",
         "CLAUDE_CODE_EFFORT_LEVEL": "high",
-        "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+        "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+        "ENABLE_TOOL_SEARCH": "true"
     },
     "permissions": {
         "allow": [
+            "Agent",
             "mcp__context7",
             "mcp__sequential-thinking",
             "mcp__grep",
@@ -19,7 +26,6 @@
             "Bash(npx *)"
         ],
         "deny": [
-            "Agent",
             "WebFetch",
             "Read(**/.env)",
             "Bash(rm *)",

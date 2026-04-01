@@ -39,6 +39,7 @@ function addMCP() {
     claude mcp add --scope user --transport stdio angular-cli -- npx -y @angular/cli@latest mcp
     claude mcp add --scope user --transport stdio daisyui-doc -- npx -y mcp-remote@latest https://gitmcp.io/saadeghi/daisyui
     claude mcp add --scope user --transport http  astro-docs -- https://mcp.docs.astro.build/mcp
+    claude mcp add --scope user --transport http  atlassian-mcp-server -- https://mcp.atlassian.com/v1/mcp
 }
 
 function setupMac() {
