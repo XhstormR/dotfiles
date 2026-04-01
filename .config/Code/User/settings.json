@@ -39,10 +39,7 @@
     "editor.renderWhitespace": "all",
     "editor.snippetSuggestions": "top",
     "editor.wordWrap": "on",
-    "editor.rulers": [
-        80,
-        120
-    ],
+    "editor.rulers": [80, 120],
     "markdown.validate.enabled": true,
     "markdown.updateLinksOnFileMove.enabled": "prompt",
     "files.autoSave": "onFocusChange",
@@ -56,20 +53,23 @@
         "**/node_modules/**": true,
         "**/bazel-out/**": true,
         "**/dist/**": true,
-        "**/dist-schema/**": true
+        "**/dist-schema/**": true,
     },
     "search.exclude": {
         "**/node_modules": true,
         "**/bazel-out": true,
         "**/dist": true,
         "**/dist-schema": true,
-        ".history": true
+        ".history": true,
     },
     "git.autofetch": true,
     "git.confirmSync": false,
     "git.enableSmartCommit": true,
     "git.ignoreLimitWarning": true,
     "git.openRepositoryInParentFolders": "always",
+    "diffEditor.codeLens": true,
+    "diffEditor.ignoreTrimWhitespace": true,
+    "diffEditor.hideUnchangedRegions.enabled": true,
     "explorer.sortOrder": "type",
     "chat.tools.terminal.autoApprove": {
         "rm": false,
@@ -78,9 +78,10 @@
     "claudeCode.disableLoginPrompt": true,
     "claudeCode.preferredLocation": "panel",
     "claudeCode.initialPermissionMode": "acceptEdits",
-    "claudeCode.selectedModel": "anthropic/claude-opus-4.6",
+    "claudeCode.allowDangerouslySkipPermissions": true,
     "java.autobuild.enabled": false,
     "java.import.maven.enabled": false,
     "java.import.gradle.enabled": false,
     "js/ts.updateImportsOnFileMove.enabled": "always",
+    "svelte.enable-ts-plugin": true,
 }
