@@ -2,6 +2,7 @@ fish_config theme choose Dracula
 
 fish_add_path /usr/local/bin
 fish_add_path /opt/homebrew/bin
+fish_add_path ~/.bun/bin
 fish_add_path ~/.pixi/bin
 fish_add_path ~/.local/bin
 
@@ -32,7 +33,7 @@ set -g fish_greeting '
        \m___m__|_|    \m_m_|   \mm_|
 '
 
-export LANG='C.UTF-8'
+export LANG='zh-Hans.UTF-8'
 export LC_ALL='C.UTF-8'
 export EDITOR='zed'
 export VISUAL='zed'
@@ -42,6 +43,8 @@ export SHELL=(command -v fish)
 
 export PAGER='less'
 export LESS="--raw-control-chars --quit-if-one-screen --redraw-on-quit --mouse --status-line --ignore-case --long-prompt --use-color --incsearch --file-size --follow-name"
+
+export JAVA_TOOL_OPTIONS="-XX:+UseZGC -XX:+UseStringDeduplication -XX:+UseCompactObjectHeaders"
 
 export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
 export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"

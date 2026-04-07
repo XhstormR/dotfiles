@@ -1,0 +1,11 @@
+# https://bun.com/docs/runtime/bunfig
+
+[install]
+registry = "https://registry.npmmirror.com"
+
+minimumReleaseAge = 259200 # seconds, 3 day
+minimumReleaseAgeExcludes = ["@types/node", "typescript"]
+
+[run]
+bun = true
+shell = "bun"

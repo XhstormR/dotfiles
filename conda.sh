@@ -19,6 +19,7 @@ packages=(
     lazygit
     hexyl
     jq
+    xan
     watchexec
     socat
     tmux
