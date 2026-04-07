@@ -1,2 +1,5 @@
 INSTALL ui;
 LOAD ui;
+
+ATTACH IF NOT EXISTS '~/.duckdb/default.db' AS disk;
+USE disk.main;

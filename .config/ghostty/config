@@ -35,6 +35,7 @@ clipboard-trim-trailing-spaces = true
 
 focus-follows-mouse = true
 macos-option-as-alt = true
+link-previews = true
 
 bell-features = system,border
 notify-on-command-finish = unfocused
