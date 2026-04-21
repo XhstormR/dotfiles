@@ -22,6 +22,7 @@ packages=(
     xan
     watchexec
     socat
+    sing-box
     tmux
     yazi
     whisper.cpp
@@ -56,7 +57,7 @@ packages=(
     exiftool
     mediainfo
 
-    lima-vm
+    lima
     docker-cli
     docker-compose
 
@@ -68,7 +69,7 @@ pixi self-update
 
 pixi global update
 
-pixi global install ${packages[@]}
+pixi global install --channel https://prefix.dev/github-releases --channel conda-forge ${packages[@]}
 pixi global install openjdk --expose java --expose javac --expose jar --expose jwebserver
 
 pixi clean cache -y
