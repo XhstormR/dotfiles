@@ -170,15 +170,14 @@ end
 
 function x
     set -l dirname (basename $argv[1] | string split --right --max 1 .)[1]
-    7zz x -y -aoa -sccUTF-8 -o$dirname $argv[1]
-end
-
-function h
-    $argv[1] --help || $argv[1] -help || $argv[1] help
+    7zz x -y -aoa -snld -sccUTF-8 -o$dirname $argv[1]
 end
 
 function v
-    $argv[1] --version || $argv[1] -version || $argv[1] version
+    $argv[1] --version 2>/dev/null \
+    || $argv[1] -version 2>/dev/null \
+    || $argv[1] version 2>/dev/null \
+    || $argv[1] -V 2>/dev/null
 end
 
 function md
