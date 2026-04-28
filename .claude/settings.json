@@ -1,15 +1,15 @@
 {
-    "model": "anthropic/claude-opus-4.6",
+    "model": "anthropic/claude-opus-4.7",
     "modelOverrides": {
-        "claude-opus-4-6": "anthropic/claude-opus-4.6",
-        "claude-sonnet-4-6": "anthropic/claude-opus-4.6"
+        "claude-opus-4.7": "anthropic/claude-opus-4.7",
+        "claude-sonnet-4-6": "anthropic/claude-opus-4.7"
     },
     "env": {
         "ANTHROPIC_BASE_URL": "https://litellm.safuapi.prod.secfdg.net",
         "ANTHROPIC_AUTH_TOKEN": "sk-innP6c3duu05DtIVmglJyw",
-        "ANTHROPIC_CUSTOM_MODEL_OPTION": "anthropic/claude-opus-4.6",
-        "ANTHROPIC_MODEL": "anthropic/claude-opus-4.6",
-        "CLAUDE_CODE_SUBAGENT_MODEL": "anthropic/claude-opus-4.6",
+        "ANTHROPIC_CUSTOM_MODEL_OPTION": "anthropic/claude-opus-4.7",
+        "ANTHROPIC_MODEL": "anthropic/claude-opus-4.7",
+        "CLAUDE_CODE_SUBAGENT_MODEL": "anthropic/claude-opus-4.7",
         "CLAUDE_CODE_EFFORT_LEVEL": "high",
         "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
         "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
