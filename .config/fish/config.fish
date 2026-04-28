@@ -34,6 +34,7 @@ set -g fish_greeting '
 '
 
 export LANG='zh-Hans.UTF-8'
+export LANGUAGE=$LANG
 export LC_ALL='C.UTF-8'
 export EDITOR='zed'
 export VISUAL='zed'

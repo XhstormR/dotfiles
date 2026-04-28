@@ -28,7 +28,7 @@
                 "api_url": "https://litellm.safuapi.prod.secfdg.net",
                 "available_models": [
                     {
-                        "name": "anthropic/claude-opus-4.6",
+                        "name": "anthropic/claude-opus-4.7",
                         "max_tokens": 200000,
                         "max_output_tokens": 32000,
                         "max_completion_tokens": 200000,
@@ -47,7 +47,7 @@
     "agent": {
         "default_model": {
             "provider": "litellm",
-            "model": "anthropic/claude-opus-4.6",
+            "model": "anthropic/claude-opus-4.7",
             "enable_thinking": false,
         },
         "notify_when_agent_waiting": "all_screens",

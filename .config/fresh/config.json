@@ -1,20 +1,23 @@
 {
     "config-schema": "https://github.com/sinelaw/fresh/blob/master/crates/fresh-editor/plugins/config-schema.json",
+    "version": 2,
     "theme": "dracula",
     "locale": "zh-CN",
     "editor": {
+        "auto_indent": true,
+        "highlight_current_line": true,
+        "highlight_current_column": true,
         "enable_semantic_tokens_full": true,
         "diagnostics_inline_text": true,
-        "auto_indent": true,
         "auto_save_enabled": true,
-        "whitespace_spaces_leading": true,
-        "whitespace_spaces_inner": true,
-        "whitespace_spaces_trailing": true,
         "trim_trailing_whitespace_on_save": true,
         "ensure_final_newline_on_save": true,
         "show_horizontal_scrollbar": false,
         "use_terminal_bg": true,
-        "rulers": [80, 120]
+        "rulers": [80, 120],
+        "whitespace_spaces_leading": true,
+        "whitespace_spaces_inner": true,
+        "whitespace_spaces_trailing": true
     },
     "file_explorer": {
         "show_hidden": true,
@@ -22,5 +25,11 @@
     },
     "file_browser": {
         "show_hidden": true
+    },
+    "lsp": {
+        "bash": {
+            "enabled": false,
+            "auto_start": false
+        }
     }
 }
