@@ -2,7 +2,7 @@
 
 command = ~/.pixi/bin/fish
 working-directory = ~/Downloads
-term = xterm-256color
+term = xterm-ghostty
 
 shell-integration = fish
 shell-integration-features = true
@@ -10,6 +10,7 @@ shell-integration-features = true
 background-opacity = 0.7
 background-opacity-cells = true
 background-blur = true
+unfocused-split-opacity = 0.3
 
 font-family = Maple Mono Normal NF CN
 font-size = 14

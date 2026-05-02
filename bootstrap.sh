@@ -51,25 +51,35 @@ function setupMac() {
     hidutil property --set '{"CapsLockDelayOverride":0}'
 
     # 关闭智能引号、智能破折号、句号替换、自动大写首字母，显示隐藏文件
+    defaults write -g AppleShowScrollBars -string "Always"
+    defaults write -g AppleShowAllExtensions -bool true
+    defaults write -g ApplePressAndHoldEnabled -bool false
     defaults write -g NSAutomaticCapitalizationEnabled -bool false
     defaults write -g NSAutomaticDashSubstitutionEnabled -bool false
     defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false
     defaults write -g NSAutomaticPeriodSubstitutionEnabled -bool false
     defaults write -g NSWindowShouldDragOnGesture -bool true
     defaults write com.apple.finder AppleShowAllFiles -bool true
+    defaults write com.apple.finder ShowStatusBar -bool true
+    defaults write com.apple.finder ShowPathbar -bool true
+    defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
     # 设置默认应用
-    duti -s com.google.Chrome pdf all
-    duti -s com.google.Chrome html all
     duti -s dev.zedapp.zed-0 sh all
     duti -s dev.zedapp.zed-0 txt all
     duti -s dev.zedapp.zed-0 fish all
     duti -s dev.zedapp.zed-0 json all
+    duti -s com.google.Chrome pdf all
+    duti -s com.google.Chrome html all
     duti -s com.colliderli.iina aac all
     duti -s com.colliderli.iina mp3 all
+    duti -s com.colliderli.iina mp4 all
     duti -s com.colliderli.iina m4a all
     duti -s com.colliderli.iina wav all
     duti -s com.colliderli.iina flac all
+    duti -s net.blyt.phoenixslides jpg all
+    duti -s net.blyt.phoenixslides png all
+    duti -s net.blyt.phoenixslides gif all
 }
 
 cd "$(dirname "${BASH_SOURCE}")" || exit;

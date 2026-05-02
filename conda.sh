@@ -40,6 +40,7 @@ packages=(
 
     btop
     bottom
+    rustnet
 
     poppler
     qpdf
@@ -62,7 +63,8 @@ packages=(
     docker-cli
     docker-compose
 
-    alacritty
+    # alacritty
+    ghostty
     zed
 )
 
