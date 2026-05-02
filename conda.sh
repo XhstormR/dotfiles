@@ -48,7 +48,8 @@ packages=(
     msedit
     vim
 
-    openjdk
+    # openjdk
+    graalvm
     bun
     uv
 
@@ -70,6 +71,5 @@ pixi self-update
 pixi global update
 
 pixi global install --channel https://prefix.dev/github-releases --channel conda-forge ${packages[@]}
-pixi global install openjdk --expose java --expose javac --expose jar --expose jwebserver
 
 pixi clean cache -y
