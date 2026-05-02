@@ -51,7 +51,7 @@
             "enable_thinking": false,
         },
         "notify_when_agent_waiting": "all_screens",
-        "play_sound_when_agent_done": true,
+        "play_sound_when_agent_done": "always",
         "show_turn_stats": true,
     },
     "edit_predictions": {

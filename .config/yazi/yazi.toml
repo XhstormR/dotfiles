@@ -1,4 +1,4 @@
-"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+#:schema https://yazi-rs.github.io/schemas/yazi.json
 
 [mgr]
 ratio = [1, 3, 4]
@@ -19,11 +19,11 @@ suppress_preload = true
 append_rules = [{ url = "*", use = ["open", "edit", "reveal"] }]
 
 [[plugin.prepend_fetchers]]
-id  = "git"
 url = "*"
 run = "git"
+group = "git"
 
 [[plugin.prepend_fetchers]]
-id  = "git"
 url = "*/"
 run = "git"
+group = "git"

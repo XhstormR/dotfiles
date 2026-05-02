@@ -40,8 +40,11 @@ packages=(
 
     btop
     bottom
+    rustnet
 
     poppler
+    pandoc
+    typst
     qpdf
 
     fresh-editor
@@ -62,7 +65,8 @@ packages=(
     docker-cli
     docker-compose
 
-    alacritty
+    # alacritty
+    ghostty
     zed
 )
 

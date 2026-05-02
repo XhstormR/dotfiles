@@ -33,9 +33,9 @@ set -g fish_greeting '
        \m___m__|_|    \m_m_|   \mm_|
 '
 
-export LANG='zh-Hans.UTF-8'
-export LANGUAGE=$LANG
-export LC_ALL='C.UTF-8'
+export LANGUAGE='zh_CN'
+export LANG='zh_CN.UTF-8'
+# export LC_ALL='C.UTF-8'
 export EDITOR='zed'
 export VISUAL='zed'
 export HISTCONTROL='ignoreboth'
@@ -111,6 +111,7 @@ alias week='date +"%V"'
 alias tree='l -T'
 alias diff='delta'
 alias rand='openssl rand -hex 30'
+alias pkill='pkill -9'
 alias aria2c='aria2c -s16 -x16 -k1M'
 alias map='xargs -n1'
 alias cpu='top -o cpu'
@@ -124,6 +125,7 @@ alias ip_wan='curl -sk https://myip.ipip.net/; dig -4 +short myip.opendns.com @r
 alias serveme='jwebserver -b 0.0.0.0 --port 8080'
 alias reload='exec fish'
 alias update='brew update && brew upgrade --greedy --force-bottle && pixi self-update && pixi global update'
+alias cleanup="fd '.DS_Store' --hidden --no-ignore --type file -X rm -v"
 
 function rm
     switch (uname)
@@ -183,71 +185,6 @@ end
 
 function md
     mkdir -p $argv && cd $argv
-end
-
-function fzf-kill -a pattern
-    if test -n "$pattern"
-        command pkill -9 $pattern
-        return
-    end
-
-    set -l cmd_prefix 'ps -e -opid,user,command'
-    set -l cmd_selected (fzf \
-        --bind "start:reload($cmd_prefix)" \
-        --bind "ctrl-r:reload($cmd_prefix)" \
-        --bind "enter:execute-silent(kill -9 {1})+reload($cmd_prefix)" \
-        --header 'Press Enter to kill
-Press CTRL-R to reload' \
-        --header-lines=1 \
-        --prompt='Processes> ' \
-        --preview='ps -f -p {1} || echo "Cannot preview {1} because it exited."' \
-        --preview-window="down:4:wrap" \
-        --layout=reverse \
-    )
-    set -l pids_selected (printf '%s\n' $cmd_selected | awk '{print $1}')
-    if test -n "$pids_selected"
-        kill -9 $pids_selected
-    end
-end
-
-function fzf-docker
-    set -l cmd_prefix 'docker ps -a'
-    set -l cmd_selected (fzf \
-        --bind "start:reload($cmd_prefix)" \
-        --bind "ctrl-r:reload($cmd_prefix)" \
-        --header 'Press CTRL-R to reload' \
-        --header-lines=1 \
-        --prompt='Container> ' \
-        --preview='docker stats --no-stream {1} || echo "Cannot preview {1} because it exited."' \
-        --preview-window="down:4:wrap" \
-        --layout=reverse \
-    )
-    set -l cid_selected (printf '%s\n' $cmd_selected[1] | awk '{print $1}')
-    if test -n "$cid_selected"
-        docker start $cid_selected && docker exec -it $cid_selected sh
-    end
-end
-
-function fzf-rg
-    set -l cmd_prefix 'rg --no-heading --column --color=always --'
-    set -l cmd_selected (fzf \
-        --disabled \
-        --query "$argv" \
-        --bind "start:reload($cmd_prefix {q})" \
-        --bind "change:reload($cmd_prefix {q} || true)" \
-        --bind "ctrl-o:execute-silent($EDITOR --goto {1}:{2}:{3})" \
-        --bind "f2:execute(cat {1})" \
-        --bind "focus:bg-transform-header(file -bI {1})" \
-        --prompt='Search> ' \
-        --delimiter ':' \
-        --preview 'bat --color=always --theme="Solarized (dark)" --highlight-line {2} -- {1}' \
-        --preview-window '~4,+{2}/3,<80(up)' \
-        --layout=reverse \
-    )
-    set -l files_selected (printf '%s\n' $cmd_selected | awk -F: '{print $1}' | sort -u | string join ' ')
-    if test -n "$files_selected"
-        commandline $files_selected
-    end
 end
 
 function fish_user_key_bindings
@@ -323,11 +260,8 @@ function postexec --on-event fish_postexec
 end
 
 if type tmux > /dev/null 2>&1 && not set -q TMUX && not set -q GHOSTTY_QUICK_TERMINAL
-    tmux -2u attach -c (pwd) || tmux -2u new
+    tmux -2u new -A -s main -c (pwd)
 end
-
-# Recursively delete .DS_Store files
-alias cleanup="fd '.DS_Store' --hidden --no-ignore --type file -X rm -v"
 
 # Change working directory to the top-most Finder window location
 function cdf
