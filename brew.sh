@@ -22,8 +22,7 @@ brew install --cask vlc
 brew install --cask iina
 brew install --cask intellij-idea
 brew install --cask itsycal
-brew install --cask ghostty
-brew install --cask jordanbaird-ice
+brew install --cask thaw
 brew install --cask karabiner-elements
 brew install --cask keepassxc
 brew install --cask maczip

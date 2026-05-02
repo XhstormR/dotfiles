@@ -5,4 +5,7 @@ change-ps1 = true
 index-url = "https://mirrors.ustc.edu.cn/pypi/simple"
 
 [mirrors]
-"https://conda.anaconda.org/conda-forge" = ["https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge"]
+"https://conda.anaconda.org/conda-forge" = [
+    "https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge",
+    "oci://ghcr.io/channel-mirrors/conda-forge",
+]
