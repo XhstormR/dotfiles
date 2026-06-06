@@ -3,17 +3,17 @@
         "sequential-thinking": {
             "enabled": true,
             "remote": false,
-            "command": "npx",
+            "command": "bun",
             "args": [
-                "-y",
+                "x",
                 "@modelcontextprotocol/server-sequential-thinking@latest",
             ],
         },
         "context7": {
             "enabled": true,
             "remote": false,
-            "command": "npx",
-            "args": ["-y", "@upstash/context7-mcp@latest"],
+            "command": "bun",
+            "args": ["x", "@upstash/context7-mcp@latest"],
         },
         "grep": {
             "enabled": true,

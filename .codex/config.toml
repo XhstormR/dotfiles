@@ -35,5 +35,5 @@ base_url = "https://litellm.safuapi.prod.secfdg.net"
 experimental_bearer_token = "sk-innP6c3duu05DtIVmglJyw"
 
 [mcp_servers.sequential-thinking]
-command = "npx"
-args = ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+command = "bun"
+args = ["x", "@modelcontextprotocol/server-sequential-thinking"]

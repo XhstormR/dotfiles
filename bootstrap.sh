@@ -30,17 +30,17 @@ function doSync() {
 }
 
 function addMCP() {
-    claude mcp add --scope user --transport stdio sequential-thinking -- npx -y @modelcontextprotocol/server-sequential-thinking@latest
-    claude mcp add --scope user --transport stdio context7 -- npx -y @upstash/context7-mcp@latest
-    claude mcp add --scope user --transport stdio playwright-mcp -- npx -y @playwright/mcp@latest
+    claude mcp add --scope user --transport stdio sequential-thinking -- bun x @modelcontextprotocol/server-sequential-thinking@latest
+    claude mcp add --scope user --transport stdio context7 -- bun x @upstash/context7-mcp@latest
+    claude mcp add --scope user --transport stdio playwright-mcp -- bun x @playwright/mcp@latest
     claude mcp add --scope user --transport stdio markitdown-mcp -- uvx markitdown-mcp@latest
-    claude mcp add --scope user --transport stdio chrome-devtools-mcp -- npx -y chrome-devtools-mcp@latest
+    claude mcp add --scope user --transport stdio chrome-devtools-mcp -- bun x chrome-devtools-mcp@latest
     claude mcp add --scope user --transport stdio code-review-graph -- uvx code-review-graph@latest serve
     claude mcp add --scope user --transport http  grep -- https://mcp.grep.app
 
-    claude mcp add --scope user --transport stdio svelte -- npx -y @sveltejs/mcp@latest
-    claude mcp add --scope user --transport stdio angular-cli -- npx -y @angular/cli@latest mcp
-    claude mcp add --scope user --transport stdio daisyui-doc -- npx -y mcp-remote@latest https://gitmcp.io/saadeghi/daisyui
+    claude mcp add --scope user --transport stdio svelte -- bun x @sveltejs/mcp@latest
+    claude mcp add --scope user --transport stdio angular-cli -- bun x @angular/cli@latest mcp
+    claude mcp add --scope user --transport stdio daisyui-doc -- bun x mcp-remote@latest https://gitmcp.io/saadeghi/daisyui
     claude mcp add --scope user --transport http  astro-docs -- https://mcp.docs.astro.build/mcp
     claude mcp add --scope user --transport http  atlassian-mcp-server -- https://mcp.atlassian.com/v1/mcp
     claude mcp add --scope user --transport http  gitlab-cmc -H "X-Gitlab-Mcp-Server-Tool-Name-Prefix: cmc_" -- https://git.coinmarketcap.supply/api/v4/mcp
