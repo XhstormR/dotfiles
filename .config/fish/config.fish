@@ -76,8 +76,8 @@ alias l='ll'
 # alias cp='cp -i'
 # alias mv='mv -i'
 
-alias df='df -h'
-alias du='du -h'
+alias df='df -a --si'
+alias du='du -a --si'
 
 alias whence='type -a'
 alias hexdump='hexdump -C'

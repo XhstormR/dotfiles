@@ -40,11 +40,11 @@ function __darwin_memory_status
     # 可用内存
     set free (math $total - $used)
     # 使用率
-    set usage_pct (math "round($used / $total * 100)")
+    set pcent (math "round($used / $total * 100)")
     # 使用率图标
-    set usage_icon (__pct_icon $usage_pct)
+    set pcent_icon (pct_icon $pcent)
 
-    printf '%.0f/%.0fGB %s\n' $used $total $usage_icon
+    printf '%.0f/%.0fGB %s\n' $used $total $pcent_icon
 
     ## 进度条
     #set bar_len 20
@@ -67,25 +67,4 @@ function __darwin_memory_status
     #printf '  联动内存  %.2f GB\n' $pwired
     #printf '  被压缩    %.2f GB\n' $pcomp
     #echo
-end
-
-# tier5 🌑 90%-100%
-# tier4 🌒 70%-90%
-# tier3 🌓 50%-70%
-# tier2 🌔 30%-50%
-# tier1 🌕 0%-30%
-function __pct_icon
-    set pct $argv[1]
-
-    if test $pct -ge 90
-        echo 🌑
-    else if test $pct -ge 70
-        echo 🌒
-    else if test $pct -ge 50
-        echo 🌓
-    else if test $pct -ge 30
-        echo 🌔
-    else
-        echo 🌕
-    end
 end

@@ -10,7 +10,7 @@ shell-integration-features = true
 background-opacity = 0.7
 background-opacity-cells = true
 background-blur = true
-unfocused-split-opacity = 0.3
+unfocused-split-opacity = 0.4
 
 font-family = Maple Mono Normal NF CN
 font-size = 14

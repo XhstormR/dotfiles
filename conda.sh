@@ -17,6 +17,7 @@ packages=(
     gawk
     git-delta
     lazygit
+    lazydocker
     hexyl
     jq
     xan
