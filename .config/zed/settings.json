@@ -1,13 +1,23 @@
 {
+    "project_panel": {
+        "dock": "left",
+    },
+    "outline_panel": {
+        "dock": "left",
+    },
+    "collaboration_panel": {
+        "dock": "left",
+    },
+    "git_panel": {
+        "dock": "left",
+        "tree_view": true,
+    },
     "context_servers": {
         "sequential-thinking": {
             "enabled": true,
             "remote": false,
             "command": "bun",
-            "args": [
-                "x",
-                "@modelcontextprotocol/server-sequential-thinking@latest",
-            ],
+            "args": ["x", "@modelcontextprotocol/server-sequential-thinking@latest"],
         },
         "context7": {
             "enabled": true,
@@ -28,7 +38,7 @@
                 "api_url": "https://litellm.safuapi.prod.secfdg.net",
                 "available_models": [
                     {
-                        "name": "anthropic/claude-opus-4.7",
+                        "name": "anthropic/claude-opus-4.8",
                         "max_tokens": 200000,
                         "max_output_tokens": 32000,
                         "max_completion_tokens": 200000,
@@ -45,9 +55,10 @@
         },
     },
     "agent": {
+        "dock": "right",
         "default_model": {
             "provider": "litellm",
-            "model": "anthropic/claude-opus-4.7",
+            "model": "anthropic/claude-opus-4.8",
             "enable_thinking": false,
         },
         "notify_when_agent_waiting": "all_screens",
@@ -56,9 +67,6 @@
     },
     "edit_predictions": {
         "provider": "zed",
-    },
-    "git_panel": {
-        "tree_view": true,
     },
     "indent_guides": {
         "enabled": true,
