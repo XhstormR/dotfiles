@@ -104,9 +104,11 @@
     },
     "auto_install_extensions": {
         "java": true,
-        "dracula": true,
+        "catppuccin": true,
+        "catppuccin-icons": true,
     },
-    "theme": "Dracula",
+    "theme": "Catppuccin Mocha",
+    "icon_theme": "Catppuccin Mocha",
     "tab_size": 4,
     "hard_tabs": false,
     "soft_wrap": "editor_width",

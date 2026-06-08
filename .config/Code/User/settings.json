@@ -1,5 +1,6 @@
 {
-    "workbench.colorTheme": "Dracula Theme",
+    "workbench.iconTheme": "catppuccin-mocha",
+    "workbench.colorTheme": "Catppuccin Mocha",
     "workbench.colorCustomizations": {
         "tree.indentGuidesStroke": "#05ef3c",
         "tree.inactiveIndentGuidesStroke": "#37373e",
@@ -39,7 +40,10 @@
     "editor.renderWhitespace": "all",
     "editor.snippetSuggestions": "top",
     "editor.wordWrap": "on",
-    "editor.rulers": [80, 120],
+    "editor.rulers": [
+        80,
+        120
+    ],
     "markdown.validate.enabled": true,
     "markdown.updateLinksOnFileMove.enabled": "prompt",
     "files.autoSave": "onFocusChange",
