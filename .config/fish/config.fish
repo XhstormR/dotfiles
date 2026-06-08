@@ -10,13 +10,13 @@ eval fzf --fish | source
 eval zoxide init fish | source
 eval brew shellenv | source
 
-set -a fish_complete_path ~/.pixi/completions/fish
-set -g fish_prompt_pwd_dir_length 0
-set -g __fish_git_prompt_showcolorhints 1
-set -g __fish_git_prompt_show_informative_status 1
-
-# https://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=leo
-set -g fish_greeting '
+if status is-interactive
+    set -a fish_complete_path ~/.pixi/completions/fish
+    set -g fish_prompt_pwd_dir_length 0
+    set -g __fish_git_prompt_showcolorhints 1
+    set -g __fish_git_prompt_show_informative_status 1
+    # https://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=leo
+    set -g fish_greeting '
    ██╗     ███████╗ ██████╗
    ██║     ██╔════╝██╔═══██╗
    ██║     █████╗  ██║   ██║
@@ -32,6 +32,7 @@ set -g fish_greeting '
       |^ ^ ^ ^ |W|   |/^^\ |   /oo |
        \m___m__|_|    \m_m_|   \mm_|
 '
+end
 
 export LANGUAGE='zh_CN'
 export LANG='zh_CN.UTF-8'
@@ -112,7 +113,8 @@ alias tree='l -T'
 alias diff='delta'
 alias rand='openssl rand -hex 30'
 alias pkill='pkill -9'
-alias aria2c='aria2c -s16 -x16 -k1M'
+alias aria2c='aria2c -s16 -x16 -k1M -c'
+alias watchexec='watchexec --print-events --shell=none'
 alias map='xargs -n1'
 alias cpu='top -o cpu'
 alias mem='top -o rsize'

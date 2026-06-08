@@ -12,7 +12,7 @@ function fzf-rg
         --bind "focus:bg-transform-header(file -bI {1})" \
         --prompt='Search> ' \
         --delimiter ':' \
-        --preview 'bat --color=always --theme="Solarized (dark)" --highlight-line {2} -- {1}' \
+        --preview 'bat --color=always --theme="Catppuccin Latte" --highlight-line {2} -- {1}' \
         --preview-window '~4,+{2}/3,<80(up)' \
         --layout=reverse \
     )

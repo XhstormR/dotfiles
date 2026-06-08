@@ -10,6 +10,7 @@ packages=(
     less
     hugo
     resvg
+    doxx
     chafa
     curl
     fish
