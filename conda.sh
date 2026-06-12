@@ -29,6 +29,7 @@ packages=(
     yazi
     whisper.cpp
     duckdb-cli
+    navi
 
     fd-find
     fzf
