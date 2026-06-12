@@ -9,6 +9,7 @@ fish_add_path ~/.local/bin
 eval fzf --fish | source
 eval zoxide init fish | source
 eval brew shellenv | source
+eval navi widget fish | source
 
 if status is-interactive
     set -a fish_complete_path ~/.pixi/completions/fish
