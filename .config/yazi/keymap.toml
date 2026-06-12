@@ -2,6 +2,7 @@
 
 [[mgr.prepend_keymap]]
 on = "!"
+for = "unix"
 run = 'shell --block -- "$SHELL"'
 desc = "Open $SHELL here"
 
@@ -11,8 +12,8 @@ run = 'shell --block -- fresh %h'
 desc = "Edit the current file"
 
 [[mgr.prepend_keymap]]
-on  = "y"
-run = [ 'shell --orphan -- echo %s | fish -c fish_clipboard_copy', "yank" ]
+on = "y"
+run = ['shell --orphan -- echo %s | fish -c fish_clipboard_copy', "yank"]
 
 [[mgr.prepend_keymap]]
 on = "T"

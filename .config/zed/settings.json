@@ -12,12 +12,20 @@
         "dock": "left",
         "tree_view": true,
     },
+    "agent_servers": {
+        "claude-acp": {
+            "type": "registry",
+        },
+    },
     "context_servers": {
         "sequential-thinking": {
             "enabled": true,
             "remote": false,
             "command": "bun",
-            "args": ["x", "@modelcontextprotocol/server-sequential-thinking@latest"],
+            "args": [
+                "x",
+                "@modelcontextprotocol/server-sequential-thinking@latest",
+            ],
         },
         "context7": {
             "enabled": true,

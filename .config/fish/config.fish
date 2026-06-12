@@ -8,7 +8,7 @@ fish_add_path ~/.local/bin
 
 eval fzf --fish | source
 eval zoxide init fish | source
-eval brew shellenv | source
+eval brew shellenv fish | source
 eval navi widget fish | source
 
 if status is-interactive
@@ -127,7 +127,7 @@ alias ip_lan='__fish_print_addresses | perl -nle"/(\d+\.\d+\.\d+\.\d+)/ and prin
 alias ip_wan='curl -sk https://myip.ipip.net/; dig -4 +short myip.opendns.com @resolver1.opendns.com; curl -sk https://ipinfo.io/json'
 alias serveme='jwebserver -b 0.0.0.0 --port 8080'
 alias reload='exec fish'
-alias update='brew update && brew upgrade --greedy --force-bottle && pixi self-update && pixi global update'
+alias update='brew update && brew upgrade --greedy --force-bottle --yes && pixi self-update && pixi global update'
 alias cleanup="fd '.DS_Store' --hidden --no-ignore --type file -X rm -v"
 
 function rm
@@ -233,10 +233,15 @@ function fish_prompt
 
     set -l prompt_proxy ''
     if set -q all_proxy
-        set prompt_proxy ' 🚀'
+        set prompt_proxy ' 🌐'
     end
 
-    set -l prompt_left (printf '%s:%s%s%s%s ' $prompt_login $prompt_pwd $prompt_vcs $prompt_status $prompt_proxy)
+    set -l prompt_job ''
+    if jobs -q
+        set prompt_job ' 🚀'
+    end
+
+    set -l prompt_left (printf '%s:%s%s%s%s%s ' $prompt_login $prompt_pwd $prompt_vcs $prompt_proxy $prompt_job $prompt_status)
 
     set -l prompt_time (date +"%T")
     set -l prompt_duration (math $CMD_DURATION / 1000)

@@ -1,0 +1,106 @@
+#!/usr/bin/osascript
+use framework "Foundation"
+use framework "Quartz"
+
+-- 识别语言
+property recognitionLanguages : {"zh-Hans", "en-US"}
+-- 扫描页渲染倍率
+property renderScale : 3.0
+-- kPDFDisplayBoxCropBox = 1，按可见裁剪框渲染
+property kPDFDisplayBoxCropBox : 1
+
+on run(argv)
+    if (count of argv) is 0 then
+        error "用法：ocr <图片或 PDF>" number 1000
+    end if
+    set absolutePath to resolvePath(item 1 of argv)
+    set ext to (absolutePath's pathExtension()'s lowercaseString()) as text
+    if ext is "pdf" then
+        return ocrPDF(absolutePath)
+    else
+        return ocrImagePath(absolutePath)
+    end if
+end run
+
+on resolvePath(path)
+    -- 展开为绝对路径
+    set absolutePath to (current application's NSString's stringWithString:path)'s stringByExpandingTildeInPath()
+    -- 校验文件存在
+    set fileManager to current application's NSFileManager's defaultManager()
+    if not (fileManager's fileExistsAtPath:absolutePath) then
+        error "文件不存在：" & absolutePath number 1001
+    end if
+    return absolutePath
+end resolvePath
+
+on ocrImagePath(imagePath)
+    set theURL to current application's NSURL's fileURLWithPath:imagePath
+    set requestHandler to current application's VNImageRequestHandler's alloc()'s initWithURL:theURL options:(missing value)
+    return recognizeText(requestHandler)
+end ocrImagePath
+
+on ocrImageData(imageData)
+    set requestHandler to current application's VNImageRequestHandler's alloc()'s initWithData:imageData options:(missing value)
+    return recognizeText(requestHandler)
+end ocrImageData
+
+-- 唯一识别核心：对已构造的请求处理器执行 Vision 文本识别，返回按行拼接的纯文本
+on recognizeText(requestHandler)
+    -- 配置文字识别请求：指定中英文语言并开启语言纠正
+    set theRequest to current application's VNRecognizeTextRequest's alloc()'s init()
+    theRequest's setRecognitionLanguages:recognitionLanguages
+    theRequest's setUsesLanguageCorrection:true
+
+    -- 同步执行并通过 (reference) 捕获 Vision 错误，失败即报错退出
+    set {ok, theError} to (requestHandler's performRequests:{theRequest} |error|:(reference))
+    if ok is false then
+        error "识别失败：" & theError's localizedDescription() number 1002
+    end if
+
+    -- 收集每个文本观测结果的最优候选；空候选用 firstObject 返回 missing value 跳过，避免取首项报错
+    set textLines to current application's NSMutableArray's array()
+    repeat with observation in (theRequest's results())
+        set candidate to (observation's topCandidates:1)'s firstObject()
+        if candidate is not missing value then (textLines's addObject:(candidate's |string|()))
+    end repeat
+
+    return (textLines's componentsJoinedByString:linefeed) as text
+end recognizeText
+
+-- PDF：加载并逐页提取文本，页间以空行分隔
+on ocrPDF(pdfPath)
+    set theURL to current application's NSURL's fileURLWithPath:pdfPath
+    set pdfDoc to current application's PDFDocument's alloc()'s initWithURL:theURL
+    if pdfDoc is missing value then
+        error "无法解析 PDF：" & pdfPath number 1003
+    end if
+
+    set pageTexts to current application's NSMutableArray's array()
+    repeat with i from 0 to ((pdfDoc's pageCount()) - 1)
+        (pageTexts's addObject:textForPage(pdfDoc's pageAtIndex:i))
+    end repeat
+
+    return (pageTexts's componentsJoinedByString:(linefeed & linefeed)) as text
+end ocrPDF
+
+-- 单页文本提取策略：优先取原生文字层，缺失时回退到 Vision OCR
+on textForPage(thePage)
+    -- 文本型 PDF 直接读取文字层，精度 100% 且无需栅格化
+    set layerText to (thePage's |string|())
+    if layerText is not missing value then
+        set ws to current application's NSCharacterSet's whitespaceAndNewlineCharacterSet()
+        set trimmed to (layerText's stringByTrimmingCharactersInSet:ws)
+        if (trimmed's |length|()) > 0 then return trimmed as text
+    end if
+    -- 扫描型/图片型 PDF 无文字层，渲染为位图后复用图片 OCR 路径
+    return ocrImageData(renderPage(thePage))
+end textForPage
+
+-- 将 PDF 页渲染为放大的位图，返回 TIFF 数据供 Vision 解码
+on renderPage(thePage)
+    set boxSize to item 2 of (thePage's boundsForBox:kPDFDisplayBoxCropBox)
+    set targetSize to {(item 1 of boxSize) * renderScale, (item 2 of boxSize) * renderScale}
+    -- 直接以列表当作 NSSize 桥接，省去 NSValue 往返
+    set thumb to (thePage's thumbnailOfSize:targetSize forBox:kPDFDisplayBoxCropBox)
+    return (thumb's TIFFRepresentation())
+end renderPage

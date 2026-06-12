@@ -7,6 +7,7 @@ brew install sniffnet
 brew install flow-control
 
 brew install --cask loop
+brew install --cask rectangle
 brew install --cask amethyst
 brew install --cask deskpad
 brew install --cask markedit
@@ -31,7 +32,6 @@ brew install --cask mos
 brew install --cask obs
 brew install --cask onyx
 brew install --cask phoenix-slides
-brew install --cask rectangle
 brew install --cask stats
 brew install --cask snipaste
 brew install --cask sloth

@@ -30,6 +30,8 @@ packages=(
     whisper.cpp
     duckdb-cli
     navi
+    sendme
+    dumbpipe
 
     fd-find
     fzf
@@ -40,6 +42,7 @@ packages=(
     util-linux
     uutils-coreutils
     moreutils
+    toybox
 
     btop
     bottom

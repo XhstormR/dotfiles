@@ -24,6 +24,7 @@ function doSync() {
         --exclude ".git/" \
         --exclude ".idea/" \
         --exclude "/*.sh" \
+        --exclude "/ui.png" \
         --exclude "/README.md" \
         --exclude "/LICENSE" \
         -avhP --no-perms . ~;
@@ -49,6 +50,8 @@ function addMCP() {
 function setupMac() {
     # MacOS: Remove Caps Lock delay
     hidutil property --set '{"CapsLockDelayOverride":0}'
+    # 关闭 Spotlight 索引
+    sudo mdutil -a -i off
 
     # 关闭智能引号、智能破折号、句号替换、自动大写首字母，显示隐藏文件
     defaults write -g AppleShowScrollBars -string "Always"
@@ -65,10 +68,10 @@ function setupMac() {
     defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
     # 设置默认应用
-    duti -s dev.zedapp.zed-0 sh all
-    duti -s dev.zedapp.zed-0 txt all
-    duti -s dev.zedapp.zed-0 fish all
-    duti -s dev.zedapp.zed-0 json all
+    duti -s dev.zedapp.zed sh all
+    duti -s dev.zedapp.zed txt all
+    duti -s dev.zedapp.zed json all
+    duti -s dev.zedapp.zed public.text all
     duti -s com.google.Chrome pdf all
     duti -s com.google.Chrome html all
     duti -s com.colliderli.iina aac all
