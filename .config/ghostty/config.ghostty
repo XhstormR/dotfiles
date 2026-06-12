@@ -7,6 +7,10 @@ term = xterm-ghostty
 shell-integration = fish
 shell-integration-features = true
 
+cursor-style = block
+cursor-style-blink = false
+cursor-click-to-move = true
+
 background-opacity = 0.7
 background-opacity-cells = true
 background-blur = true

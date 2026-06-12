@@ -2,12 +2,14 @@ function Linemode:size_and_mtime()
 	local time = math.floor(self._file.cha.mtime or 0)
 	if time == 0 then
 		time = ""
+	elseif os.date("%Y", time) == os.date("%Y") then
+		time = os.date("%m-%d %H:%M", time)
 	else
-		time = os.date("%Y-%m-%d %H:%M", time)
+		time = os.date("%m-%d  %Y", time)
 	end
 
 	local size = self._file:size()
-	return string.format("%6s %s", size and ya.readable_size(size) or "-", time)
+	return string.format("%s %s", size and ya.readable_size(size) or "-", time)
 end
 
 Status:children_add(function()
@@ -35,6 +37,12 @@ end, 500, Status.RIGHT)
 
 require("full-border"):setup()
 
+require("folder-rules"):setup()
+
 require("git"):setup {
 	order = 0,
+}
+
+require("session"):setup {
+	sync_yanked = true,
 }

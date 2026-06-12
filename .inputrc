@@ -6,6 +6,7 @@ set convert-meta off
 
 set show-all-if-ambiguous on
 set show-all-if-unmodified on
+set show-mode-in-prompt on
 
 set completion-map-case on
 set completion-ignore-case on
