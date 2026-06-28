@@ -8,6 +8,7 @@ brew install flow-control
 
 brew install --cask loop
 brew install --cask rectangle
+brew install --cask swift-shift
 brew install --cask amethyst
 brew install --cask deskpad
 brew install --cask markedit
