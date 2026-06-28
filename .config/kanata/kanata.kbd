@@ -1,0 +1,170 @@
+;; 配置指南: https://github.com/jtroo/kanata/blob/main/docs/config.adoc
+;; 按键列表: https://github.com/jtroo/kanata/blob/main/parser/src/keys/mod.rs
+;; 按键码表: https://www.toptal.com/developers/keycode/table
+
+(defcfg
+    log-layer-changes no
+    process-unmapped-keys yes
+    delegate-to-first-layer yes
+    macos-dev-names-include (
+        "Keychron K8 Max"
+    )
+)
+
+(defsrc
+)
+
+(defvar
+    tap-time 220  ;; 双击判定时间
+    hold-time 220 ;; 判定长按还是短按
+)
+
+(defalias
+    test1 (macro S-b e s t spc r e g a r d s , ret S-l e o S-1 ret)
+
+    ;; 点按为空格，按住进入spacefn层
+    spacefn (tap-hold-press $tap-time $hold-time spc (layer-while-held spacefn))
+
+    caps-arrows (tap-hold-press $tap-time $hold-time caps (layer-while-held arrows))
+
+    common-lctl (tap-hold-press $tap-time $hold-time lctl (layer-while-held common-lctl))
+
+    chrome-lctl (tap-hold-press $tap-time $hold-time lctl (layer-while-held chrome-lctl))
+
+;;    (multi lsft (layer-while-held lsft-pairs-symbols))
+)
+
+;; 通用编辑/窗口快捷键:Ctrl+X → Cmd+X。
+;; 由 common 层与 chrome-lctl 层共同复用,避免重复定义。
+(deftemplate common-keys()
+    c        M-c
+    v        M-v
+    x        M-x
+    z        M-z
+    a        M-a
+    f        M-f
+    t        M-t
+    w        M-w
+    s        M-s
+    n        M-n
+    tab      C-tab
+    spc      C-spc
+    left     (switch
+        ((input real lsft)) (unmod lsft lalt left)    break
+        ((input real lalt)) (unmod lctl lalt left)    break ;; Rectangle
+        ((input real lmet)) (unmod lctl lmet left)    break
+        ()                  M-left                    break ;; 其余情况
+    )
+    right    (switch
+        ((input real lsft)) (unmod lsft lalt right)   break
+        ((input real lalt)) (unmod lctl lalt right)   break
+        ((input real lmet)) (unmod lctl lmet right)   break
+        ()                  M-right                   break
+    )
+)
+
+;; 保持 Ctrl 原生行为(Ctrl+C=SIGINT 等),覆盖 base 层的 common-lctl
+(deftemplate raw-lctl-layer (appid)
+    (deflayermap $appid
+        lctl     lctl
+    )
+)
+
+(deflayermap base
+    spc      @spacefn
+    ;; 按住 Ctrl 进入 common 层,实现通用 Ctrl→Cmd
+    lctl     @common-lctl
+    ;; 双击生成符号对
+    9        (tap-dance $tap-time (9 (macro S-9 S-0 left)))           ;; 括号对()
+    apos     (tap-dance $tap-time (apos (macro S-apos S-apos left)))  ;; 引号对""
+    comm     (tap-dance $tap-time (comm (macro S-comm S-. left)))     ;; 尖括号<>
+    lbrc     (tap-dance $tap-time (lbrc (macro lbrc rbrc left)))      ;; 中括号[]
+    ;; 双击 Alt+Drag -> Ctrl+Cmd+Drag
+    lalt     (tap-dance $tap-time (lalt (multi lctl lmet)))
+)
+
+(deflayermap com.google.Chrome
+    lctl     @chrome-lctl
+)
+
+(deflayermap com.apple.finder
+    ret      M-o       ;; 打开
+    del      M-bspc    ;; 删除
+    bspc     M-up      ;; 返回
+)
+
+(t! raw-lctl-layer com.mitchellh.ghostty)
+(t! raw-lctl-layer com.jetbrains.intellij)
+
+;; 通用层:仅含跨 app 通用的 Ctrl→Cmd 映射
+(deflayermap common-lctl
+    (t! common-keys)
+)
+
+;; Chrome 专用层:复用通用键 + Chrome/浏览器专属快捷键
+(deflayermap chrome-lctl
+    (t! common-keys)
+    j        M-A-l
+    u        M-A-u
+    l        M-l
+    r        M-r
+    h        M-y
+    mlft     M-mlft      ;; TODO macos-dev-names-include
+    i        (fork i (unmod lmet lalt i) (lsft)) ;; Ctrl+Shift+I → Cmd+Alt+I 打开开发者工具，fork 是 switch 的简化版
+)
+
+;; 模拟方向键
+(deflayermap arrows
+    w        up
+    s        down
+    a        left
+    d        right
+)
+
+;; 按住 Space 时:数字行 → F1-F12,Enter → Ctrl+Enter。
+(deflayermap spacefn
+    1        f1
+    2        (switch
+        ((base-layer com.apple.finder))  ret   break ;; 重命名
+        ()                               f2    break
+    )
+    3        f3
+    4        f4
+    5        (switch
+        ((base-layer com.google.Chrome)) M-r   break ;; 刷新
+        ()                               f5    break
+    )
+    6        f6
+    7        f7
+    8        f8
+    9        f9
+    0        f10
+    -        f11
+    =        f12
+    bspc     del
+    ;; Ctrl 常用操作
+    z        M-z
+    c        M-c
+    v        M-v
+    x        M-x
+    ret      M-ret
+    ;; 模拟鼠标
+    w        (movemouse-accel-up    5 750 1 10)
+    s        (movemouse-accel-down  5 750 1 10)
+    a        (movemouse-accel-left  5 750 1 10)
+    d        (movemouse-accel-right 5 750 1 10)
+    q        mlft
+    e        mrgt
+    ;; 鼠标滚轮
+    r        (mwheel-down 50 10)
+    f        (mwheel-up   50 10)
+    ;; 媒体音量
+    u        mute
+    i        voldwn
+    o        volu
+    ;; 媒体播放
+    j        pp
+    k        prev
+    l        next
+    t        @test1
+)

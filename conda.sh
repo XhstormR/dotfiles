@@ -20,6 +20,7 @@ packages=(
     lazygit
     lazydocker
     hexyl
+    openssl
     jq
     xan
     watchexec

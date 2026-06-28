@@ -83,6 +83,8 @@ function setupMac() {
     duti -s net.blyt.phoenixslides jpg all
     duti -s net.blyt.phoenixslides png all
     duti -s net.blyt.phoenixslides gif all
+
+    cp .config/kanata/kanata-layer-daemon.plist ~/Library/LaunchAgents/kanata-layer-daemon.plist
 }
 
 cd "$(dirname "${BASH_SOURCE}")" || exit;
