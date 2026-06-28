@@ -1,4 +1,5 @@
 local function setup()
+    -- https://github.com/sxyazi/yazi/blob/main/yazi-fs/src/sorter.rs
     ps.sub("ind-sort", function(opt)
         local cwd = cx.active.current.cwd
         if cwd:ends_with("Downloads") then
