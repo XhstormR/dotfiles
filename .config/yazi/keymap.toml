@@ -12,6 +12,11 @@ run = 'shell --block -- fresh %h'
 desc = "Edit the current file"
 
 [[mgr.prepend_keymap]]
+on  = [ "c", "o" ]
+run = 'shell --block -- ocr %h | fish -c fish_clipboard_copy'
+desc = "Copy file content (OCR)"
+
+[[mgr.prepend_keymap]]
 on = "y"
 run = ['shell --orphan -- echo %s | fish -c fish_clipboard_copy', "yank"]
 

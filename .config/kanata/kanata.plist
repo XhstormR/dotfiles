@@ -7,7 +7,7 @@
 
     <key>ProgramArguments</key>
     <array>
-      <string>/Users/leo/Downloads/macos-binaries-arm64/kanata_macos_arm64</string>
+      <string>/Users/leo/.pixi/bin/kanata</string>
       <string>--cfg</string>
       <string>/Users/leo/.config/kanata/kanata.kbd</string>
       <string>--port</string>
