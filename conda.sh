@@ -33,6 +33,7 @@ packages=(
     navi
     sendme
     dumbpipe
+    tesseract
 
     fd-find
     fzf
@@ -48,6 +49,7 @@ packages=(
     btop
     bottom
     rustnet
+    witr
 
     poppler
     pandoc

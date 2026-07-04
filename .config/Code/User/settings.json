@@ -1,10 +1,14 @@
 {
+    "workbench.experimental.modernUI": true,
     "workbench.iconTheme": "catppuccin-mocha",
     "workbench.colorTheme": "Catppuccin Mocha",
     "workbench.colorCustomizations": {
         "tree.indentGuidesStroke": "#05ef3c",
         "tree.inactiveIndentGuidesStroke": "#37373e",
         "editor.lineHighlightBackground": "#45475b",
+        "editor.selectionBackground": "#05ef3c88",
+        "editor.selectionHighlightBackground": "#05ef3c88",
+        "editor.findMatchHighlightBackground": "#05ef3c88",
     },
     "workbench.tree.indent": 18,
     "workbench.tree.renderIndentGuides": "always",

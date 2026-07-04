@@ -22,10 +22,7 @@
             "enabled": true,
             "remote": false,
             "command": "bun",
-            "args": [
-                "x",
-                "@modelcontextprotocol/server-sequential-thinking@latest",
-            ],
+            "args": ["x", "@modelcontextprotocol/server-sequential-thinking@latest"],
         },
         "context7": {
             "enabled": true,
@@ -117,6 +114,18 @@
     },
     "theme": "Catppuccin Mocha",
     "icon_theme": "Catppuccin Mocha",
+    "theme_overrides": {
+        "Catppuccin Mocha": {
+            "search.match_background": "#05ef3c88",
+            "editor.document_highlight.read_background": "#05ef3c88",
+            "editor.document_highlight.write_background": "#05ef3c88",
+            "players": [
+                {
+                    "selection": "#05ef3c88",
+                },
+            ],
+        },
+    },
     "tab_size": 4,
     "hard_tabs": false,
     "soft_wrap": "editor_width",
