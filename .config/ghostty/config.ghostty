@@ -3,6 +3,7 @@
 command = ~/.pixi/bin/fish
 working-directory = ~/Downloads
 term = xterm-ghostty
+language = zh_CN
 
 shell-integration = fish
 shell-integration-features = true
@@ -22,7 +23,10 @@ font-thicken = true
 bold-color = bright
 
 theme = Dracula
-language = zh_CN
+# https://github.com/0xhckr/ghostty-shaders/blob/main/cursor_blaze.glsl
+custom-shader = cursor_blaze.glsl
+custom-shader = focus_cursor.glsl
+custom-shader-animation = false
 
 maximize = true
 window-theme = dark

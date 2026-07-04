@@ -33,6 +33,8 @@ packages=(
     navi
     sendme
     dumbpipe
+    tesseract
+    fastfetch
 
     fd-find
     fzf
@@ -48,6 +50,7 @@ packages=(
     btop
     bottom
     rustnet
+    witr
 
     poppler
     pandoc
@@ -61,6 +64,7 @@ packages=(
     # openjdk
     graalvm
     bun
+    quickjs
     uv
 
     yt-dlp

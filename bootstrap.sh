@@ -11,6 +11,9 @@ function doIt() {
 
     sh <(curl https://raw.githubusercontent.com/PeonPing/peon-ping/main/install.sh)
 
+    curl --output-dir ~/.local/bin -O https://raw.githubusercontent.com/junegunn/fzf/refs/heads/master/bin/fzf-preview.sh
+    chmod +x ~/.local/bin/fzf-preview.sh
+
     curl -O https://github.com/subframe7536/maple-font/releases/download/v7.9/MapleMonoNormal-NF-CN-unhinted.zip
     unzip -o MapleMonoNormal-NF-CN-unhinted.zip -d ~/Library/Fonts/
     rm MapleMonoNormal-NF-CN-unhinted.zip
@@ -53,7 +56,7 @@ function setupMac() {
     # 关闭 Spotlight 索引
     sudo mdutil -a -i off
 
-    # 关闭智能引号、智能破折号、句号替换、自动大写首字母，显示隐藏文件
+    # 关闭智能引号、智能破折号、句号替换、自动大写首字母，显示隐藏文件，Ctrl+Cmd+Drag
     defaults write -g AppleShowScrollBars -string "Always"
     defaults write -g AppleShowAllExtensions -bool true
     defaults write -g ApplePressAndHoldEnabled -bool false
@@ -84,7 +87,8 @@ function setupMac() {
     duti -s net.blyt.phoenixslides png all
     duti -s net.blyt.phoenixslides gif all
 
-    cp .config/kanata/kanata-layer-daemon.plist ~/Library/LaunchAgents/kanata-layer-daemon.plist
+    cp .config/kanata/kanata-layer-daemon.plist ~/Library/LaunchAgents/
+    cp .config/kanata/kanata.plist /Library/LaunchDaemons/
 }
 
 cd "$(dirname "${BASH_SOURCE}")" || exit;

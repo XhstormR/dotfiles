@@ -34,9 +34,15 @@ func recognizeText(_ requestHandler: VNImageRequestHandler) -> String {
         .joined(separator: "\n")
 }
 
-// 将 PDF 页栅格化为放大位图并 OCR，供无文字层的扫描页复用图片识别路径
-func ocrPageImage(_ page: PDFPage) -> String {
-    // PDFDisplayBox.cropBox：按可见裁剪框渲染
+// 单页文本提取策略：优先取原生文字层，缺失时回退到栅格化 Vision OCR
+func textForPage(_ page: PDFPage) -> String {
+    // 文本型 PDF 直接读取文字层，精度 100% 且无需栅格化
+    if let layerText = page.string?.trimmingCharacters(in: .whitespacesAndNewlines),
+        !layerText.isEmpty
+    {
+        return layerText
+    }
+    // 扫描型/图片型 PDF 无文字层，按可见裁剪框（cropBox）放大栅格化后走图片识别路径
     let box = PDFDisplayBox.cropBox
     let bounds = page.bounds(for: box)
     let size = NSSize(width: bounds.width * renderScale, height: bounds.height * renderScale)
@@ -49,18 +55,6 @@ func ocrPageImage(_ page: PDFPage) -> String {
     return recognizeText(VNImageRequestHandler(cgImage: image, options: [:]))
 }
 
-// 单页文本提取策略：优先取原生文字层，缺失时回退到 Vision OCR
-func textForPage(_ page: PDFPage) -> String {
-    // 文本型 PDF 直接读取文字层，精度 100% 且无需栅格化
-    if let layerText = page.string?.trimmingCharacters(in: .whitespacesAndNewlines),
-        !layerText.isEmpty
-    {
-        return layerText
-    }
-    // 扫描型/图片型 PDF 无文字层，回退到栅格化 OCR
-    return ocrPageImage(page)
-}
-
 // PDF：加载并逐页提取文本，页间以空行分隔
 func ocrPDF(_ url: URL) -> String {
     guard let document = PDFDocument(url: url) else {
@@ -71,7 +65,39 @@ func ocrPDF(_ url: URL) -> String {
         .joined(separator: "\n\n")
 }
 
-// 入口：校验文件存在后按扩展名分派到 PDF 或图片识别路径
+// 调用 `file --mime-type` 探测文件真实 MIME 类型，杜绝扩展名伪装
+func mimeType(of url: URL) -> String {
+    let process = Process()
+    let pipe = Pipe()
+    process.executableURL = URL(fileURLWithPath: "/usr/bin/file")
+    process.arguments = ["--mime-type", "--brief", url.path]
+    process.standardOutput = pipe
+    do {
+        try process.run()
+    } catch {
+        fail("类型探测失败: \(error.localizedDescription)")
+    }
+    process.waitUntilExit()
+
+    return String(decoding: pipe.fileHandleForReading.readDataToEndOfFile(), as: UTF8.self)
+        .trimmingCharacters(in: .whitespacesAndNewlines)
+}
+
+// 按真实 MIME 分派：PDF 走文字层/栅格化路径，任意图片交给 Vision（底层 ImageIO 解码，
+// 天然支持 PNG/JPEG/HEIC/TIFF 等），其余类型一律拒绝
+func ocr(_ url: URL) -> String {
+    let mime = mimeType(of: url)
+    switch mime {
+    case "application/pdf":
+        return ocrPDF(url)
+    case let type where type.hasPrefix("image/"):
+        return recognizeText(VNImageRequestHandler(url: url, options: [:]))
+    default:
+        fail("不支持的类型: \(mime)（仅接受 PDF 和图片）")
+    }
+}
+
+// 入口：校验文件存在后按真实类型分派
 guard let file = CommandLine.arguments.dropFirst().first else {
     fail("用法：ocr <图片或 PDF>")
 }
@@ -79,8 +105,4 @@ let url = URL(fileURLWithPath: (file as NSString).expandingTildeInPath)
 guard FileManager.default.fileExists(atPath: url.path) else {
     fail("文件不存在: \(url.path)")
 }
-let result =
-    url.pathExtension.lowercased() == "pdf"
-    ? ocrPDF(url)
-    : recognizeText(VNImageRequestHandler(url: url, options: [:]))
-print(result)
+print(ocr(url))

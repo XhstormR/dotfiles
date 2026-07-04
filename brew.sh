@@ -14,7 +14,9 @@ brew install --cask deskpad
 brew install --cask markedit
 brew install --cask textgrabber2
 brew install --cask easydict
+brew install --cask copyq
 brew install --cask maccy
+brew install --cask meetily
 brew install --cask alt-tab
 brew install --cask input-source-pro
 brew install --cask keepingyouawake
