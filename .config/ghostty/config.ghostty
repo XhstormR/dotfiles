@@ -25,6 +25,7 @@ bold-color = bright
 theme = Dracula
 # https://github.com/0xhckr/ghostty-shaders/blob/main/cursor_blaze.glsl
 custom-shader = cursor_blaze.glsl
+# https://github.com/martinemde/dotfiles/blob/main/home/dot_config/ghostty/shaders/focus_cursor.glsl
 custom-shader = focus_cursor.glsl
 custom-shader-animation = false
 
