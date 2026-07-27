@@ -41,6 +41,7 @@ brew install --cask sloth
 brew install --cask solvespace
 brew install --cask telegram
 brew install --cask visual-studio-code
+brew install --cask zedis
 brew install --cask handy
 #brew install --cask android-file-transfer
 #brew install --cask background-music
