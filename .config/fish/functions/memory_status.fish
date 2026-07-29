@@ -1,12 +1,14 @@
 #!/usr/bin/env fish
 
 function memory_status
-    switch (uname)
-        case Darwin
-            __darwin_memory_status
-        case '*'
-            echo "不支持的操作系统: $(uname)"
-    end
+    set sizeTier (math 2^30) # GB: 1024 * 1024 * 1024
+    set mem (fastfetch --json --pipe --structure Memory | jq -r '.[0].result | .total, .used')
+    set total (math $mem[1] / $sizeTier)
+    set used  (math $mem[2] / $sizeTier)
+    set pcent (math "round($used / $total * 100)")
+    set pcent_icon (pct_icon $pcent)
+
+    printf '%.0f/%.0fGB %s\n' $used $total $pcent_icon
 end
 
 # OSX Activity monitor formulas

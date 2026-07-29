@@ -268,7 +268,10 @@ end
 function postexec --on-event fish_postexec
 end
 
-if status is-interactive && type tmux > /dev/null 2>&1 && not set -q TMUX && not set -q GHOSTTY_QUICK_TERMINAL
+if status is-interactive
+    and command -q tmux
+    and not set -q TMUX
+    and not set -q GHOSTTY_QUICK_TERMINAL
     tmux -2u new -A -s main -c (pwd)
 end
 
