@@ -43,7 +43,7 @@
                 "api_url": "https://litellm.safuapi.prod.secfdg.net",
                 "available_models": [
                     {
-                        "name": "anthropic/claude-opus-4.8",
+                        "name": "anthropic/claude-opus-5",
                         "max_tokens": 200000,
                         "max_output_tokens": 32000,
                         "max_completion_tokens": 200000,
@@ -63,7 +63,7 @@
         "dock": "right",
         "default_model": {
             "provider": "litellm",
-            "model": "anthropic/claude-opus-4.8",
+            "model": "anthropic/claude-opus-5",
             "enable_thinking": false,
         },
         "notify_when_agent_waiting": "all_screens",
@@ -140,6 +140,7 @@
     "show_whitespaces": "all",
     "current_line_highlight": "all",
     "scroll_beyond_last_line": "off",
+    "cli_default_open_behavior": "existing_window",
     "auto_signature_help": true,
     "ensure_final_newline_on_save": true,
     "remove_trailing_whitespace_on_save": true,

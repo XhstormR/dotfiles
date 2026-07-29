@@ -1,5 +1,5 @@
 {
-    "config-schema": "https://github.com/sinelaw/fresh/blob/master/crates/fresh-editor/plugins/config-schema.json",
+    "$schema": "https://raw.githubusercontent.com/sinelaw/fresh/refs/heads/master/crates/fresh-editor/plugins/config-schema.json",
     "version": 2,
     "theme": "dracula",
     "locale": "zh-CN",

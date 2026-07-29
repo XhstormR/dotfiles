@@ -37,6 +37,7 @@ brew install --cask onyx
 brew install --cask phoenix-slides
 brew install --cask stats
 brew install --cask snipaste
+brew install --cask snapzy
 brew install --cask sloth
 brew install --cask solvespace
 brew install --cask telegram

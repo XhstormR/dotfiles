@@ -6,7 +6,7 @@ function battery_status
 
     switch (uname)
         case Darwin
-            set capacity (pmset -g batt | string match -r "[0-9]{1,3}(?=%)")
+            set capacity (fastfetch --json --pipe --structure Battery | jq '.[0].result[0].capacity | floor')
         case Linux
             set capacity (cat /sys/class/power_supply/BAT0/capacity)
         case '*'
