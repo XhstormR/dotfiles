@@ -3,6 +3,7 @@
     "version": 2,
     "theme": "dracula",
     "locale": "zh-CN",
+    "keymap": "macos",
     "editor": {
         "auto_indent": true,
         "highlight_current_line": true,

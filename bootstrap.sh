@@ -14,7 +14,7 @@ function doIt() {
     curl --output-dir ~/.local/bin -O https://raw.githubusercontent.com/junegunn/fzf/refs/heads/master/bin/fzf-preview.sh
     chmod +x ~/.local/bin/fzf-preview.sh
 
-    curl -O https://github.com/subframe7536/maple-font/releases/download/v7.9/MapleMonoNormal-NF-CN-unhinted.zip
+    curl -O https://github.com/subframe7536/maple-font/releases/download/v8.0-beta.1/MapleMonoNormal-NF-CN-unhinted.zip
     unzip -o MapleMonoNormal-NF-CN-unhinted.zip -d ~/Library/Fonts/
     rm MapleMonoNormal-NF-CN-unhinted.zip
 
@@ -38,7 +38,7 @@ function addMCP() {
     claude mcp add --scope user --transport stdio context7 -- bun x @upstash/context7-mcp@latest
     claude mcp add --scope user --transport stdio playwright-mcp -- bun x @playwright/mcp@latest
     claude mcp add --scope user --transport stdio markitdown-mcp -- uvx markitdown-mcp@latest
-    claude mcp add --scope user --transport stdio chrome-devtools-mcp -- bun x chrome-devtools-mcp@latest
+    # claude mcp add --scope user --transport stdio chrome-devtools-mcp -- bun x chrome-devtools-mcp@latest
     claude mcp add --scope user --transport stdio code-review-graph -- uvx code-review-graph@latest serve
     claude mcp add --scope user --transport http  grep -- https://mcp.grep.app
 

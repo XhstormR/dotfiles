@@ -21,6 +21,7 @@ packages=(
     lazydocker
     hexyl
     openssl
+    age
     jq
     xan
     watchexec
