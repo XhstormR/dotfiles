@@ -94,7 +94,6 @@ alias yt-dlp='yt-dlp --embed-metadata --js-runtimes quickjs' # --cookies-from-br
 
 alias vi='vim'
 alias cat='bat'
-alias xxd='hexyl'
 
 alias ..='c ..'
 alias ...='c ../..'
@@ -103,7 +102,7 @@ alias ....='c ../../..'
 alias dt='c ~/Desktop'
 alias dc='c ~/Documents'
 alias dl='c ~/Downloads'
-alias dp='c ~/IdeaProjects'
+alias dp='c ~/Documents/IdeaProjects'
 
 alias g='lazygit'
 alias gs='git status'
@@ -266,6 +265,10 @@ function preexec --on-event fish_preexec
 end
 
 function postexec --on-event fish_postexec
+end
+
+if test -f ~/.local.fish
+    source ~/.local.fish
 end
 
 if status is-interactive
