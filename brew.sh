@@ -6,6 +6,7 @@ brew upgrade --greedy --force-bottle
 brew install sniffnet
 brew install flow-control
 
+brew install --cask appcleaner
 brew install --cask loop
 brew install --cask rectangle
 brew install --cask swift-shift
@@ -17,6 +18,7 @@ brew install --cask easydict
 brew install --cask copyq
 brew install --cask maccy
 brew install --cask meetily
+brew install --cask dockdoor
 brew install --cask alt-tab
 brew install --cask input-source-pro
 brew install --cask keepingyouawake

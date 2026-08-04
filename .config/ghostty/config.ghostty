@@ -27,7 +27,7 @@ theme = Dracula
 custom-shader = cursor_blaze.glsl
 # https://github.com/martinemde/dotfiles/blob/main/home/dot_config/ghostty/shaders/focus_cursor.glsl
 custom-shader = focus_cursor.glsl
-custom-shader-animation = false
+custom-shader-animation = true
 
 maximize = true
 window-theme = dark
