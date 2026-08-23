@@ -1,0 +1,98 @@
+# https://github.com/karinushka/paneru/blob/main/CONFIGURATION.md
+
+[options]
+mouse_follows_focus = false
+auto_center = false
+reap_empty_workspaces = true
+virtual_workspace_animations = true
+animation_speed = 16
+
+[bindings]
+# 切换窗口
+window_focus_west = "cmd - leftarrow"
+window_focus_east = "cmd - rightarrow"
+# 交换窗口
+window_swap_west = "cmd + shift - leftarrow"
+window_swap_east = "cmd + shift - rightarrow"
+
+# 切换虚拟空间
+window_virtual_north = "cmd - uparrow"
+window_virtual_south = "cmd - downarrow"
+# 移动窗口到虚拟空间
+window_virtualsend_north = "cmd + shift - uparrow"
+window_virtualsend_south = "cmd + shift - downarrow"
+
+# 切换浮动窗口
+window_togglefloatlayer = "cmd - space"
+
+# 退出窗口管理器。
+quit = "ctrl + alt - q"
+# 窗口居中
+window_center = "alt - c"
+# 窗口全屏
+window_fullwidth = "alt - f"
+# 窗口浮动
+window_manage = "alt - t"
+# 窗口宽度
+window_grow = "alt - r"
+window_shrink = "alt + shift - r"
+# 窗口高度
+window_stack = "alt - ]"
+window_unstack = "alt + shift - ]"
+
+[windows.all]
+title = ".*"
+vertical_padding = 6
+horizontal_padding = 6
+
+[windows.pip]
+title = "Picture.*(in)?.*[Pp]icture"
+floating = true
+grid = "6:6:1:1:2:2"
+
+[windows.iina]
+title = ".*"
+bundle_id = "com.colliderli.iina"
+floating = true
+grid = "6:6:1:1:2:2"
+
+[windows.finder]
+title = ".*"
+bundle_id = "com.apple.finder"
+floating = true
+grid = "6:6:1:1:2:2"
+
+[windows.chrome]
+title = ".*"
+bundle_id = "com.google.Chrome"
+index = 0
+
+[windows.ghostty]
+title = ".*"
+bundle_id = "com.mitchellh.ghostty"
+index = 1
+
+[windows.vscode]
+title = ".*"
+bundle_id = "com.microsoft.VSCode"
+index = 2
+
+[swipe]
+sensitivity = 0.6
+continuous = false
+
+[swipe.gesture]
+direction = "Reversed"
+
+[swipe.scroll]
+modifier = "cmd"
+vertical_modifier = "shift"
+
+[decorations.active.border]
+enabled = true
+color = "#FF9632"
+width = 4
+
+[decorations.inactive.dim]
+opacity = 0
+opacity_night = 0
