@@ -23,6 +23,7 @@ packages=(
     openssl
     age
     jq
+    magika-cli
     xan
     watchexec
     socat
@@ -34,6 +35,8 @@ packages=(
     navi
     sendme
     dumbpipe
+    tailcat
+    croc
     tesseract
     fastfetch
 
@@ -57,16 +60,11 @@ packages=(
     pandoc
     typst
     qpdf
+    pdf-inspector
 
     fresh-editor
     msedit
     vim
-
-    # openjdk
-    graalvm
-    bun
-    quickjs
-    uv
 
     yt-dlp
     ffmpeg
@@ -77,9 +75,23 @@ packages=(
     docker-cli
     docker-compose
 
-    # alacritty
+    # Mac only
+    paneru
+
+    # Languages
+    bun
+    quickjs
+    uv
+    graalvm
+    # openjdk
+
+    # Dynamic Library
+    onnxruntime-cpp
+
+    # GUI
     ghostty
     zed
+    # alacritty
 )
 
 pixi self-update

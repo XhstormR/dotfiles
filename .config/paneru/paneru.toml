@@ -1,11 +1,13 @@
 # https://github.com/karinushka/paneru/blob/main/CONFIGURATION.md
 
 [options]
+focus_follows_mouse = false
 mouse_follows_focus = false
 auto_center = false
 reap_empty_workspaces = true
 virtual_workspace_animations = true
 animation_speed = 16
+mouse_resize_modifier = "cmd + shift"
 
 [bindings]
 # 切换窗口
@@ -46,21 +48,27 @@ vertical_padding = 6
 horizontal_padding = 6
 
 [windows.pip]
-title = "Picture.*(in)?.*[Pp]icture"
+title = "画中画"
 floating = true
-grid = "6:6:1:1:2:2"
+grid = "6:6:2:0:2:3"
 
 [windows.iina]
 title = ".*"
 bundle_id = "com.colliderli.iina"
 floating = true
-grid = "6:6:1:1:2:2"
+grid = "6:6:2:0:2:3"
 
 [windows.finder]
 title = ".*"
 bundle_id = "com.apple.finder"
 floating = true
-grid = "6:6:1:1:2:2"
+grid = "6:6:2:0:2:3"
+
+[windows.zed]
+title = ".*"
+bundle_id = "dev.zedapp.zed"
+floating = true
+grid = "6:6:2:0:2:3"
 
 [windows.chrome]
 title = ".*"
@@ -91,7 +99,8 @@ vertical_modifier = "shift"
 [decorations.active.border]
 enabled = true
 color = "#FF9632"
-width = 4
+# color = "#368FEB"
+width = 6
 
 [decorations.inactive.dim]
 opacity = 0

@@ -6,7 +6,9 @@ brew upgrade --greedy --force-bottle
 brew install sniffnet
 brew install flow-control
 
+brew install --cask sfm
 brew install --cask vorssaint
+brew install --cask neohtop
 brew install --cask appcleaner
 brew install --cask loop
 brew install --cask rectangle
@@ -47,11 +49,15 @@ brew install --cask telegram
 brew install --cask visual-studio-code
 brew install --cask zedis
 brew install --cask handy
+brew install --cask paseo
 #brew install --cask android-file-transfer
 #brew install --cask background-music
 #brew install --cask megasync
 #brew install --cask macfuse
 #brew install --cask mounty
 #brew install --cask orbstack
+
+brew install --cask abue-ammar/tinycast/tinycast
+brew install --cask byrencheema/tap/airstats
 
 brew cleanup --prune=all
