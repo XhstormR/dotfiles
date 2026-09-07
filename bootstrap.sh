@@ -4,6 +4,7 @@ function doIt() {
     doSync
 
     addMCP
+    addSkill
 
     setupMac
 
@@ -48,6 +49,17 @@ function addMCP() {
     claude mcp add --scope user --transport http  astro-docs -- https://mcp.docs.astro.build/mcp
     claude mcp add --scope user --transport http  atlassian-mcp-server -- https://mcp.atlassian.com/v1/mcp
     claude mcp add --scope user --transport http  gitlab-cmc -H "X-Gitlab-Mcp-Server-Tool-Name-Prefix: cmc_" -- https://git.coinmarketcap.supply/api/v4/mcp
+}
+
+function addSkill() {
+    bun x skills add --agent claude-code --global --yes https://github.com/anthropics/skills --skill webapp-testing frontend-design
+    bun x skills add --agent claude-code --global --yes https://github.com/sveltejs/ai-tools --skill svelte-code-writer svelte-core-bestpractices
+    bun x skills add --agent claude-code --global --yes https://github.com/vercel-labs/skills --skill find-skills
+    bun x skills add --agent claude-code --global --yes https://github.com/ast-grep/agent-skill --skill ast-grep
+    bun x skills add --agent claude-code --global --yes https://github.com/dietrichgebert/ponytail --skill ponytail
+    bun x skills add --agent claude-code --global --yes https://github.com/3stoneBrother/code-audit --skill code-audit
+    bun x skills add --agent claude-code --global --yes https://github.com/microsoft/playwright-cli --skill playwright-cli
+    bun x skills add --agent claude-code --global --yes https://github.com/nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max
 }
 
 function setupMac() {
