@@ -8,15 +8,18 @@ find_this="$1"
 shift
 replace_with="$1"
 shift
+glob="$1"
+shift
 
 if command -v rg &>/dev/null ; then
-  items=$(rg -l --color never "$find_this" --fixed-strings --case-sensitive --glob "$@")
+  items=$(rg -l --color never --fixed-strings --case-sensitive --no-follow --glob "$glob" -- "$find_this")
 else
-  items=$(ag -l --nocolor "$find_this" "$@")
+  echo >&2 "replace: need ripgrep"
+  exit 1
 fi
 
 IFS=$'\n'
 for item in $items; do
   echo "Processing: $item"
-  sed --in-place "s/$find_this/$replace_with/g" "$item"
+  sed --in-place --follow-symlinks -e "s/$find_this/$replace_with/g" -- "$item"
 done

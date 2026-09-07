@@ -52,10 +52,7 @@
     "editor.renderWhitespace": "all",
     "editor.snippetSuggestions": "top",
     "editor.wordWrap": "on",
-    "editor.rulers": [
-        80,
-        120
-    ],
+    "editor.rulers": [80, 120],
     "markdown.validate.enabled": true,
     "markdown.updateLinksOnFileMove.enabled": "prompt",
     "files.autoSave": "onFocusChange",
@@ -94,7 +91,7 @@
     },
     "claudeCode.disableLoginPrompt": true,
     "claudeCode.preferredLocation": "panel",
-    "claudeCode.initialPermissionMode": "acceptEdits",
+    "claudeCode.initialPermissionMode": "",
     "claudeCode.allowDangerouslySkipPermissions": true,
     "java.autobuild.enabled": false,
     "java.import.maven.enabled": false,

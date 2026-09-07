@@ -3,106 +3,301 @@
 import PDFKit
 import Vision
 
-// 识别语言
-let recognitionLanguages = ["zh-Hans", "en-US"]
-// 扫描页渲染倍率
-let renderScale: CGFloat = 3.0
+// MARK: - 路径
 
-// 打印错误信息并退出
-func fail(_ message: String) -> Never {
-    FileHandle.standardError.write(Data((message + "\n").utf8))
-    exit(1)
+extension URL {
+    /// 交给 POSIX 层（子进程参数、`FileManager`、错误消息）使用的路径。
+    var fileSystemPath: String { path(percentEncoded: false) }
 }
 
-// 唯一识别核心：对任意图像源构造的请求处理器执行 Vision 文本识别，返回按行拼接的纯文本
-func recognizeText(_ requestHandler: VNImageRequestHandler) -> String {
-    // 配置文字识别请求：指定中英文语言并开启语言纠正
-    let request = VNRecognizeTextRequest()
-    request.recognitionLanguages = recognitionLanguages
-    request.usesLanguageCorrection = true
+// MARK: - 诊断输出
 
-    // 同步执行，失败即报错退出
-    do {
-        try requestHandler.perform([request])
-    } catch {
-        fail("识别失败: \(error.localizedDescription)")
+/// 诊断信息统一走标准错误，标准输出只留提取正文，保证 `ocr x | pbcopy` 这类管道不被污染
+enum Diagnostics {
+    /// 可恢复错误：打印后继续执行——单页失败不应让整份文档颗粒无收。
+    static func warn(_ message: String) {
+        try? FileHandle.standardError.write(contentsOf: Data((message + "\n").utf8))
     }
 
-    // 收集每个文本观测结果的最优候选；空候选自动跳过
-    return (request.results ?? [])
-        .compactMap { $0.topCandidates(1).first?.string }
-        .joined(separator: "\n")
+    /// 致命错误：同样打到标准错误，再以非零码退出
+    static func fail(_ message: String) -> Never {
+        warn(message)
+        exit(1)
+    }
 }
 
-// 单页文本提取策略：优先取原生文字层，缺失时回退到栅格化 Vision OCR
-func textForPage(_ page: PDFPage) -> String {
-    // 文本型 PDF 直接读取文字层，精度 100% 且无需栅格化
-    if let layerText = page.string?.trimmingCharacters(in: .whitespacesAndNewlines),
-        !layerText.isEmpty
-    {
-        return layerText
+// MARK: - 子进程
+
+/// 外部命令的执行。只负责跑进程与回收标准输出，不解释输出内容
+enum Shell {
+    /// 运行命令并返回其标准输出。
+    static func run(_ command: String, _ arguments: [String]) -> Data {
+        let process = Process()
+        let pipe = Pipe()
+        var output = Data()
+        process.executableURL = URL(filePath: "/usr/bin/env")
+        process.arguments = [command] + arguments
+        process.standardOutput = pipe
+
+        do {
+            try process.run()
+            output = try pipe.fileHandleForReading.readToEnd() ?? Data()
+            process.waitUntilExit()
+        } catch {
+            Diagnostics.fail("无法执行 \(command): \(error.localizedDescription)")
+        }
+
+        return output
     }
-    // 扫描型/图片型 PDF 无文字层，按可见裁剪框（cropBox）放大栅格化后走图片识别路径
-    let box = PDFDisplayBox.cropBox
-    let bounds = page.bounds(for: box)
-    let size = NSSize(width: bounds.width * renderScale, height: bounds.height * renderScale)
-    guard
-        let image = page.thumbnail(of: size, for: box)
+}
+
+// MARK: - JSON 解码
+
+/// JSON 解码。magika 与 pdf2md 的键名都是 snake_case，转换规则统一在此，
+/// 各工具的契约结构即可按 Swift 惯例命名属性
+enum JSON {
+    /// 解不出即返回 nil（命令报错时输出往往为空或不是 JSON），由调用方决定降级还是终止
+    static func decode<Value: Decodable>(_ value: Value.Type, from data: Data) -> Value? {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return try? decoder.decode(value, from: data)
+    }
+}
+
+// MARK: - 输入类型探测
+
+/// magika 的内容类型探测封装：模型按文件内容推断类型，取代按魔数表匹配的 `file`。
+enum Magika {
+    enum InputKind {
+        case pdf
+        case image
+        case text
+    }
+
+    /// 探测结果，取自 magika 的 `output`——模型输出经其内置规则复核后的最终判定
+    private struct ContentType: Decodable {
+        let mimeType: String
+        let isText: Bool
+    }
+
+    private struct Entry: Decodable {
+        struct Result: Decodable {
+            struct Value: Decodable {
+                let output: ContentType
+            }
+
+            let value: Value?
+        }
+
+        let result: Result
+    }
+
+    private static func contentType(of url: URL) -> ContentType {
+        let output = Shell.run("magika", ["--jsonl", url.fileSystemPath])
+        let entry = JSON.decode(Entry.self, from: output)
+        if let type = entry?.result.value?.output { return type }
+        Diagnostics.fail("类型探测失败: \(url.fileSystemPath)")
+    }
+
+    /// 探测并归入某条提取路径，三类之外即终止：无从提取的类型不该被静默当成文本
+    static func detect(of url: URL) -> InputKind {
+        let type = contentType(of: url)
+        if type.isText { return .text }
+        if type.mimeType == "application/pdf" { return .pdf }
+        if type.mimeType.hasPrefix("image/") { return .image }
+        Diagnostics.fail("不支持的类型: \(type.mimeType)（仅接受 PDF、图片和文本）")
+    }
+}
+
+// MARK: - 提取路径一：文本文件
+
+enum TextFile {
+    static func text(of url: URL) -> String {
+        do {
+            var detectedEncoding = String.Encoding.utf8
+            return try String(contentsOf: url, usedEncoding: &detectedEncoding)
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+        } catch {
+            Diagnostics.fail("读取失败: \(error.localizedDescription)")
+        }
+    }
+}
+
+// MARK: - 提取路径二：图像文字识别
+
+enum ImageFile {
+    /// 识别语言偏好，元素为 BCP 47 语言标识
+    static let RECOGNITION_LANGUAGES = ["zh-Hans", "en-US"].map(Locale.Language.init(identifier:))
+
+    /// 识别图片文件
+    static func text(of url: URL) async throws -> String {
+        try await text(ImageRequestHandler(url))
+    }
+
+    /// 识别位图
+    static func text(of image: CGImage) async throws -> String {
+        try await text(ImageRequestHandler(image))
+    }
+
+    private static func text(_ handler: ImageRequestHandler) async throws -> String {
+        var request = RecognizeDocumentsRequest()
+        request.textRecognitionOptions.minimumTextHeightFraction = 0
+        request.textRecognitionOptions.recognitionLanguages = RECOGNITION_LANGUAGES
+        request.textRecognitionOptions.useLanguageCorrection = true
+        request.textRecognitionOptions.automaticallyDetectLanguage = false
+
+        return try await handler.perform(request)
+            .map(\.document.text.transcript)
+            .joined(separator: "\n")
+    }
+}
+
+// MARK: - 提取路径三之一：PDF 探测
+
+/// pdf-inspector 的 `pdf2md` 封装：判定每页是文字页还是需 OCR 的页，并产出文字页的 Markdown。
+/// 用它取代自研的「文字层非空即可用」启发式——后者会把乱码页原样输出，也会漏掉图内文字。
+/// 对外只暴露两个查询，报告结构不外泄
+enum PDFInspector {
+    /// `pdf2md --json` 的输出契约，两种调用共用一个结构：`--detect-only` 填需 OCR 的页号，
+    /// `--select-pages N` 另填该页的 Markdown。失败时这两个键都不出现（只给 `error`），
+    /// 所以取不到值即等于失败，无须另判 `error`。其余字段（版式复杂度、表格页等）
+    /// 当前不参与决策，故不声明——JSONDecoder 会忽略结构里没有的键
+    private struct Report: Decodable {
+        let pagesNeedingOcr: [Int]?
+        let markdown: String?
+    }
+
+    /// 需 OCR 的页号（1 起）。整份文件解析不了时返回 nil，由调用方决定降级方式；
+    /// 解析成功但没有这样的页则返回空数组，两者不可混同。
+    /// 用 `--detect-only` 而非完整转换：此调用只为分派，Markdown 一律由 `markdown(ofPage:of:)` 取
+    static func pagesNeedingOCR(of url: URL) -> [Int]? {
+        report(of: url, arguments: ["--detect-only"])?.pagesNeedingOcr
+    }
+
+    /// 取单页 Markdown。`--select-pages` 接受 `1,3,5-10` 形式，这里固定传单个页号：
+    /// 逐页取回才能与页序对齐。
+    /// 单页失败按空页处理并告警——整份文档不该因一页解析不了而中断
+    static func markdown(ofPage number: Int, of url: URL) -> String {
+        let output = report(of: url, arguments: ["--select-pages", "\(number)"])
+        guard let markdown = output?.markdown else {
+            Diagnostics.warn("pdf2md 无法提取第 \(number) 页，跳过")
+            return ""
+        }
+        return markdown.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    /// pdf2md 缺失或输出不成契约时返回 nil
+    private static func report(of url: URL, arguments: [String]) -> Report? {
+        let output = Shell.run("pdf2md", [url.fileSystemPath, "--json"] + arguments)
+        return JSON.decode(Report.self, from: output)
+    }
+}
+
+// MARK: - 提取路径三之二：PDF 装配
+
+/// 把 pdf2md 的文字页 Markdown 与 Vision 的识别结果按页序装配成一份文本。
+/// 栅格化并入此处：位图只为喂给 Vision 而生，与页号一样只在装配阶段成立；
+/// 而 `ImageFile` 只该认位图，不该认 PDF
+enum PDFAssembler {
+    /// 渲染像素预算（总像素数）：缩放由页面面积反推，故长宽比无论多极端都能摊到相近的字号密度。
+    private static let pixelBudget: CGFloat = 8_000_000
+    /// 放大倍率上限，防止超小页面被拉伸到无意义的尺寸
+    private static let maxRenderScale: CGFloat = 3.0
+
+    /// 逐页二选一：文字页取 pdf2md 的 Markdown 以保留标题与表格结构，被判定需 OCR 的页
+    /// （扫描页、乱码页）一律用 Vision 结果替换掉低质量文字层，识别为空也不回退；空页丢弃。
+    ///
+    /// 必须串行：PDFKit 非线程安全，而 Vision 的文字识别在并发 perform 下同样存在竞态，
+    /// 会以 SIGSEGV 崩掉整个进程。实测（40 轮 × 11 页扫描页）：批宽 1 与 2 各 40/40 通过，
+    /// 批宽 4 在第 23 轮崩溃，批宽 14（核数）约每 15 次运行崩 1 次。批宽 2 虽比串行快 1.5 倍
+    /// （93.6s vs 140.6s），但竞态只是窗口变窄而非消失——脚本输出直接进剪贴板，
+    /// 崩溃等于用户什么都拿不到，这点提速不值得换
+    static func text(of url: URL) async -> String {
+        // 页数以 PDFKit 为准，pdf2md 报出的越界页号因此自动失配，不会为它白跑一次渲染
+        guard let document = PDFDocument(url: url), document.pageCount > 0 else {
+            Diagnostics.fail("无法解析: \(url.fileSystemPath)")
+        }
+        // pdf2md 解析不了整份文件时（如 invalid file trailer）全页交给 Vision，
+        // 这只是「逐页二选一」的一个特例，故复用同一条装配链路
+        let pagesNeedingOCR = PDFInspector.pagesNeedingOCR(of: url)
+        if pagesNeedingOCR == nil {
+            Diagnostics.warn("pdf2md 无法解析该文件，降级为逐页 Vision 识别")
+        }
+        let numbers = Set(pagesNeedingOCR ?? Array(1...document.pageCount))
+
+        var pages: [String] = []
+        for number in 1...document.pageCount {
+            let page = numbers.contains(number)
+                ? await text(ofPage: number, of: document)
+                : PDFInspector.markdown(ofPage: number, of: url)
+            if !page.isEmpty { pages.append(page) }
+        }
+        return pages.joined(separator: "\n\n")
+    }
+
+    /// 取页、栅格化、识别一条龙，任一步失败都按空页处理并告警，不中断整份文档。
+    /// 页号一律用 PDFKit 的页序而非 `PDFPage.label`：告警要能和 pdf2md 的页号对得上，
+    /// 而页标签可能是罗马数字之类另一套编号
+    private static func text(ofPage number: Int, of document: PDFDocument) async -> String {
+        guard let page = document.page(at: number - 1), let image = image(of: page) else {
+            Diagnostics.warn("栅格化失败，跳过第 \(number) 页")
+            return ""
+        }
+        do {
+            return try await ImageFile.text(of: image)
+        } catch {
+            Diagnostics.warn("识别失败，跳过第 \(number) 页: \(error.localizedDescription)")
+            return ""
+        }
+    }
+
+    /// 渲染整页的可见裁剪框（出血区不参与识别），失败返回 nil 交调用方告警。
+    /// 缩放只放大不缩小：低分辨率页面补足到预算密度，面积本就超预算的按原尺寸渲染，
+    /// 省下无谓的像素与内存。
+    ///
+    /// 用 PDFKit 的 `thumbnail(of:for:)` 而不自己开 `CGContext` 铺白底再逐步缩放绘制：
+    /// 实测五页夹具（含背景透明、必须靠白底才认得出字的那页）两者的像素尺寸与识别文字
+    /// 逐字符相同，官方 API 已把白底与坐标系对齐都办了。
+    ///
+    /// 已知代价：Vision 对图像尺寸有上限，超限后静默返回零个观测结果而非报错，
+    /// 故面积远超预算的极端页面（实测 741×49125 点的整页网页截图，1× 下 3600 万像素）
+    /// 整页送进去只得 0 字符。按要求不做条带切分，此限制原样保留
+    private static func image(of page: PDFPage) -> CGImage? {
+        let bounds = page.bounds(for: .cropBox)
+        let scale = min(maxRenderScale, max(1, sqrt(pixelBudget / (bounds.width * bounds.height))))
+        let size = CGSize(width: bounds.width * scale, height: bounds.height * scale)
+        return page.thumbnail(of: size, for: .cropBox)
             .cgImage(forProposedRect: nil, context: nil, hints: nil)
-    else {
-        fail("PDF 页栅格化失败")
-    }
-    return recognizeText(VNImageRequestHandler(cgImage: image, options: [:]))
-}
-
-// PDF：加载并逐页提取文本，页间以空行分隔
-func ocrPDF(_ url: URL) -> String {
-    guard let document = PDFDocument(url: url) else {
-        fail("无法解析: \(url.path)")
-    }
-    return (0..<document.pageCount)
-        .compactMap { document.page(at: $0).map(textForPage) }
-        .joined(separator: "\n\n")
-}
-
-// 调用 `file --mime-type` 探测文件真实 MIME 类型，杜绝扩展名伪装
-func mimeType(of url: URL) -> String {
-    let process = Process()
-    let pipe = Pipe()
-    process.executableURL = URL(fileURLWithPath: "/usr/bin/file")
-    process.arguments = ["--mime-type", "--brief", url.path]
-    process.standardOutput = pipe
-    do {
-        try process.run()
-    } catch {
-        fail("类型探测失败: \(error.localizedDescription)")
-    }
-    process.waitUntilExit()
-
-    return String(decoding: pipe.fileHandleForReading.readDataToEndOfFile(), as: UTF8.self)
-        .trimmingCharacters(in: .whitespacesAndNewlines)
-}
-
-// 按真实 MIME 分派：PDF 走文字层/栅格化路径，任意图片交给 Vision（底层 ImageIO 解码，
-// 天然支持 PNG/JPEG/HEIC/TIFF 等），其余类型一律拒绝
-func ocr(_ url: URL) -> String {
-    let mime = mimeType(of: url)
-    switch mime {
-    case "application/pdf":
-        return ocrPDF(url)
-    case let type where type.hasPrefix("image/"):
-        return recognizeText(VNImageRequestHandler(url: url, options: [:]))
-    default:
-        fail("不支持的类型: \(mime)（仅接受 PDF 和图片）")
     }
 }
 
-// 入口：校验文件存在后按真实类型分派
-guard let file = CommandLine.arguments.dropFirst().first else {
-    fail("用法：ocr <图片或 PDF>")
+// MARK: - 入口
+
+/// 按真实类型分派：PDF 走 pdf2md/Vision 混合路径，图片直接交给 Vision
+///（底层 ImageIO 解码，天然支持 PNG/JPEG/HEIC/TIFF 等），文本读原文。
+///
+/// 只有图片一路会抛错：图片没有别的提取路径，识别不了就没有任何可输出的内容；
+/// PDF 单页失败已在装配阶段按空页消化，不会传到这里
+func ocr(_ url: URL) async throws -> String {
+    switch Magika.detect(of: url) {
+    case .pdf:
+        return await PDFAssembler.text(of: url)
+    case .image:
+        return try await ImageFile.text(of: url)
+    case .text:
+        return TextFile.text(of: url)
+    }
 }
-let url = URL(fileURLWithPath: (file as NSString).expandingTildeInPath)
-guard FileManager.default.fileExists(atPath: url.path) else {
-    fail("文件不存在: \(url.path)")
+
+guard let argument = CommandLine.arguments.dropFirst().first else {
+    Diagnostics.fail("用法: ocr <图片、PDF 或文本文件>")
 }
-print(ocr(url))
+let url = URL(filePath: argument)
+guard FileManager.default.isReadableFile(atPath: url.fileSystemPath) else {
+    Diagnostics.fail("无法读取文件: \(url.fileSystemPath)")
+}
+do {
+    print(try await ocr(url))
+} catch {
+    Diagnostics.fail("识别失败: \(error.localizedDescription)")
+}

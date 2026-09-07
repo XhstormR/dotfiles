@@ -4,8 +4,13 @@ change-ps1 = true
 [pypi-config]
 index-url = "https://mirrors.ustc.edu.cn/pypi/simple"
 
+[repodata-config]
+disable-sharded = false
+
 [mirrors]
 "https://conda.anaconda.org/conda-forge" = [
+    "https://prefix.dev/conda-forge",
+    "https://conda.anaconda.org/conda-forge",
     "https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge",
     "oci://ghcr.io/channel-mirrors/conda-forge",
 ]

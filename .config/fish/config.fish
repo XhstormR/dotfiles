@@ -6,12 +6,12 @@ fish_add_path ~/.bun/bin
 fish_add_path ~/.pixi/bin
 fish_add_path ~/.local/bin
 
-eval fzf --fish | source
-eval zoxide init fish | source
-eval brew shellenv fish | source
-eval navi widget fish | source
-
 if status is-interactive
+    eval fzf --fish | source
+    eval zoxide init fish | source
+    eval brew shellenv fish | source
+    eval navi widget fish | source
+
     set -a fish_complete_path ~/.pixi/completions/fish
     set -g fish_prompt_pwd_dir_length 0
     set -g __fish_git_prompt_showcolorhints 1
@@ -54,6 +54,9 @@ export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
 export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
 export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
 
+export XDG_CONFIG_HOME="$HOME/.config"
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
 export FZF_ALT_C_COMMAND='fd -t d . $dir'
 export FZF_CTRL_T_COMMAND='fd -t f . $dir'
 export FZF_DEFAULT_COMMAND='fd'
@@ -66,9 +69,6 @@ alias f='fzf'
 
 export EZA_COLORS='da=2;0:gm=1;0'
 alias eza='eza -abgF --group-directories-first --color=auto --time-style=long-iso --git-repos-no-status --octal-permissions --flags --icons --color-scale --sort=Extension --hyperlink'
-
-export XDG_CONFIG_HOME="$HOME/.config"
-export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 alias ls='eza'
 alias ll='ls -l'

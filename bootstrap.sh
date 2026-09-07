@@ -14,7 +14,7 @@ function doIt() {
     curl --output-dir ~/.local/bin -O https://raw.githubusercontent.com/junegunn/fzf/refs/heads/master/bin/fzf-preview.sh
     chmod +x ~/.local/bin/fzf-preview.sh
 
-    curl -O https://github.com/subframe7536/maple-font/releases/download/v8.0-beta.1/MapleMonoNormal-NF-CN-unhinted.zip
+    curl -O https://github.com/subframe7536/maple-font/releases/download/v8.0-beta.2/MapleMonoNormal-NF-CN-unhinted.zip
     unzip -o MapleMonoNormal-NF-CN-unhinted.zip -d ~/Library/Fonts/
     rm MapleMonoNormal-NF-CN-unhinted.zip
 
@@ -72,7 +72,9 @@ function setupMac() {
 
     # 设置默认应用
     duti -s dev.zedapp.zed sh all
+    duti -s dev.zedapp.zed vtt all
     duti -s dev.zedapp.zed txt all
+    duti -s dev.zedapp.zed csv all
     duti -s dev.zedapp.zed json all
     duti -s dev.zedapp.zed public.text all
     duti -s com.google.Chrome pdf all
