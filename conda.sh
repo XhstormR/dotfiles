@@ -32,10 +32,12 @@ packages=(
     yazi
     whisper.cpp
     duckdb-cli
+    redis-server
     navi
     sendme
     dumbpipe
     tailcat
+    cloudflared
     croc
     tesseract
     fastfetch
@@ -43,6 +45,7 @@ packages=(
     fd-find
     fzf
     zoxide
+    tgrep
     ripgrep
     ast-grep
 

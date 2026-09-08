@@ -31,6 +31,9 @@ custom-shader = focus_cursor.glsl
 # https://github.com/0xhckr/ghostty-shaders/blob/main/inside-the-matrix.glsl
 # custom-shader = inside-the-matrix.glsl
 custom-shader-animation = true
+# https://fragcoord.xyz/s/g2jgpgou
+# https://fragcoord.xyz/s/bdf4dchf
+# https://fragcoord.xyz/s/siovosn2
 
 maximize = true
 window-theme = dark
