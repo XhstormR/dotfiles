@@ -4,7 +4,7 @@
 
 --smart-case
 
---hyperlink-format=file://{host}{path}
+--hyperlink-format=file://{path}
 
 --no-require-git
 

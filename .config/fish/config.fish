@@ -245,7 +245,7 @@ function fish_prompt
 
     set -l prompt_time (date +"%T")
     set -l prompt_duration (math $CMD_DURATION / 1000)
-    set -l prompt_right (printf ' (%.2fs) %s ' $prompt_duration $prompt_time)
+    set -l prompt_right (printf ' (%.2fs ) %s   ' $prompt_duration $prompt_time)
 
     set -l color_status (set_color yellow)
     set -l width_left (string length --visible $prompt_left)

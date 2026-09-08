@@ -1,4 +1,7 @@
+// https://github.com/zed-industries/zed/blob/main/assets/settings/default.json
+// https://github.com/zed-industries/zed/blob/main/docs/src/reference/all-settings.md
 {
+    "$schema": "zed://schemas/settings",
     "project_panel": {
         "dock": "left",
     },
@@ -66,12 +69,19 @@
             "model": "anthropic/claude-opus-5",
             "enable_thinking": false,
         },
+        "tool_permissions": {
+            "default": "confirm",
+        },
         "notify_when_agent_waiting": "all_screens",
         "play_sound_when_agent_done": "always",
         "show_turn_stats": true,
     },
     "edit_predictions": {
         "provider": "zed",
+    },
+    "completions": {
+        "words": "enabled",
+        "words_min_length": 2,
     },
     "indent_guides": {
         "enabled": true,
@@ -125,6 +135,9 @@
                 },
             ],
         },
+    },
+    "cursor_animation": {
+        "enabled": true,
     },
     "tab_size": 4,
     "hard_tabs": false,
