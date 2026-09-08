@@ -15,7 +15,7 @@ function doIt() {
     curl --output-dir ~/.local/bin -O https://raw.githubusercontent.com/junegunn/fzf/refs/heads/master/bin/fzf-preview.sh
     chmod +x ~/.local/bin/fzf-preview.sh
 
-    curl -O https://github.com/subframe7536/maple-font/releases/download/v8.0-beta.2/MapleMonoNormal-NF-CN-unhinted.zip
+    curl -O https://github.com/subframe7536/maple-font/releases/download/v8.0-beta.3/MapleMonoNormal-NF-CN-unhinted.zip
     unzip -o MapleMonoNormal-NF-CN-unhinted.zip -d ~/Library/Fonts/
     rm MapleMonoNormal-NF-CN-unhinted.zip
 
@@ -41,6 +41,7 @@ function addMCP() {
     claude mcp add --scope user --transport stdio markitdown-mcp -- uvx markitdown-mcp@latest
     # claude mcp add --scope user --transport stdio chrome-devtools-mcp -- bun x chrome-devtools-mcp@latest
     claude mcp add --scope user --transport stdio code-review-graph -- uvx code-review-graph@latest serve
+    claude mcp add --scope user --transport stdio fff -- fff-mcp
     claude mcp add --scope user --transport http  grep -- https://mcp.grep.app
 
     claude mcp add --scope user --transport stdio svelte -- bun x @sveltejs/mcp@latest
@@ -54,6 +55,9 @@ function addMCP() {
 function addSkill() {
     bun x skills add --agent claude-code --global --yes https://github.com/anthropics/skills --skill webapp-testing frontend-design
     bun x skills add --agent claude-code --global --yes https://github.com/sveltejs/ai-tools --skill svelte-code-writer svelte-core-bestpractices
+    bun x skills add --agent claude-code --global --yes https://github.com/redis/agent-skills --skill '*'
+    bun x skills add --agent claude-code --global --yes https://github.com/duckdb/duckdb-skills --skill '*'
+    bun x skills add --agent claude-code --global --yes https://github.com/tt-a1i/archify --skill archify
     bun x skills add --agent claude-code --global --yes https://github.com/vercel-labs/skills --skill find-skills
     bun x skills add --agent claude-code --global --yes https://github.com/ast-grep/agent-skill --skill ast-grep
     bun x skills add --agent claude-code --global --yes https://github.com/dietrichgebert/ponytail --skill ponytail
@@ -84,6 +88,7 @@ function setupMac() {
 
     # 设置默认应用
     duti -s dev.zedapp.zed sh all
+    duti -s dev.zedapp.zed md all
     duti -s dev.zedapp.zed vtt all
     duti -s dev.zedapp.zed txt all
     duti -s dev.zedapp.zed csv all

@@ -14,11 +14,14 @@ brew install --cask rectangle
 brew install --cask swift-shift
 brew install --cask amethyst
 brew install --cask deskpad
+brew install --cask opendisplay
 brew install --cask markedit
+brew install --cask markdown-preview
 brew install --cask textgrabber2
 brew install --cask easydict
 brew install --cask copyq
 brew install --cask maccy
+brew install --cask uniclipboard
 brew install --cask meetily
 brew install --cask dockdoor
 brew install --cask alt-tab
@@ -40,6 +43,7 @@ brew install --cask obs
 brew install --cask onyx
 brew install --cask phoenix-slides
 brew install --cask stats
+brew install --cask airstats
 brew install --cask mac-performance-monitor
 brew install --cask neohtop
 brew install --cask snipaste
@@ -59,6 +63,5 @@ brew install --cask paseo
 #brew install --cask orbstack
 
 brew install --cask abue-ammar/tinycast/tinycast
-brew install --cask byrencheema/tap/airstats
 
 brew cleanup --prune=all

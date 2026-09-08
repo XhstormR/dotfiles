@@ -9,6 +9,10 @@
 # 🌓
 # 🌔
 # 🌕
+# 🕐 🕑 🕒 🕓 🕔 🕕 🕖 🕗 🕘 🕙 🕚 🕛
+#            
+# ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏
+# ○ ◔ ◑ ◕ ●
 function moon_spinner
     set phases 🌕 🌖 🌗 🌘 🌑 🌒 🌓 🌔
     while true
