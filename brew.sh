@@ -14,11 +14,14 @@ brew install --cask rectangle
 brew install --cask swift-shift
 brew install --cask amethyst
 brew install --cask deskpad
+brew install --cask opendisplay
 brew install --cask markedit
+brew install --cask markdown-preview
 brew install --cask textgrabber2
 brew install --cask easydict
 brew install --cask copyq
 brew install --cask maccy
+brew install --cask uniclipboard
 brew install --cask meetily
 brew install --cask dockdoor
 brew install --cask alt-tab

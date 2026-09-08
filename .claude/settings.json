@@ -176,6 +176,19 @@
                 ]
             }
         ],
+        "PreToolUse": [
+            {
+                "matcher": "",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "/Users/leo/.claude/hooks/peon-ping/peon.sh",
+                        "timeout": 10,
+                        "async": true
+                    }
+                ]
+            }
+        ],
         "PostToolUseFailure": [
             {
                 "matcher": "Bash",
@@ -190,19 +203,6 @@
             }
         ],
         "PreCompact": [
-            {
-                "matcher": "",
-                "hooks": [
-                    {
-                        "type": "command",
-                        "command": "/Users/leo/.claude/hooks/peon-ping/peon.sh",
-                        "timeout": 10,
-                        "async": true
-                    }
-                ]
-            }
-        ],
-        "PreToolUse": [
             {
                 "matcher": "",
                 "hooks": [
