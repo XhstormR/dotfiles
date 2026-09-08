@@ -15,6 +15,7 @@ brew install --cask swift-shift
 brew install --cask amethyst
 brew install --cask deskpad
 brew install --cask markedit
+brew install --cask markdown-preview
 brew install --cask textgrabber2
 brew install --cask easydict
 brew install --cask copyq

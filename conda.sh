@@ -32,6 +32,7 @@ packages=(
     yazi
     whisper.cpp
     duckdb-cli
+    redis-server
     navi
     sendme
     dumbpipe
