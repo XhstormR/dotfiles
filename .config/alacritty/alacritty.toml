@@ -1,9 +1,12 @@
+# https://alacritty.org/config-alacritty.html
+
 [general]
 import = ["dracula.toml"]
-working_directory = "/Users/leo/Downloads"
+# working_directory = "/Users/leo/Downloads"
 
 [terminal.shell]
-program = "/Users/leo/.pixi/bin/fish"
+program = "wsl.exe"
+args = ["--cd ~ -- fish"]
 
 [env]
 TERM = "xterm-256color"

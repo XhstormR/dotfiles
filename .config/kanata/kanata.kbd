@@ -109,7 +109,7 @@
     l        M-l
     r        M-r
     h        M-y
-    mlft     M-mlft      ;; TODO macos-dev-names-include
+;;    mlft     M-mlft      ;; TODO macos-dev-names-include mouse events are not supported in kanata on MacOS
     i        (fork i (unmod lmet lalt i) (lsft)) ;; Ctrl+Shift+I → Cmd+Alt+I 打开开发者工具，fork 是 switch 的简化版
 )
 

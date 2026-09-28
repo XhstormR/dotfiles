@@ -10,6 +10,9 @@
         "editor.selectionHighlightBackground": "#05ef3c88",
         "editor.findMatchHighlightBackground": "#05ef3c88",
     },
+    "workbench.editorAssociations": {
+        "*.html": "workbench.editor.browser",
+    },
     "workbench.tree.indent": 18,
     "workbench.tree.renderIndentGuides": "always",
     "workbench.startupEditor": "newUntitledFile",
