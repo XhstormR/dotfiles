@@ -40,7 +40,7 @@ export LANG='zh_CN.UTF-8'
 # export LC_ALL='C.UTF-8'
 export EDITOR='zed'
 export VISUAL='zed'
-export HISTCONTROL='ignoreboth'
+export HISTCONTROL='ignoreboth:erasedups'
 export GPG_TTY=(tty)
 export SHELL=(command -v fish)
 
@@ -57,12 +57,13 @@ export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
 export XDG_CONFIG_HOME="$HOME/.config"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
+# https://junegunn.github.io/fzf/reference/
 export FZF_ALT_C_COMMAND='fd -t d . $dir'
 export FZF_CTRL_T_COMMAND='fd -t f . $dir'
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_ALT_C_OPTS='--preview "eza --color=always --tree --level 3 {}"'
 export FZF_CTRL_R_OPTS='--with-nth 1,3..'
-export FZF_CTRL_T_OPTS='--preview "fzf-preview.sh {}" --preview-window "~4" --bind "ctrl-o:execute-silent($EDITOR --goto {})" --bind "focus:bg-transform-header(file -bI {}),f2:execute(cat {})"'
+export FZF_CTRL_T_OPTS='--preview "fzf-preview.sh {}" --preview-window "~4" --bind "ctrl-o:execute-silent($EDITOR {})" --bind "focus:bg-transform-header(file -bI {}),f2:execute(cat {})"'
 export FZF_COMPLETION_OPTS='--border-label " fzf " --info=inline'
 export FZF_DEFAULT_OPTS='-0 -1 --gap --wrap --multi --ansi --popup 85% --border-label " fzf " --style=full --info=inline-right --marker-multi-line "╔║╚" --marker "║" --pointer ▌ --gutter " " --highlight-line --color marker:green,pointer:green,prompt:green,selected-bg:238,border:#9999cc --preview-window "wrap:70%" --bind "alt-a:select-all,alt-d:deselect-all,ctrl-/:toggle-preview,ctrl-y:execute-silent(echo {} | cb)+abort"'
 alias f='fzf'
@@ -124,8 +125,8 @@ alias jq='jq -r'
 alias xq='xmllint --format'
 alias e='$EDITOR'
 alias ip_lan='__fish_print_addresses | string match -r "\d+\.\d+\.\d+\.\d+"'
-alias ip_wan='curl -sk https://myip.ipip.net/; curl -sk https://ipinfo.io/json'
-alias serveme='jwebserver -b 0.0.0.0 --port 8080'
+alias ip_wan='curl -sk https://myip.ipip.net/; curl -sk https://checkip.amazonaws.com/; curl -sk https://ipinfo.io/json'
+alias serveme='caddy file-server --browse --listen 0.0.0.0:8080'
 alias reload='exec fish'
 alias update='brew update && brew upgrade --greedy --force-bottle --yes && pixi self-update && pixi global update'
 alias cleanup="fd '.DS_Store' --hidden --no-ignore --type file -X rm -v"
@@ -238,7 +239,7 @@ function fish_prompt
 
     set -l prompt_job ''
     if jobs -q
-        set prompt_job ' 🚀'
+        set prompt_job ' 🚀' # 🔔
     end
 
     set -l prompt_left (printf '%s:%s%s%s%s%s ' $prompt_login $prompt_pwd $prompt_vcs $prompt_proxy $prompt_job $prompt_status)

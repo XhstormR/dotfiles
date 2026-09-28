@@ -65,6 +65,7 @@ function addSkill() {
     bun x skills add --agent claude-code --global --yes https://github.com/nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max
 
     bun x skills add --agent claude-code --global --yes https://github.com/3stoneBrother/code-audit --skill code-audit
+    bun x skills add --agent claude-code --global --yes https://github.com/alibaba/open-code-review --skill open-code-review open-code-review-delegate
     bun x skills add --agent claude-code --global --yes https://github.com/cloudflare/security-audit-skill --skill security-audit
 }
 

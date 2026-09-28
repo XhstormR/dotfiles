@@ -7,6 +7,7 @@ packages=(
     eza
     dua-cli
     syncthing
+    caddy
     less
     hugo
     resvg
@@ -24,25 +25,28 @@ packages=(
     age
     jq
     magika-cli
+    wifit3
     xan
     watchexec
     socat
     sing-box
     tmux
     yazi
+    rclone
     whisper.cpp
-    duckdb-cli
-    redis-server
     navi
+    tesseract
+    fastfetch
+
     sendme
     dumbpipe
     tailcat
     cloudflared
     croc
-    tesseract
-    fastfetch
+    uniclip
 
     fd-find
+    fff-mcp
     fzf
     zoxide
     tgrep
@@ -68,6 +72,10 @@ packages=(
     fresh-editor
     msedit
     vim
+
+    duckdb-cli
+    redis-server
+    turso
 
     yt-dlp
     ffmpeg
@@ -102,6 +110,6 @@ pixi self-update
 
 pixi global update
 
-pixi global install --channel https://prefix.dev/github-releases --channel conda-forge ${packages[@]}
+pixi global install --channel https://prefix.dev/github-releases --channel conda-forge "${packages[@]}"
 
 pixi clean cache -y
