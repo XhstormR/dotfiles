@@ -21,6 +21,8 @@ function doIt() {
 
     mkdir -p ~/Library/'Application Support'/Code
     ln -s ~/.config/Code/User ~/Library/'Application Support'/Code
+
+    ya pkg install # Yazi
 }
 
 function doSync() {
@@ -65,6 +67,7 @@ function addSkill() {
     bun x skills add --agent claude-code --global --yes https://github.com/nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max
 
     bun x skills add --agent claude-code --global --yes https://github.com/3stoneBrother/code-audit --skill code-audit
+    bun x skills add --agent claude-code --global --yes https://github.com/alibaba/open-code-review --skill open-code-review open-code-review-delegate
     bun x skills add --agent claude-code --global --yes https://github.com/cloudflare/security-audit-skill --skill security-audit
 }
 
@@ -76,6 +79,7 @@ function setupMac() {
 
     # 关闭智能引号、智能破折号、句号替换、自动大写首字母，显示隐藏文件，Ctrl+Cmd+Drag
     defaults write -g AppleShowScrollBars -string "Always"
+    defaults write -g AppleShowAllFiles -bool true
     defaults write -g AppleShowAllExtensions -bool true
     defaults write -g ApplePressAndHoldEnabled -bool false
     defaults write -g NSAutomaticCapitalizationEnabled -bool false
@@ -83,7 +87,6 @@ function setupMac() {
     defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false
     defaults write -g NSAutomaticPeriodSubstitutionEnabled -bool false
     defaults write -g NSWindowShouldDragOnGesture -bool true
-    defaults write com.apple.finder AppleShowAllFiles -bool true
     defaults write com.apple.finder ShowStatusBar -bool true
     defaults write com.apple.finder ShowPathbar -bool true
     defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
