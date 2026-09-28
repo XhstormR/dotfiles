@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-function battery_status
+function status_battery
     set battery 🔋
     set low_battery 🪫
 
@@ -15,8 +15,8 @@ function battery_status
     end
 
     if test "$capacity" -gt 40
-        echo "$battery $capacity%"
+        echo $capacity%" "$battery
     else
-        echo "$low_battery $capacity%"
+        echo $capacity%" "$low_battery
     end
 end

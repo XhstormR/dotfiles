@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-function memory_status
+function status_memory
     set sizeTier (math 2^30) # GB: 1024 * 1024 * 1024
     set mem (fastfetch --json --pipe --structure Memory | jq -r '.[0].result | .total, .used')
     set total (math $mem[1] / $sizeTier)
