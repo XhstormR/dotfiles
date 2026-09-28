@@ -40,7 +40,7 @@ export LANG='zh_CN.UTF-8'
 # export LC_ALL='C.UTF-8'
 export EDITOR='zed'
 export VISUAL='zed'
-export HISTCONTROL='ignoreboth'
+export HISTCONTROL='ignoreboth:erasedups'
 export GPG_TTY=(tty)
 export SHELL=(command -v fish)
 
@@ -124,7 +124,7 @@ alias jq='jq -r'
 alias xq='xmllint --format'
 alias e='$EDITOR'
 alias ip_lan='__fish_print_addresses | string match -r "\d+\.\d+\.\d+\.\d+"'
-alias ip_wan='curl -sk https://myip.ipip.net/; curl -sk https://ipinfo.io/json'
+alias ip_wan='curl -sk https://myip.ipip.net/; curl -sk https://checkip.amazonaws.com/; curl -sk https://ipinfo.io/json'
 alias serveme='jwebserver -b 0.0.0.0 --port 8080'
 alias reload='exec fish'
 alias update='brew update && brew upgrade --greedy --force-bottle --yes && pixi self-update && pixi global update'
@@ -238,7 +238,7 @@ function fish_prompt
 
     set -l prompt_job ''
     if jobs -q
-        set prompt_job ' 🚀'
+        set prompt_job ' 🚀' # 🔔
     end
 
     set -l prompt_left (printf '%s:%s%s%s%s%s ' $prompt_login $prompt_pwd $prompt_vcs $prompt_proxy $prompt_job $prompt_status)

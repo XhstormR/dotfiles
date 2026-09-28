@@ -18,6 +18,7 @@ brew install --cask opendisplay
 brew install --cask markedit
 brew install --cask markdown-preview
 brew install --cask textgrabber2
+brew install --cask trex
 brew install --cask easydict
 brew install --cask copyq
 brew install --cask maccy
@@ -41,6 +42,7 @@ brew install --cask middleclick
 brew install --cask mos
 brew install --cask obs
 brew install --cask onyx
+brew install --cask puremac
 brew install --cask phoenix-slides
 brew install --cask stats
 brew install --cask airstats
@@ -65,5 +67,7 @@ brew install --cask robbietilton-compositor
 #brew install --cask orbstack
 
 brew install --cask abue-ammar/tinycast/tinycast
+brew install --cask 66HEX/frame/frame
+brew install --cask pch/tap/rawmakase
 
 brew cleanup --prune=all

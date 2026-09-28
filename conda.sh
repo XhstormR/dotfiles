@@ -7,6 +7,7 @@ packages=(
     eza
     dua-cli
     syncthing
+    caddy
     less
     hugo
     resvg
@@ -31,16 +32,16 @@ packages=(
     tmux
     yazi
     whisper.cpp
-    duckdb-cli
-    redis-server
     navi
+    tesseract
+    fastfetch
+
     sendme
     dumbpipe
     tailcat
     cloudflared
     croc
-    tesseract
-    fastfetch
+    uniclip
 
     fd-find
     fzf
@@ -68,6 +69,10 @@ packages=(
     fresh-editor
     msedit
     vim
+
+    duckdb-cli
+    redis-server
+    turso
 
     yt-dlp
     ffmpeg

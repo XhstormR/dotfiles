@@ -14,3 +14,8 @@ function list_app
         echo "$app_dir  -  $bundle_id"
     end
 end
+
+function fzf-app --description 'Enter to open selected app'
+    set -l sel (list_app 2>/dev/null | fzf --prompt='Apps> ' --layout=reverse)
+    and open (string split -m1 '  -  ' -- $sel)[1]
+end
