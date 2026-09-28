@@ -5,7 +5,7 @@ function hostip
         case Darwin
             ipconfig getifaddr en0
         case Linux Windows_NT 'MINGW64_NT*'
-            hostname -i
+            fastfetch --json --pipe --structure LocalIp | jq '.[0].result[0].ipv4' || hostname -i
         case '*'
             echo "不支持的操作系统: $(uname)"
     end

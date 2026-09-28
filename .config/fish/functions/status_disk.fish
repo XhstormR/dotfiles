@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
-function disk_status
-    set stats (df --output='used,size,pcent' -- / | string match -ra [0-9]+)
+function status_disk
+    set stats (command df --block-size=GB --output='used,size,pcent' -- / | tail -n +2 | string match -ra [0-9]+)
     set used $stats[1]
     set total $stats[2]
     set pcent $stats[3]

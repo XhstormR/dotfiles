@@ -6,7 +6,8 @@
         "claude-opus-4-7": "anthropic/claude-opus-4.7",
         "claude-opus-4-8": "anthropic/claude-opus-4.8",
         "claude-opus-5": "anthropic/claude-opus-5",
-        "claude-opus-5-5": "anthropic/claude-opus-5.5"
+        "claude-opus-5-5": "anthropic/claude-opus-5.5",
+        "claude-sonnet-5": "anthropic/claude-sonnet-5"
     },
     "env": {
         "ANTHROPIC_BASE_URL": "https://litellm.safuapi.prod.secfdg.net",
@@ -55,6 +56,7 @@
         "feature-dev@claude-code-plugins": true,
         "superpowers@superpowers-marketplace": true
     },
+    "includeCoAuthoredBy": false,
     "alwaysThinkingEnabled": true,
     "hooks": {
         "SessionStart": [
