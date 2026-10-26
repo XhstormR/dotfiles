@@ -13,6 +13,7 @@ desc = "Edit the current file"
 
 [[mgr.prepend_keymap]]
 on  = [ "c", "o" ]
+for = "macos"
 run = 'shell --block -- ocr %h | fish -c fish_clipboard_copy'
 desc = "Copy file content (OCR)"
 

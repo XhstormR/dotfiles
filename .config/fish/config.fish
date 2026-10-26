@@ -1,7 +1,6 @@
 fish_config theme choose Dracula
 
 fish_add_path /usr/local/bin
-fish_add_path /opt/homebrew/bin
 fish_add_path ~/.bun/bin
 fish_add_path ~/.pixi/bin
 fish_add_path ~/.local/bin
@@ -9,7 +8,6 @@ fish_add_path ~/.local/bin
 if status is-interactive
     eval fzf --fish | source
     eval zoxide init fish | source
-    eval brew shellenv fish | source
     eval navi widget fish | source
 
     set -a fish_complete_path ~/.pixi/completions/fish
@@ -38,8 +36,6 @@ end
 export LANGUAGE='zh_CN'
 export LANG='zh_CN.UTF-8'
 # export LC_ALL='C.UTF-8'
-export EDITOR='zed'
-export VISUAL='zed'
 export HISTCONTROL='ignoreboth:erasedups'
 export GPG_TTY=(tty)
 export SHELL=(command -v fish)
@@ -48,11 +44,6 @@ export PAGER='less'
 export LESS="--raw-control-chars --quit-if-one-screen --redraw-on-quit --mouse --status-line --ignore-case --long-prompt --use-color --incsearch --file-size --follow-name"
 
 export JAVA_TOOL_OPTIONS="-XX:+UseZGC -XX:+UseStringDeduplication -XX:+UseCompactObjectHeaders"
-
-export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
-export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
-export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
-export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
@@ -80,7 +71,7 @@ alias l='ll'
 # alias cp='cp -i'
 # alias mv='mv -i'
 
-alias df='df -a --si'
+alias df='df -a --si --print-type'
 alias du='du -a --si'
 
 alias whence='type -a'
@@ -118,8 +109,8 @@ alias pkill='pkill -9'
 alias aria2c='aria2c -s16 -x16 -k1M -c'
 alias watchexec='watchexec --print-events --shell=none --debounce=1sec'
 alias map='xargs -t -n1 -P3 -I "{}"'
-alias cpu='top -o cpu'
-alias mem='top -o rsize'
+alias cpu='btm --basic --process_default_sort cpu%'
+alias mem='btm --basic --process_default_sort mem% --process_memory_as_value'
 alias cb='fish_clipboard_copy' # Clipboard
 alias jq='jq -r'
 alias xq='xmllint --format'
@@ -128,8 +119,18 @@ alias ip_lan='__fish_print_addresses | string match -r "\d+\.\d+\.\d+\.\d+"'
 alias ip_wan='curl -sk https://myip.ipip.net/; curl -sk https://checkip.amazonaws.com/; curl -sk https://ipinfo.io/json'
 alias serveme='caddy file-server --browse --listen 0.0.0.0:8080'
 alias reload='exec fish'
-alias update='brew update && brew upgrade --greedy --force-bottle --yes && pixi self-update && pixi global update'
 alias cleanup="fd '.DS_Store' --hidden --no-ignore --type file -X rm -v"
+
+function update
+    switch (uname)
+        case Darwin
+            pixi self-update && pixi global update && brew update && brew upgrade --greedy --force-bottle --yes
+        case Windows_NT 'MINGW64_NT*' Linux
+            pixi self-update && pixi global update
+        case '*'
+            echo "不支持的操作系统: $(uname)"
+    end
+end
 
 function rm
     switch (uname)
@@ -277,9 +278,4 @@ if status is-interactive
     and not set -q TMUX
     and not set -q GHOSTTY_QUICK_TERMINAL
     tmux -2u new -A -s main -c (pwd)
-end
-
-# Change working directory to the top-most Finder window location
-function cdf
-    cd (osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')
 end

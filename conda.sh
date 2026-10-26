@@ -22,6 +22,7 @@ packages=(
     sed
     gawk
     git-delta
+    kanata
     lazygit
     lazydocker
     hexyl
@@ -46,7 +47,6 @@ packages=(
     sendme
     dumbpipe
     tailcat
-    cloudflared
     croc
     uniclip
 
@@ -65,7 +65,6 @@ packages=(
 
     btop
     bottom
-    rustnet
     witr
 
     poppler
@@ -90,34 +89,32 @@ packages=(
     exiftool
     mediainfo
 
-    lima
+    lima-vm
     docker-cli
     docker-compose
-
-    # Mac only
-    paneru
 
     # Languages
     bun
     quickjs
     uv
-    yamlstar
-    graalvm
     # openjdk
 
     # Dynamic Library
     onnxruntime-cpp
+)
 
-    # GUI
-    ghostty
-    zed
-    # alacritty
+packages_github=(
+    graalvm
+    yamlstar
+    cloudflared
+    rustnet
 )
 
 pixi self-update
 
 pixi global update
 
-pixi global install --channel https://prefix.dev/github-releases --channel conda-forge "${packages[@]}"
+pixi global install --channel conda-forge "${packages[@]}"
+pixi global install --channel https://prefix.dev/github-releases "${packages_github[@]}"
 
 pixi clean cache -y
