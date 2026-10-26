@@ -3,24 +3,10 @@
 function doIt() {
     doSync
 
-    addMCP
-    addSkill
-
-    setupMac
-
     sh <(curl https://raw.githubusercontent.com/prefix-dev/pixi/refs/heads/main/install/install.sh)
-
-    sh <(curl https://raw.githubusercontent.com/PeonPing/peon-ping/main/install.sh)
 
     curl --output-dir ~/.local/bin -O https://raw.githubusercontent.com/junegunn/fzf/refs/heads/master/bin/fzf-preview.sh
     chmod +x ~/.local/bin/fzf-preview.sh
-
-    curl -O https://github.com/subframe7536/maple-font/releases/download/v8.0-beta.3/MapleMonoNormal-NF-CN-unhinted.zip
-    unzip -o MapleMonoNormal-NF-CN-unhinted.zip -d ~/Library/Fonts/
-    rm MapleMonoNormal-NF-CN-unhinted.zip
-
-    mkdir -p ~/Library/'Application Support'/Code
-    ln -s ~/.config/Code/User ~/Library/'Application Support'/Code
 
     ya pkg install # Yazi
 }
@@ -29,98 +15,24 @@ function doSync() {
     rsync \
         --exclude ".git/" \
         --exclude ".idea/" \
+        --exclude "osx/" \
+        --exclude "win/" \
         --exclude "/*.sh" \
         --exclude "/ui.png" \
         --exclude "/README.md" \
         --exclude "/LICENSE" \
         -avhP --no-perms . ~;
-}
 
-function addMCP() {
-    claude mcp add --scope user --transport stdio sequential-thinking -- bun x @modelcontextprotocol/server-sequential-thinking@latest
-    claude mcp add --scope user --transport stdio context7 -- bun x @upstash/context7-mcp@latest
-    claude mcp add --scope user --transport stdio playwright-mcp -- bun x @playwright/mcp@latest
-    claude mcp add --scope user --transport stdio markitdown-mcp -- uvx markitdown-mcp@latest
-    # claude mcp add --scope user --transport stdio chrome-devtools-mcp -- bun x chrome-devtools-mcp@latest
-    claude mcp add --scope user --transport stdio code-review-graph -- uvx code-review-graph@latest serve
-    claude mcp add --scope user --transport stdio fff -- fff-mcp
-    claude mcp add --scope user --transport http  grep -- https://mcp.grep.app
-
-    claude mcp add --scope user --transport stdio svelte -- bun x @sveltejs/mcp@latest
-    claude mcp add --scope user --transport stdio angular-cli -- bun x @angular/cli@latest mcp
-    claude mcp add --scope user --transport stdio daisyui-doc -- bun x mcp-remote@latest https://gitmcp.io/saadeghi/daisyui
-    claude mcp add --scope user --transport http  astro-docs -- https://mcp.docs.astro.build/mcp
-    claude mcp add --scope user --transport http  atlassian-mcp-server -- https://mcp.atlassian.com/v1/mcp
-    claude mcp add --scope user --transport http  gitlab-cmc -H "X-Gitlab-Mcp-Server-Tool-Name-Prefix: cmc_" -- https://git.coinmarketcap.supply/api/v4/mcp
-}
-
-function addSkill() {
-    bun x skills add --agent claude-code --global --yes https://github.com/anthropics/skills --skill webapp-testing frontend-design
-    bun x skills add --agent claude-code --global --yes https://github.com/sveltejs/ai-tools --skill svelte-code-writer svelte-core-bestpractices
-    bun x skills add --agent claude-code --global --yes https://github.com/redis/agent-skills --skill '*'
-    bun x skills add --agent claude-code --global --yes https://github.com/duckdb/duckdb-skills --skill '*'
-    bun x skills add --agent claude-code --global --yes https://github.com/tt-a1i/archify --skill archify
-    bun x skills add --agent claude-code --global --yes https://github.com/vercel-labs/skills --skill find-skills
-    bun x skills add --agent claude-code --global --yes https://github.com/ast-grep/agent-skill --skill ast-grep
-    bun x skills add --agent claude-code --global --yes https://github.com/dietrichgebert/ponytail --skill ponytail
-    bun x skills add --agent claude-code --global --yes https://github.com/microsoft/playwright-cli --skill playwright-cli
-    bun x skills add --agent claude-code --global --yes https://github.com/nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max
-    bun x skills add --agent claude-code --global --yes https://github.com/humanlayer/skills --skill show-me
-
-    bun x skills add --agent claude-code --global --yes https://github.com/3stoneBrother/code-audit --skill code-audit
-    bun x skills add --agent claude-code --global --yes https://github.com/alibaba/open-code-review --skill open-code-review open-code-review-delegate
-    bun x skills add --agent claude-code --global --yes https://github.com/cloudflare/security-audit-skill --skill security-audit
-}
-
-function setupMac() {
-    # MacOS: Remove Caps Lock delay
-    hidutil property --set '{"CapsLockDelayOverride":0}'
-    # 关闭 Spotlight 索引
-    sudo mdutil -a -i off
-
-    # 关闭智能引号、智能破折号、句号替换、自动大写首字母，显示隐藏文件，Ctrl+Cmd+Drag
-    defaults write -g AppleShowScrollBars -string "Always"
-    defaults write -g AppleShowAllFiles -bool true
-    defaults write -g AppleShowAllExtensions -bool true
-    defaults write -g ApplePressAndHoldEnabled -bool false
-    defaults write -g NSAutomaticCapitalizationEnabled -bool false
-    defaults write -g NSAutomaticDashSubstitutionEnabled -bool false
-    defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false
-    defaults write -g NSAutomaticPeriodSubstitutionEnabled -bool false
-    defaults write -g NSWindowShouldDragOnGesture -bool true
-    defaults write com.apple.finder ShowStatusBar -bool true
-    defaults write com.apple.finder ShowPathbar -bool true
-    defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-
-    # 设置默认应用
-    duti -s dev.zedapp.zed sh all
-    duti -s dev.zedapp.zed md all
-    duti -s dev.zedapp.zed vtt all
-    duti -s dev.zedapp.zed txt all
-    duti -s dev.zedapp.zed csv all
-    duti -s dev.zedapp.zed json all
-    duti -s dev.zedapp.zed public.text all
-    duti -s com.google.Chrome pdf all
-    duti -s com.google.Chrome html all
-    duti -s com.colliderli.iina aac all
-    duti -s com.colliderli.iina mp3 all
-    duti -s com.colliderli.iina mp4 all
-    duti -s com.colliderli.iina m4a all
-    duti -s com.colliderli.iina wav all
-    duti -s com.colliderli.iina flac all
-    duti -s net.blyt.phoenixslides jpg all
-    duti -s net.blyt.phoenixslides png all
-    duti -s net.blyt.phoenixslides gif all
-
-    cp .config/kanata/kanata-layer-daemon.plist ~/Library/LaunchAgents/
-    cp .config/kanata/kanata.plist /Library/LaunchDaemons/
+    if [ "$(uname)" == "Darwin" ]; then
+        rsync --exclude "/*.sh" -avhP --no-perms osx/ ~;
+    fi;
 }
 
 cd "$(dirname "${BASH_SOURCE}")" || exit;
 
-if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then
+if [ "$1" == "--force" ] || [ "$1" == "-F" ]; then
     doIt;
-elif [ "$1" == "--sync" ] || [ "$1" == "-s" ]; then
+elif [ "$1" == "--sync" ] || [ "$1" == "-S" ]; then
     doSync;
 else
     read -r -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;

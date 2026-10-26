@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 formulae=(
+    duti
     sniffnet
     flow-control
 )
