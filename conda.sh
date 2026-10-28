@@ -74,6 +74,7 @@ packages=(
     qpdf
     pdf-inspector
     markitdown
+    html-to-markdown-cli
 
     fresh-editor
     msedit
