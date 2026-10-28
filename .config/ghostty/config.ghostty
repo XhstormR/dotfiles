@@ -50,6 +50,8 @@ clipboard-write = allow
 clipboard-trim-trailing-spaces = true
 clipboard-paste-protection = true
 
+middle-click-action = clipboard-paste
+
 focus-follows-mouse = true
 macos-option-as-alt = true
 link-previews = true

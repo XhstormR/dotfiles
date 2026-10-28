@@ -2,7 +2,7 @@
 #
 # Find and replace by a given list of files.
 #
-# replace foo bar **/*.rb
+# replace foo bar '**/*.rb'
 
 find_this="$1"
 shift
@@ -12,14 +12,18 @@ glob="$1"
 shift
 
 if command -v rg &>/dev/null ; then
-  items=$(rg -l --color never --fixed-strings --case-sensitive --no-follow --glob "$glob" -- "$find_this")
+  items=$(rg -l --color never --fixed-strings --case-sensitive --no-follow --hidden --glob "$glob" -- "$find_this")
 else
   echo >&2 "replace: need ripgrep"
   exit 1
 fi
 
+# Escape for literal match: BRE metacharacters in pattern, `\ / &` in replacement.
+find_esc=$(printf '%s' "$find_this" | sed -e 's/[]\/$*.^[]/\\&/g')
+replace_esc=$(printf '%s' "$replace_with" | sed -e 's/[\/&]/\\&/g')
+
 IFS=$'\n'
 for item in $items; do
   echo "Processing: $item"
-  sed --in-place --follow-symlinks -e "s/$find_this/$replace_with/g" -- "$item"
+  sed --in-place --follow-symlinks -e "s/$find_esc/$replace_esc/g" -- "$item"
 done

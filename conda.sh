@@ -13,7 +13,6 @@ packages=(
     caddy
     less
     hugo
-    resvg
     doxx
     leaf-markdown-viewer
     chafa
@@ -74,6 +73,7 @@ packages=(
     qpdf
     pdf-inspector
     markitdown
+    html-to-markdown-cli
 
     fresh-editor
     msedit
@@ -85,6 +85,8 @@ packages=(
 
     yt-dlp
     ffmpeg
+    libvips
+    resvg
     caesiumclt
     exiftool
     mediainfo

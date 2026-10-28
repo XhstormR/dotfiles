@@ -119,7 +119,7 @@ alias ip_lan='__fish_print_addresses | string match -r "\d+\.\d+\.\d+\.\d+"'
 alias ip_wan='curl -sk https://myip.ipip.net/; curl -sk https://checkip.amazonaws.com/; curl -sk https://ipinfo.io/json'
 alias serveme='caddy file-server --browse --listen 0.0.0.0:8080'
 alias reload='exec fish'
-alias cleanup="fd '.DS_Store' --hidden --no-ignore --type file -X rm -v"
+alias cleanup="fd '.DS_Store' --hidden --no-ignore --type file -X coreutils rm -v; fd --no-ignore --type directory --type empty -X coreutils rmdir -vp --ignore-fail-on-non-empty"
 
 function update
     switch (uname)
@@ -172,13 +172,15 @@ function z
 end
 
 function a
-    set -l archive (basename (pwd))
-    7zz a -y -aoa -sccUTF-8 $archive $argv
+    test (count $argv) -ne 1 && echo "Usage: a <文件夹>" && return 1
+    set -l archive (path basename -- (path resolve -- $argv)).7z
+    7zz a -y -sccUTF-8 -- $archive $argv
 end
 
 function x
-    set -l dirname (basename $argv[1] | string split --right --max 1 .)[1]
-    7zz x -y -aoa -snld -sccUTF-8 -o$dirname $argv[1]
+    test (count $argv) -ne 1 && echo "Usage: x <压缩包>" && return 1
+    set -l dirname (path basename -E -- $argv)
+    7zz x -y -sccUTF-8 -aoa -snld -o$dirname -- $argv
 end
 
 function v

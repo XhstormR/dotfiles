@@ -63,6 +63,7 @@ casks=(
     handy
     paseo
     localsend
+    photocraft
     artcraft-launcher
     robbietilton-compositor
     # android-file-transfer
@@ -73,6 +74,7 @@ casks=(
     # orbstack
 
     # Third-party taps
+    opengeos/rustgis/rustgis
     getopenscreen/openscreen/openscreen
     abue-ammar/tinycast/tinycast
     66HEX/frame/frame

@@ -78,7 +78,6 @@
     9        (tap-dance $tap-time (9 (macro S-9 S-0 left)))           ;; 括号对()
     apos     (tap-dance $tap-time (apos (macro S-apos S-apos left)))  ;; 引号对""
     comm     (tap-dance $tap-time (comm (macro S-comm S-. left)))     ;; 尖括号<>
-    lbrc     (tap-dance $tap-time (lbrc (macro lbrc rbrc left)))      ;; 中括号[]
     ;; 双击 Alt+Drag -> Ctrl+Cmd+Drag
     lalt     (tap-dance $tap-time (lalt (multi lctl lmet)))
 )
