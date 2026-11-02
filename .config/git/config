@@ -122,3 +122,5 @@
     minus-style = syntax bold auto
 [include]
     path = os.gitconfig
+[includeIf "gitdir:~/Documents/IdeaProjects/company/"]
+    path = work.gitconfig

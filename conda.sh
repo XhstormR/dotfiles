@@ -17,6 +17,7 @@ packages=(
     leaf-markdown-viewer
     chafa
     curl
+    trurl
     fish
     sed
     gawk

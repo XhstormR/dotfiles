@@ -1,0 +1,10 @@
+[user]
+    name = Leo Z
+    email = leo.z@binance.com
+    signingkey = BC04DC500D0F0F2E6D701332FF54FF5C8AA0A33D
+[commit]
+    gpgsign = true
+[tag]
+    gpgsign = true
+[gpg]
+    program = /opt/homebrew/bin/gpg

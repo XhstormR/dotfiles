@@ -27,12 +27,12 @@ model_provider = "litellm"
 name = "azure-chat"
 base_url = "https://safuapi.prod.secfdg.net/openai/deployments/gpt-5.1-chat"
 query_params = { api-version = "2025-04-01-preview" }
-env_key = "OPENAI_API_KEY"
+env_key = "LITELLM_API_KEY"
 
 [model_providers.litellm]
 name = "litellm"
 base_url = "https://litellm.safuapi.prod.secfdg.net"
-experimental_bearer_token = "REDACTED"
+env_key = "LITELLM_API_KEY"
 
 [mcp_servers.sequential-thinking]
 command = "bun"

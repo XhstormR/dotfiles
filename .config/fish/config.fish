@@ -31,6 +31,10 @@ if status is-interactive
       |^ ^ ^ ^ |W|   |/^^\ |   /oo |
        \m___m__|_|    \m_m_|   \mm_|
 '
+
+    if test -f ~/.local.fish
+        source ~/.local.fish
+    end
 end
 
 export LANGUAGE='zh_CN'
@@ -269,10 +273,6 @@ function preexec --on-event fish_preexec
 end
 
 function postexec --on-event fish_postexec
-end
-
-if test -f ~/.local.fish
-    source ~/.local.fish
 end
 
 if status is-interactive

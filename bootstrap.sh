@@ -18,6 +18,7 @@ function doSync() {
         --exclude "osx/" \
         --exclude "win/" \
         --exclude "/*.sh" \
+        --exclude "/.local.fish" \
         --exclude "/ui.png" \
         --exclude "/README.md" \
         --exclude "/LICENSE" \
