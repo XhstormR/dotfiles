@@ -2,6 +2,8 @@
 # This DSC config file will install Microsoft.PowerToys, then configure, by:   #
 # Disabling the ShortcutGuide and setting it to full opacity, then enabling    #
 # Fancy Zones and setting the Fancy Zone Editor hotkey to Shift+Ctrl+Alt+F.    #
+# It also installs Tianyu199509.DeskBox (https://github.com/Tianyu199509/      #
+# DeskBox), a desktop icon-box / fence tool for Windows.                       #
 #                                                                              #
 ################################################################################
 #
@@ -48,3 +50,13 @@ resources:
         FancyzonesEditorHotkey: "Shift+Ctrl+Alt+F"
     metadata:
       description: Configure PowerToys
+  - type: Microsoft.WinGet/Package
+    name: DeskBox
+    properties:
+      id: Tianyu199509.DeskBox
+      source: winget
+      matchOption: equals
+      useLatest: true
+      acceptAgreements: true
+    metadata:
+      description: Install DeskBox (https://github.com/Tianyu199509/DeskBox)

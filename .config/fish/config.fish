@@ -279,5 +279,6 @@ if status is-interactive
     and command -q tmux
     and not set -q TMUX
     and not set -q GHOSTTY_QUICK_TERMINAL
+    and not set -q REX_SESSION
     tmux -2u new -A -s main -c (pwd)
 end

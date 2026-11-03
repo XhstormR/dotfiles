@@ -33,6 +33,7 @@ bun x skills add --agent claude-code --global --yes https://github.com/dietrichg
 bun x skills add --agent claude-code --global --yes https://github.com/microsoft/playwright-cli --skill playwright-cli
 bun x skills add --agent claude-code --global --yes https://github.com/nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max
 bun x skills add --agent claude-code --global --yes https://github.com/humanlayer/skills --skill show-me
+bun x skills add --agent claude-code --global --yes https://github.com/google/skills --skill sign-in-with-google-web dpop-adoption
 
 bun x skills add --agent claude-code --global --yes https://github.com/3stoneBrother/code-audit --skill code-audit
 bun x skills add --agent claude-code --global --yes https://github.com/alibaba/open-code-review --skill open-code-review open-code-review-delegate

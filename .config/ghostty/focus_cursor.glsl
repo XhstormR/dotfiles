@@ -30,14 +30,14 @@ const vec3 TRAIL_COLOR = vec3(1.0, 0.725, 0.161);        // 黄色
 const vec3 TRAIL_COLOR_ACCENT = vec3(1.0, 0.0, 0.0);     // 红橙色
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
-    // Quick exit: only run during active focus animation
+    // 只采样一次，所有早退直接 return（对齐 cursor_balatro.glsl）。
+    fragColor = texture(iChannel0, fragCoord / iResolution.xy);
+
+    // Quick exit: only run during active focus animation; 光标隐藏时无处可高亮。
     float timeSinceFocus = iTime - iTimeFocus;
-    if (iFocus == 0 || timeSinceFocus < 0.0 || timeSinceFocus > PULSE_DURATION) {
-        fragColor = texture(iChannel0, fragCoord / iResolution.xy);
+    if (iFocus == 0 || iCursorVisible == 0 || timeSinceFocus < 0.0 || timeSinceFocus > PULSE_DURATION) {
         return;
     }
-
-    vec4 originalColor = texture(iChannel0, fragCoord / iResolution.xy);
 
     // Animation progress: 0.0 at start, 1.0 at end
     float progress = timeSinceFocus / PULSE_DURATION;
@@ -62,7 +62,6 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
     // 早退：像素在软边范围（EDGE_SOFTNESS）之外，pulse 恒为 0，无需混合。
     if (dist >= EDGE_SOFTNESS) {
-        fragColor = originalColor;
         return;
     }
 
@@ -77,6 +76,5 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec3 highlightColor = mix(TRAIL_COLOR_ACCENT, TRAIL_COLOR, innerFactor);
 
     // Blend cursor color with original
-    vec3 finalColor = mix(originalColor.rgb, highlightColor, pulse);
-    fragColor = vec4(finalColor, originalColor.a);
+    fragColor.rgb = mix(fragColor.rgb, highlightColor, pulse);
 }

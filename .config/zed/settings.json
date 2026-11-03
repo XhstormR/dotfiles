@@ -142,6 +142,7 @@
     "tab_size": 4,
     "hard_tabs": false,
     "cursor_blink": true,
+    "use_system_window_tabs": true,
     "soft_wrap": "editor_width",
     "wrap_guides": [80, 120],
     "buffer_font_family": "Maple Mono Normal NF CN",

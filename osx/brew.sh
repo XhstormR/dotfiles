@@ -8,8 +8,10 @@ formulae=(
 
 casks=(
     sfm
+    proxybridge
     vorssaint
     appcleaner
+    peel
     loop
     rectangle
     tungsten-edge
@@ -66,6 +68,7 @@ casks=(
     photocraft
     artcraft-launcher
     robbietilton-compositor
+    tinycast
     # android-file-transfer
     # background-music
     # megasync
@@ -76,7 +79,6 @@ casks=(
     # Third-party taps
     opengeos/rustgis/rustgis
     getopenscreen/openscreen/openscreen
-    abue-ammar/tinycast/tinycast
     66HEX/frame/frame
     pch/tap/rawmakase
 )

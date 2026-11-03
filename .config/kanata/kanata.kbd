@@ -92,6 +92,7 @@
     bspc     M-up      ;; 返回
 )
 
+(t! raw-lctl-layer com.superlogical.rex)
 (t! raw-lctl-layer com.mitchellh.ghostty)
 (t! raw-lctl-layer com.jetbrains.intellij)
 
